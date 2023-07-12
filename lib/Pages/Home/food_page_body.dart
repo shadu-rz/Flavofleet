@@ -150,8 +150,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                 right: Dimensions.width10,
                               ),
                               child: GestureDetector(
-                                // onTap: () => Get.to(
-                                //     () => RecomendedFoodDetails(pageId: index)),
                                 onTap: () => navigator!.push(
                                   MaterialPageRoute(
                                     builder: (context) =>
@@ -180,7 +178,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: Dimensions.width10,
+                                      width: Dimensions.width10/2,
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(
@@ -188,7 +186,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                         top: Dimensions.height10,
                                       ),
                                       height: Dimensions.height45 * 2,
-                                      width: Dimensions.width20 * 14,
+                                      width: Dimensions.width20 * 13,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         color: Colors.white,
