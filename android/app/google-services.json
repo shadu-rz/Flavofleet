@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "165082463166",
+    "project_id": "flavorfleet6",
+    "storage_bucket": "flavorfleet6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165082463166:android:3dbdd00cb9c6417d8b57ef",
+        "android_client_info": {
+          "package_name": "com.example.flavour_fleet_main"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165082463166-730lp5numcqnlo6u7h238cudc2diualh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCplMpIgLOQBGChxMIBvxOkCUmO0w0rlUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165082463166-730lp5numcqnlo6u7h238cudc2diualh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

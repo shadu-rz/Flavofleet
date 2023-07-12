@@ -1,0 +1,63 @@
+name: flavour_fleet_main
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  dots_indicator: ^3.0.0
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  persistent_bottom_nav_bar: ^5.0.2
+  shared_preferences:
+  google_sign_in: ^6.1.4
+  firebase_core:
+  firebase_auth:
+  cloud_firestore: ^4.7.0
+  firebase_storage: ^11.2.0
+  
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/image/food1.jpg
+    - assets/image/food2.jpg
+    - assets/image/food3.jpg
+    - assets/image/food4.jpg
+    - assets/image/food5.jpg
+    - assets/image/food6.jpg
+    - assets/image/food7.jpg
+    - assets/image/food8.jpg
+    - assets/image/google.png
+    - assets/image/fb.jpg
+    - assets/image/mainlogo.png
+    - assets/image/foodLoading.jpg
+    - assets/image/google-logo.png
+    - assets/image/login_image.jpg
+    - assets/image/splashImage.jpg
+
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/font/Roboto-Regular.ttf
+          weight: 400
+        - asset: assets/font/Roboto-Medium.ttf
+          weight: 500
+        - asset: assets/font/Roboto-Bold.ttf
+          weight: 700
+        - asset: assets/font/Roboto-Black.ttf
+          weight: 900
