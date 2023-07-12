@@ -1,7 +1,10 @@
+import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
+import 'package:flavour_fleet_main/Pages/auth/auth_page.dart';
 import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/app_text_field.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/firebase/auth/sign_in_with_google.dart';
 import 'package:flavour_fleet_main/firebase/auth/sign_up.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -133,14 +136,6 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             SizedBox(height: Dimensions.height20),
-            // AppTextField(
-            //   obscureText: true,
-            //   textColor: Colors.black87,
-            //   textController: confirmPasswordController,
-            //   hintText: 'Conform Password',
-            //   icon: Icons.password_sharp,
-            // ),
-            // SizedBox(height: Dimensions.height20),
 
             // Sign up Button
             GestureDetector(
@@ -195,38 +190,25 @@ class _SignUpPageState extends State<SignUpPage> {
             SizedBox(
               height: Dimensions.screenWidth * 0.05,
             ),
-            Container(
-              height: 50,
-              width: 100,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/image/google-logo.png'))),
+            GestureDetector(
+              onTap: () async {
+                final user = await signInWithGoogle();
+                if (user != null) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const AuthPage(),
+                    ),
+                  );
+                }
+              },
+              child: Container(
+                height: 50,
+                width: 100,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/image/google-logo.png'))),
+              ),
             )
-            // Wrap(
-            //   children: List.generate(
-            //       2,
-            //       (index) => Container(
-            //             margin: EdgeInsets.only(right: Dimensions.height10),
-            //             height: Dimensions.height10 * 4.6,
-            //             width: Dimensions.height10 * 4.6,
-            //             decoration: BoxDecoration(
-            //                 color: Colors.grey[300],
-            //                 borderRadius:
-            //                     BorderRadius.circular(Dimensions.radius20),
-            //                 border: Border.all(
-            //                     width: 2,
-            //                     color:
-            //                         const Color.fromARGB(255, 208, 208, 208))),
-            //             child: Padding(
-            //               padding: const EdgeInsets.all(8.0),
-            //               child: CircleAvatar(
-            //                 radius: 20,
-            //                 backgroundColor: Colors.transparent,
-            //                 backgroundImage: AssetImage(signupImages[index]),
-            //               ),
-            //             ),
-            //           )),
-            // )
           ],
         ),
       ),

@@ -40,7 +40,7 @@ final UserController userController = Get.find<UserController>();
 
       return user;
     } catch (e) {
-      log('Error signing in with Google: $e');
-      return null;
+      log('Error signing in with Gooooooooooooogle: $e');
+      return null; 
     }
   }
