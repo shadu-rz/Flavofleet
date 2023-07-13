@@ -1,6 +1,5 @@
-import 'package:flavour_fleet_main/Controllers/recommended_product_controller.dart';
+
 import 'package:flavour_fleet_main/Pages/Cart/cart_page.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/app_constants.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
@@ -10,13 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RecomendedFoodDetails extends StatelessWidget {
-  final int pageId;
-  const RecomendedFoodDetails({super.key, required this.pageId});
-
+  const RecomendedFoodDetails({super.key,  required this.snap});
+  final Map<String,dynamic>snap;
   @override
   Widget build(BuildContext context) {
-    var product =
-        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -61,7 +57,7 @@ class RecomendedFoodDetails extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(Dimensions.radius20),
                         topRight: Radius.circular(Dimensions.radius20))),
-                child: Center(child: BigText(text: product.name!)),
+                child: Center(child: BigText(text: snap['title'])),
               ),
             ),
             pinned: true,
@@ -69,7 +65,7 @@ class RecomendedFoodDetails extends StatelessWidget {
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
-                AppConstants.baseUrl + AppConstants.uploadUrl + product.img!,
+                snap['image'],
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -85,7 +81,7 @@ class RecomendedFoodDetails extends StatelessWidget {
                   bottom: Dimensions.height10,
                   top: Dimensions.height10,
                 ),
-                child: ExpandableTextWidget(text: product.description!),
+                child: ExpandableTextWidget(text: snap['description']),
               )
             ],
           ))
@@ -103,17 +99,17 @@ class RecomendedFoodDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(
+                const AppIcon(
                   icon: Icons.remove,
                   backgroundColor: AppColors.mainColor,
                   iconColor: Colors.white,
                 ),
                 BigText(
-                  text: '\$${product.price} ' "X" ' 0',
+                  text: '\$${snap['distance']} ' "X " '0',
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),
-                AppIcon(
+                const AppIcon(
                   icon: Icons.add,
                   backgroundColor: AppColors.mainColor,
                   iconColor: Colors.white,
@@ -164,7 +160,7 @@ class RecomendedFoodDetails extends StatelessWidget {
                     onTap: () {},
                     child: Center(
                       child: BigText(
-                        text: "\$${product.price!} Add to cart ",
+                        text: "₹${snap['price'].toString()} add to cart",
                         color: Colors.white,
                       ),
                     ),

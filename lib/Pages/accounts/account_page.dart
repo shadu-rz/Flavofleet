@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavour_fleet_main/Pages/accounts/update_profile.dart';
 import 'package:flavour_fleet_main/Pages/accounts/logout_page.dart';
 import 'package:flavour_fleet_main/Pages/address/add_address_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
@@ -9,6 +10,7 @@ import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/account_widget.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/usercontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,39 +31,6 @@ class _AccountPageState extends State<AccountPage> {
 
   void signUserOut() {
     FirebaseAuth.instance.signOut();
-  }
-
-  Future<void> _showMyDialog() async {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title:  Text(
-              'Are you sure you want to log out?',
-              style: TextStyle(
-                fontSize: Dimensions.font20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            actions: [
-              TextButton(
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: const Text('Confirm'),
-                onPressed: () {
-                  navigator!.pushReplacement(MaterialPageRoute(
-                    builder: (context) => const LogoutPage(),
-                  ));
-                  return signUserOut();
-                },
-              ),
-            ],
-          );
-        });
   }
 
   @override
@@ -116,24 +85,60 @@ class _AccountPageState extends State<AccountPage> {
                   margin: EdgeInsets.only(top: Dimensions.height20),
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: Dimensions.height20,
-                      ),
                       //profile icon
-                      CircleAvatar(
-                        radius: Dimensions.height45 * 1.6,
-                        backgroundColor: Colors.white60,
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                content: CircleAvatar(
+                                  radius: Dimensions.height45 *2,
+                                  backgroundImage:
+                                    NetworkImage(snapshot
+                                    .data!['image'].isEmpty
+                                ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
+                                : snapshot.data!['image']),
+                                ),
+                              );
+                            },
+                          );
+                        },
                         child: CircleAvatar(
-                          backgroundColor: Colors.blueGrey[400],
-                          backgroundImage: NetworkImage(snapshot
-                                  .data!['image'].isEmpty
-                              ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
-                              : snapshot.data!['image']),
-                          radius: Dimensions.height45 * 1.5,
+                          radius: Dimensions.height45 * 1.6,
+                          backgroundColor: Colors.white60,
+                          child: CircleAvatar(
+                            backgroundColor: Colors.blueGrey[400],
+                            backgroundImage: NetworkImage(snapshot
+                                    .data!['image'].isEmpty
+                                ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
+                                : snapshot.data!['image']),
+                            radius: Dimensions.height45 * 1.5,
+                          ),
                         ),
                       ),
                       SizedBox(
-                        height: Dimensions.height30,
+                        height: Dimensions.height10,
+                      ),
+                      GestureDetector(
+                        onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const EditProfile(),
+                        )),
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: Dimensions.height15 + 3),
+                          decoration: BoxDecoration(
+                              color: Colors.white70,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius15)),
+                          height: Dimensions.height45 - 5,
+                          width: double.maxFinite,
+                          child: Center(child: BigText(text: 'update profile')),
+                        ),
+                      ),
+                      SizedBox(
+                        height: Dimensions.height10,
                       ),
                       //scrollable
                       Expanded(
@@ -259,5 +264,38 @@ class _AccountPageState extends State<AccountPage> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     return snap;
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              'Are you sure want to log out?',
+              style: TextStyle(
+                fontSize: Dimensions.font20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Confirm'),
+                onPressed: () {
+                  navigator!.pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LogoutPage(),
+                  ));
+                  return signUserOut();
+                },
+              ),
+            ],
+          );
+        });
   }
 }

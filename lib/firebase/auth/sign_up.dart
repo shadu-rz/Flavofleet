@@ -10,10 +10,15 @@ Future signUp(context, String email, String password) async {
     showCustomSnackBar('Type in your emai address', title: 'Email address');
   } else if (password.isEmpty) {
     showCustomSnackBar('Type in your password', title: 'Password');
-  } else if (password.length < 6) {
+  }
+   else if (password.length < 6) {
     showCustomSnackBar('Password cannot be less than six character',
         title: 'Password');
-  } else {
+  }
+  // else if (email.isEmail) {
+  //   showCustomSnackBar('Provide a proper email address', title: 'Email');
+  // }
+   else {
     showCustomSnackBar('All went well', title: 'perfect');
   }
 
@@ -36,6 +41,7 @@ Future signUp(context, String email, String password) async {
       'phoneNumber': '',
       'username': '',
       'image': '',
+      'uId':cred.user!.uid
     });
     navigator!.pushReplacement(
       MaterialPageRoute(

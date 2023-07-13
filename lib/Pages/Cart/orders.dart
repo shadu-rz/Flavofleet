@@ -13,11 +13,6 @@ class CartHistory extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
-        // actions: [
-        //   IconButton(
-        //       onPressed: () => Get.to(() => CartPage()),
-        //       icon: Icon(Icons.shopping_cart))
-        // ],
         title: BigText(
           text: 'Orders',
           color: Colors.white,

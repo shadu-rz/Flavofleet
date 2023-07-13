@@ -10,9 +10,9 @@ class AppColumn extends StatelessWidget {
   final String text;
   const AppColumn({
     super.key,
-    required this.text,
+    required this.text, required this.snap,
   });
-
+  final Map<String , dynamic>snap;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,13 +22,13 @@ class AppColumn extends StatelessWidget {
           text: text,
           size: Dimensions.font26,
         ),
-        SizedBox(height: Dimensions.height5),
+        SizedBox(height: Dimensions.height10),
         Row(
           children: [
             Wrap(
               children: List.generate(
-                5,
-                (index) => Icon(
+                snap['star'],
+                (index) =>const  Icon(
                   Icons.star,
                   color: AppColors.mainColor,
                   size: 15,
@@ -36,30 +36,31 @@ class AppColumn extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            SmallText(text: '4.5'),
-            const SizedBox(width: 10),
+            SmallText(text: snap['rating'].toString()),
+             SizedBox(width: Dimensions.width20*2),
             SmallText(text: '1282'),
             const SizedBox(width: 10),
             SmallText(text: 'comments')
           ],
         ),
-        SizedBox(height: Dimensions.height5),
-        Row(
-          children: const [
-            IconAndTextWidget(
+        SizedBox(height: Dimensions.height10),
+         Row(
+          children:  [
+            const IconAndTextWidget(
               icon: Icons.circle_sharp,
               text: 'Normal',
               iconColor: Colors.orangeAccent,
             ),
+            SizedBox(width: Dimensions.width20),
             IconAndTextWidget(
               icon: Icons.location_on,
-              text: '1.7 Km',
+              text: '${snap['distance']} km',
               iconColor: Colors.deepOrangeAccent,
             ),
-            SizedBox(width: 10),
-            IconAndTextWidget(
+             SizedBox(width: Dimensions.width20*1.5),
+             IconAndTextWidget(
               icon: Icons.access_time_filled_rounded,
-              text: '32 min',
+              text: '${snap['time']} min',
               iconColor: Colors.brown,
             ),
           ],

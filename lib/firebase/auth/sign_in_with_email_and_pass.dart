@@ -38,6 +38,7 @@ void signUserIn(context, String email, String password) async {
       'phoneNumber': '',
       'username': '',
       'image': '',
+      'uId':cred.user!.uid,
     });
     navigator!.pushReplacement(
       MaterialPageRoute(

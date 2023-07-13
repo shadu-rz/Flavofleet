@@ -14,11 +14,11 @@ class LogoutPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+           SizedBox(height: Dimensions.height45*4),
           Container(
-            height: Dimensions.height45 * 8,
+            height: Dimensions.height45 * 7,
             width: double.maxFinite,
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -27,6 +27,7 @@ class LogoutPage extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: Dimensions.height20*5),
           GestureDetector(
             onTap: () => navigator!.pushReplacement(
               MaterialPageRoute(

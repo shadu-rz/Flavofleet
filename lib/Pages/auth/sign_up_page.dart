@@ -1,4 +1,4 @@
-import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
+
 import 'package:flavour_fleet_main/Pages/auth/auth_page.dart';
 import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
@@ -21,13 +21,11 @@ class _SignUpPageState extends State<SignUpPage> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var confirmPasswordController = TextEditingController();
-  bool passwordVisible = true;
+  bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    // void _registration() {
-
-    // }
+   
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -169,7 +167,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   recognizer: TapGestureRecognizer()
                     ..onTap =
                         () => navigator!.pushReplacement(MaterialPageRoute(
-                              builder: (context) => SignInPage(),
+                              builder: (context) => const SignInPage(),
                             )),
                   text: 'Already have an account ?',
                   style: const TextStyle(

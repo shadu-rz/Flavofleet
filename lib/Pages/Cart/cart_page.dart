@@ -12,60 +12,13 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
-        title: const Text('Cart'),
+        title: BigText(text: 'Cart',color: Colors.white),
       ),
       body: Stack(
         children: [
-          // Positioned(
-          //   top: Dimensions.height20 * 2.5,
-          //   left: Dimensions.width20,
-          //   right: Dimensions.width20,
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       GestureDetector(
-          //         onTap: () => navigator!.pop(),
-          //         child: AppIcon(
-          //           icon: Icons.clear,
-          //           iconColor: Colors.white,
-          //           backgroundColor: AppColors.mainColor,
-          //           size: Dimensions.iconSize24 * 2,
-          //         ),
-          //       ),
-          //       SizedBox(
-          //         width: Dimensions.width20 * 9,
-          //       ),
-          //       GestureDetector(
-          //         onTap: () => navigator!.pushReplacement(
-          //           MaterialPageRoute(
-          //             builder: (context) => const HomePage(),
-          //           ),
-          //         ),
-          //         child: AppIcon(
-          //           icon: Icons.home,
-          //           iconColor: Colors.white,
-          //           backgroundColor: AppColors.mainColor,
-          //           size: Dimensions.iconSize24 * 2,
-          //         ),
-          //       ),
-          //       GestureDetector(
-          //         onTap: () => navigator!.push(
-          //           MaterialPageRoute(
-          //             builder: (context) => const CartHistory(),
-          //           ),
-          //         ),
-          //         child: AppIcon(
-          //           icon: Icons.shopping_cart,
-          //           iconColor: Colors.white,
-          //           backgroundColor: AppColors.mainColor,
-          //           size: Dimensions.iconSize24 * 2,
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Positioned(
             left: Dimensions.width20,
             right: Dimensions.width20,
