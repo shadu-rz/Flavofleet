@@ -105,7 +105,7 @@ class RecommendedProductListWidget extends StatelessWidget {
                                             children: [
                                               Wrap(
                                                 children: List.generate(
-                                                  snap['star'],
+                                                int.parse(snap['star']) ,
                                                   (index) => const Icon(
                                                     Icons.star,
                                                     color: AppColors.mainColor,
@@ -116,7 +116,7 @@ class RecommendedProductListWidget extends StatelessWidget {
                                               const SizedBox(width: 10),
                                               SmallText(
                                                   text:
-                                                      snap['rating'].toString()),
+                                                      snap['rating']),
                                               const SizedBox(width: 10),
                                               SmallText(text: '1282'),
                                               const SizedBox(width: 10),

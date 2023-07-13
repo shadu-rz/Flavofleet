@@ -105,7 +105,7 @@ class RecomendedFoodDetails extends StatelessWidget {
                   iconColor: Colors.white,
                 ),
                 BigText(
-                  text: '\$${snap['distance']} ' "X " '0',
+                  text: '\₹${snap['price']} ' "X " '0',
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),
@@ -159,9 +159,19 @@ class RecomendedFoodDetails extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {},
                     child: Center(
-                      child: BigText(
-                        text: "₹${snap['price'].toString()} add to cart",
-                        color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          BigText(
+                            text: "₹${snap['price']}",
+                            color: Colors.white,
+                          ),
+                          BigText(
+                            text: "add to cart",
+                            color: Colors.white,
+                            size: Dimensions.font20/1.1,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -179,6 +189,7 @@ class RecomendedFoodDetails extends StatelessWidget {
                       child: BigText(
                         text: "Buy Now",
                         color: Colors.white,
+                        size: Dimensions.font20,
                       ),
                     ),
                   ),

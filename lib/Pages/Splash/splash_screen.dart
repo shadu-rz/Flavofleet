@@ -12,6 +12,7 @@ class SpalshScreen extends StatefulWidget {
 class _SpalshScreenState extends State<SpalshScreen> {
   @override
   void initState() {
+    super.initState();
     gotoHome();
   }
 

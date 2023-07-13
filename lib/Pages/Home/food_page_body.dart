@@ -33,7 +33,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           //Slider Section
           HomePageHorSlideWidget(pageController: pageController),
 
-          //Recomended Text
           SizedBox(height: Dimensions.height10),
 
           //Recommended title widget

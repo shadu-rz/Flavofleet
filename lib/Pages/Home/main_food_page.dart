@@ -21,7 +21,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                 fit: BoxFit.cover)),
         child: const Column(
           children: [
-            SafeArea(
+            SafeArea( 
               //showing the header
               child: HomeScreenAppBar(),
             ),

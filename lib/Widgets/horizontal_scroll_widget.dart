@@ -1,5 +1,4 @@
 import 'package:flavour_fleet_main/Pages/Food/popular_food_details.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/icon_and_text.dart';
@@ -77,18 +76,18 @@ class HorizontalScrollWidget extends StatelessWidget {
                     SizedBox(height: Dimensions.height5),
                     Row(
                       children: [
-                        Wrap(
-                          children: List.generate(
-                            snap['star'],
-                            (index) => const Icon(
-                              Icons.star,
-                              color: AppColors.mainColor,
-                              size: 15,
-                            ),
-                          ),
-                        ),
+                        // Wrap(
+                        //   children: List.generate(
+                        //     snap['star'].toInt(),
+                        //     (index) => const Icon(
+                        //       Icons.star,
+                        //       color: AppColors.mainColor,
+                        //       size: 15,
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(width: 10),
-                        SmallText(text: snap['rating'].toString()),
+                        SmallText(text: snap['rating']),
                         const SizedBox(width: 10),
                         SmallText(text: '1282'),
                         const SizedBox(width: 10),
@@ -105,13 +104,13 @@ class HorizontalScrollWidget extends StatelessWidget {
                         ),
                         IconAndTextWidget(
                           icon: Icons.location_on,
-                          text: '${snap['distance']} km',
+                          text: '${int.parse(snap['distance'])} km',
                           iconColor: Colors.deepOrangeAccent,
                         ),
                         const SizedBox(width: 10),
                          IconAndTextWidget(
                           icon: Icons.access_time_filled_rounded,
-                          text: '${snap['time']} min',
+                          text: '${int.parse(snap['time'])} min',
                           iconColor: Colors.brown,
                         ),
                       ],

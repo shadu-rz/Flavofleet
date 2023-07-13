@@ -27,7 +27,7 @@ class AppColumn extends StatelessWidget {
           children: [
             Wrap(
               children: List.generate(
-                snap['star'],
+               int.parse(snap['star']) ,
                 (index) =>const  Icon(
                   Icons.star,
                   color: AppColors.mainColor,
@@ -36,7 +36,7 @@ class AppColumn extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            SmallText(text: snap['rating'].toString()),
+            SmallText(text: snap['rating']),
              SizedBox(width: Dimensions.width20*2),
             SmallText(text: '1282'),
             const SizedBox(width: 10),
