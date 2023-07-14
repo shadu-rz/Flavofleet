@@ -25,7 +25,8 @@ class CartPage extends StatelessWidget {
             right: Dimensions.width20,
             top: Dimensions.height10,
             bottom: 0,
-            child: SizedBox(
+            child: Container(
+              padding: EdgeInsets.only(bottom: Dimensions.height30*2),
               child: MediaQuery.removePadding(
                 context: context,
                 removeTop: true,
