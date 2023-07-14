@@ -44,14 +44,14 @@ class CartListWidget extends StatelessWidget {
                 height: Dimensions.height20 * 5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     BigText(
                       text: 'Bitter orange juice',
                       size: Dimensions.font20,
                       color: Colors.black54,
                     ),
-                    SmallText(text: 'spicy'),
+                   
                     Row(
                       mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
