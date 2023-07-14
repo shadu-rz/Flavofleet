@@ -21,13 +21,25 @@ class BottomNavCart extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 height: Dimensions.height20 * 2,
-                width: Dimensions.height45 * 2.3,
+                width: Dimensions.height45 * 2.7,
                 decoration: BoxDecoration(
                     color: Colors.black12,
                     borderRadius:
                         BorderRadius.circular(Dimensions.radius15)),
                 child: Center(
-                  child: BigText(text: 'Total: 5'),
+                  child: BigText(text: 'Total item: 6',size: Dimensions.font20/1.2,),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                height: Dimensions.height20 * 2,
+                width: Dimensions.height45 * 2,
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius:
+                        BorderRadius.circular(Dimensions.radius15)),
+                child: Center(
+                  child: BigText(text: '₹ 360'),
                 ),
               ),
               Container(

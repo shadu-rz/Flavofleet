@@ -28,11 +28,10 @@ class CartListWidget extends StatelessWidget {
                 height: Dimensions.height20 * 5,
                 decoration: BoxDecoration(
                     image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image:
-                            AssetImage('assets/image/food2.jpg')),
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.radius20),
+                      fit: BoxFit.cover,
+                      image: NetworkImage('https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                    ),
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: Colors.white),
               ),
               SizedBox(
@@ -46,17 +45,15 @@ class CartListWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     BigText(
-                      text: 'Bitter orange juice',
+                      text: 'Meat Pizza',
                       size: Dimensions.font20,
                       color: Colors.black54,
                     ),
-                   
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         BigText(
-                          text: '\$ 33.0',
+                          text: '₹ 60.0',
                           size: Dimensions.font20,
                           color: Colors.redAccent,
                         ),
@@ -69,8 +66,8 @@ class CartListWidget extends StatelessWidget {
                             left: Dimensions.width20 / 2,
                           ),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  Dimensions.radius15),
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius15),
                               color: Colors.white),
                           child: Row(
                             children: [
@@ -82,9 +79,7 @@ class CartListWidget extends StatelessWidget {
                                   color: Colors.grey,
                                 ),
                               ),
-                              BigText(
-                                  text:
-                                      "0" //popularProduct.quantity
+                              BigText(text: "1" //popularProduct.quantity
                                   // .toString()
                                   ),
                               GestureDetector(
