@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flutter/material.dart';
@@ -9,100 +10,126 @@ class CartListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      physics: const BouncingScrollPhysics(),
-      separatorBuilder: (context, index) => SizedBox(
-        height: Dimensions.height10,
-      ),
-      itemCount: 6,
-      itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.only(top: Dimensions.height10),
-          // color: Colors.amber,
-          height: 100,
-          width: double.maxFinite,
-          child: Row(
-            children: [
-              Container(
-                width: Dimensions.height20 * 5,
-                height: Dimensions.height20 * 5,
-                decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage('https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-                    ),
-                    borderRadius: BorderRadius.circular(Dimensions.radius20),
-                    color: Colors.white),
-              ),
-              SizedBox(
-                width: Dimensions.width10,
-              ),
-              Expanded(
-                  child: Container(
-                height: Dimensions.height20 * 5,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('cart').snapshots(),
+        builder: (context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (!snapshot.hasData) {
+            return Center(
+              child: BigText(text: 'No items found'),
+            );
+          }
+          if (snapshot.data!.docs.isEmpty) {
+            return Center(
+              child: BigText(text: 'No items found'),
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: BigText(text: 'Check your internet connection'),
+            );
+          }
+          return ListView.separated(
+            physics: const BouncingScrollPhysics(),
+            separatorBuilder: (context, index) => SizedBox(
+              height: Dimensions.height10,
+            ),
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) {
+              var snap = snapshot.data!.docs[index].data();
+              return Container(
+                margin: EdgeInsets.only(top: Dimensions.height10),
+                // color: Colors.amber,
+                height: 100,
+                width: double.maxFinite,
+                child: Row(
                   children: [
-                    BigText(
-                      text: 'Meat Pizza',
-                      size: Dimensions.font20,
-                      color: Colors.black54,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BigText(
-                          text: '₹ 60.0',
-                          size: Dimensions.font20,
-                          color: Colors.redAccent,
-                        ),
-                        //containerrr
-                        Container(
-                          padding: EdgeInsets.only(
-                            top: Dimensions.height10,
-                            bottom: Dimensions.height10,
-                            right: Dimensions.width20 / 2,
-                            left: Dimensions.width20 / 2,
+                    Container(
+                      width: Dimensions.height20 * 5,
+                      height: Dimensions.height20 * 5,
+                      decoration: BoxDecoration(
+                          image:  DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                               snap['image']),
                           ),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius15),
-                              color: Colors.white),
-                          child: Row(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20),
+                          color: Colors.white),
+                    ),
+                    SizedBox(
+                      width: Dimensions.width10,
+                    ),
+                    Expanded(
+                        child: Container(
+                      height: Dimensions.height20 * 5,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          BigText(
+                            text: snap['title'],
+                            size: Dimensions.font20,
+                            color: Colors.black54,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              GestureDetector(
-                                // onTap: () => popularProduct
-                                //     .setQuantity(false),
-                                child: const Icon(
-                                  Icons.remove,
-                                  color: Colors.grey,
+                              BigText(
+                              text: '₹ ${snap['price']}',
+                                size: Dimensions.font20,
+                                color: Colors.redAccent,
+                              ),
+                              //containerrr
+                              Container(
+                                padding: EdgeInsets.only(
+                                  top: Dimensions.height10,
+                                  bottom: Dimensions.height10,
+                                  right: Dimensions.width20 / 2,
+                                  left: Dimensions.width20 / 2,
+                                ),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.radius15),
+                                    color: Colors.white),
+                                child: Row(
+                                  children: [
+                                    GestureDetector(
+                                      // onTap: () => popularProduct
+                                      //     .setQuantity(false),
+                                      child: const Icon(
+                                        Icons.remove,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    BigText(text: "1" //popularProduct.quantity
+                                        // .toString()
+                                        ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        // popularProduct.setQuantity(true);
+                                      },
+                                      child: const Icon(
+                                        Icons.add,
+                                        color: Colors.grey,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
-                              BigText(text: "1" //popularProduct.quantity
-                                  // .toString()
-                                  ),
-                              GestureDetector(
-                                onTap: () {
-                                  // popularProduct.setQuantity(true);
-                                },
-                                child: const Icon(
-                                  Icons.add,
-                                  color: Colors.grey,
-                                ),
-                              )
                             ],
-                          ),
-                        ),
-                      ],
-                    )
+                          )
+                        ],
+                      ),
+                    ))
                   ],
                 ),
-              ))
-            ],
-          ),
-        );
-      },
-    );
+              );
+            },
+          );
+        });
   }
 }

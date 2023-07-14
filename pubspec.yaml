@@ -7,21 +7,20 @@ version: 1.0.0+1
 environment:
   sdk: '>=2.19.6 <3.0.0'
 
-
 dependencies:
+  cloud_firestore: ^4.7.0
   cupertino_icons: ^1.0.2
   dots_indicator: ^3.0.0
+  firebase_auth: null
+  firebase_core: null
+  firebase_storage: ^11.2.0
   flutter:
     sdk: flutter
   get: ^4.6.5
-  persistent_bottom_nav_bar: ^5.0.2
-  shared_preferences:
   google_sign_in: ^6.1.4
-  firebase_core:
-  firebase_auth:
-  cloud_firestore: ^4.7.0
-  firebase_storage: ^11.2.0
-  
+  persistent_bottom_nav_bar: ^5.0.2
+  shared_preferences: null
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -48,7 +47,6 @@ flutter:
     - assets/image/google-logo.png
     - assets/image/login_image.jpg
     - assets/image/splashImage.jpg
-
 
   fonts:
     - family: Roboto

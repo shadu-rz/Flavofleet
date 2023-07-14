@@ -22,9 +22,10 @@ class AppbarPopFoodDetails extends StatelessWidget {
             onTap: () => navigator!.pop(),
             child: AppIcon(
               icon: Icons.arrow_back,
-              backgroundColor: const Color.fromARGB(150, 200, 200, 200),
+              backgroundColor:Colors.white70,
               size: Dimensions.height45,
               iconSize: Dimensions.height20,
+              iconColor: Colors.black,
             ),
           ),
           GestureDetector(
@@ -35,9 +36,10 @@ class AppbarPopFoodDetails extends StatelessWidget {
             ),
             child: AppIcon(
               icon: Icons.shopping_cart_outlined,
-              backgroundColor: const Color.fromARGB(150, 200, 200, 200),
+              backgroundColor: Colors.white70,
               size: Dimensions.height45,
               iconSize: Dimensions.height20,
+              iconColor: Colors.black,
             ),
           ),
         ],

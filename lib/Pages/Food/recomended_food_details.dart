@@ -29,7 +29,7 @@ class RecomendedFoodDetails extends StatelessWidget {
                   },
                   child: const AppIcon(
                     icon: Icons.clear,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.white70,
                   ),
                 ),
                 GestureDetector(
@@ -40,7 +40,7 @@ class RecomendedFoodDetails extends StatelessWidget {
                   ),
                   child: const AppIcon(
                     icon: Icons.shopping_cart,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.white70,
                   ),
                 )
               ],

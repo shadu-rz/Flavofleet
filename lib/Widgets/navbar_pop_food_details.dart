@@ -1,6 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
+import 'package:flavour_fleet_main/model/popular_product_model.dart';
 import 'package:flutter/material.dart';
 
 class NavBarPopFoodDetails extends StatelessWidget {
@@ -53,15 +58,33 @@ class NavBarPopFoodDetails extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            height: Dimensions.height45,
-            width: Dimensions.height10 * 17,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius15),
-              color: AppColors.mainColor,
-            ),
-            child: GestureDetector(
-              onTap: () {},
+          GestureDetector(
+
+            onTap: () async {
+               if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, snap['title'])) {
+                showCustomSnackBar('Already exist in the cart',title: '');
+              }else{
+                 PopularProductModel product = PopularProductModel(
+                title: snap['title'],
+                price: double.parse(snap['price']) ,
+                image: snap['image'],
+                description: snap['description'],
+                distance: double.parse(snap['distance']) ,
+                rating: double.parse(snap['rating'])  ,
+                star: double.parse(snap['star']) ,
+                time: double.parse(snap['time']) ,
+                uId: FirebaseAuth.instance.currentUser!.uid,
+              );
+              await FirebaseMethods().addToCart(product);
+              }
+            },
+            child: Container(
+              height: Dimensions.height45,
+              width: Dimensions.height10 * 17,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius15),
+                color: AppColors.mainColor,
+              ),
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

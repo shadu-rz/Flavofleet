@@ -1,6 +1,8 @@
 import 'dart:developer';
-
+import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
+import 'package:uuid/uuid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flavour_fleet_main/model/popular_product_model.dart';
 
 class FirebaseMethods {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -27,7 +29,35 @@ class FirebaseMethods {
     log(res);
     return res;
   }
+  
 
-  // Stream<List<recommendedProduct>> RecommendedProduct() =>
-  //     FirebaseFirestore.instance.collection('recommendedProducts').snapshots();
+  Future<void> addToCart(PopularProductModel productModel)async{
+
+    try {
+      String id =const  Uuid().v1();
+      await firestore.collection('cart').doc(id).set(productModel.toJson());
+      log('add to cart success');
+      showCustomSnackBar('Added to Cart successfull',title: 'cart');
+      
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future<bool> alreadyExistInCart(String uId, String title)async{
+    try {
+      QuerySnapshot<Map<String,dynamic>> doc = await firestore.collection('cart').get();
+      for (var element in doc.docs) {
+        // log(element['title']);
+        if (element['title']==title && element['uId']==uId) {
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      log(e.toString());
+    }
+    return false;
+  }
+
 }
