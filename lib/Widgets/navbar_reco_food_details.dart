@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavour_fleet_main/Pages/buy%20now/buy_now_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
@@ -7,6 +8,7 @@ import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/recommended_product_mode.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class NavbarRecoFoodDetails extends StatelessWidget {
   const NavbarRecoFoodDetails({
@@ -121,7 +123,9 @@ class NavbarRecoFoodDetails extends StatelessWidget {
                   color: AppColors.mainColor,
                 ),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                     navigator!.push(MaterialPageRoute(builder: (context) => const BuyNowPage(),));
+                  },
                   child: Center(
                     child: BigText(
                       text: "Buy Now",

@@ -16,8 +16,8 @@ class AddAddressPage extends StatefulWidget {
 
 class _AddAddressPageState extends State<AddAddressPage> {
   TextEditingController _addressController = TextEditingController();
-  final TextEditingController _contactPersonName = TextEditingController();
-  final TextEditingController _contactPersonNumber = TextEditingController();
+  // final TextEditingController _contactPersonName = TextEditingController();
+  // final TextEditingController _contactPersonNumber = TextEditingController();
   late bool isLogged;
   // final CameraPosition _cameraPosition = const CameraPosition(
   //   target: LatLng(10.933406381023925, 76.00130423779683),
@@ -52,8 +52,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   borderRadius: BorderRadius.circular(5),
                   border: Border.all(
                       width: 2, color: Theme.of(context).primaryColor)),
-              child: Stack(
-                children: const [
+              child: const Stack(
+                children: [
                   // GoogleMap(
                   //   initialCameraPosition:
                   //       CameraPosition(target: _initialPosition, zoom: 70),

@@ -10,7 +10,6 @@ import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/account_widget.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/usercontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -274,7 +273,7 @@ class _AccountPageState extends State<AccountPage> {
             title: Text(
               'Are you sure want to log out?',
               style: TextStyle(
-                fontSize: Dimensions.font20,
+                fontSize: Dimensions.font20-3,
                 fontWeight: FontWeight.bold,
               ),
             ),

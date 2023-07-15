@@ -65,6 +65,7 @@ class RecommendedProductListWidget extends StatelessWidget {
                                   ),
                                 ),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
                                       width: Dimensions.height45 * 2,
@@ -77,9 +78,6 @@ class RecommendedProductListWidget extends StatelessWidget {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: Dimensions.width10 / 2,
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(

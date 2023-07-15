@@ -16,6 +16,9 @@ class CartPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
         title: BigText(text: 'Cart',color: Colors.white),
+        actions: [
+          IconButton(onPressed: (){}, icon:const Icon( Icons.clear_all_rounded))
+        ],
       ),
       body: Stack(
         children: [
