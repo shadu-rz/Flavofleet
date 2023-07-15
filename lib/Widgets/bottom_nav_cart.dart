@@ -1,3 +1,4 @@
+import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
@@ -27,7 +28,7 @@ class BottomNavCart extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 height: Dimensions.height20 * 2,
-                width: Dimensions.height45 * 2.7,
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
                 decoration: BoxDecoration(
                     color: Colors.black12,
                     borderRadius: BorderRadius.circular(Dimensions.radius15)),
@@ -40,10 +41,10 @@ class BottomNavCart extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              Container(      
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
                 margin: const EdgeInsets.only(bottom: 10),
                 height: Dimensions.height20 * 2,
-                width: Dimensions.height45 * 2,
                 decoration: BoxDecoration(
                     color: Colors.black12,
                     borderRadius: BorderRadius.circular(Dimensions.radius15)),
@@ -55,15 +56,20 @@ class BottomNavCart extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 10),
-                height: Dimensions.height20 * 2,
-                width: Dimensions.height45 * 3,
-                decoration: BoxDecoration(
-                    color: Colors.black12,
-                    borderRadius: BorderRadius.circular(Dimensions.radius15)),
-                child: Center(
-                  child: BigText(text: 'Check Out'),
+              GestureDetector(
+                onTap: () {
+                  navigator!.push(MaterialPageRoute(builder: (context) => const CheckoutPage(),));
+                },
+                child: Container(
+                  height: Dimensions.font20*2,
+                  padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+                  margin: const EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.circular(Dimensions.radius15)),
+                  child: Center(
+                    child: BigText(text: 'Check Out'),
+                  ),
                 ),
               ),
             ],

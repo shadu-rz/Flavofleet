@@ -87,7 +87,7 @@ class RecommendedProductListWidget extends StatelessWidget {
                                         top: Dimensions.height10,
                                       ),
                                       height: Dimensions.height45 * 2,
-                                      width: Dimensions.width20 * 13.5,  // overflow error may cause here
+                                      width: Dimensions.width20 * 12,  // overflow error may cause here
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         color: Colors.white,

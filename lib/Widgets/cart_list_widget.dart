@@ -48,78 +48,77 @@ class CartListWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      width: Dimensions.height20 * 5,
-                      height: Dimensions.height20 * 5,
+                      width: Dimensions.height20 * 4,
+                      height: Dimensions.height20 * 4,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(snap['image']),
                           ),
                           borderRadius:
-                              BorderRadius.circular(Dimensions.radius20),
+                              BorderRadius.circular(Dimensions.radius15),
                           color: Colors.white),
                     ),
                     SizedBox(
                       width: Dimensions.width10,
                     ),
                     Expanded(
-                        child: SizedBox(
-                      height: Dimensions.height20 * 5,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      child: SizedBox(
+                        height: Dimensions.height20 * 5,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            BigText(
+                              text: snap['title'],
+                              size: Dimensions.font20 - 2,
+                              color: Colors.black54,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                BigText(
+                                  text: '₹ ${snap['price']}',
+                                  size: Dimensions.font20 - 2,
+                                  color: Colors.redAccent,
+                                ),
+                                //containerrr
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        top: Dimensions.height10,
+                        bottom: Dimensions.height10,
+                        right: Dimensions.width20 / 2,
+                        left: Dimensions.width20 / 2,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius15),
+                          color: Colors.white),
+                      child: Row(
                         children: [
-                          BigText(
-                            text: snap['title'],
-                            size: Dimensions.font20,
-                            color: Colors.black54,
+                          GestureDetector(
+                            child: const Icon(
+                              Icons.remove,
+                              color: Colors.grey,
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              BigText(
-                                text: '₹ ${snap['price']}',
-                                size: Dimensions.font20,
-                                color: Colors.redAccent,
-                              ),
-                              //containerrr
-                              Container(
-                                padding: EdgeInsets.only(
-                                  top: Dimensions.height10,
-                                  bottom: Dimensions.height10,
-                                  right: Dimensions.width20 / 2,
-                                  left: Dimensions.width20 / 2,
-                                ),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.radius15),
-                                    color: Colors.white),
-                                child: Row(
-                                  children: [
-                                    GestureDetector(
-                                      child: const Icon(
-                                        Icons.remove,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    BigText(text: "1"
-                                        ),
-                                    GestureDetector(
-                                      onTap: () {
-                                      },
-                                      child: const Icon(
-                                        Icons.add,
-                                        color: Colors.grey,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
+                          BigText(text: "1"),
+                          GestureDetector(
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.grey,
+                            ),
                           )
                         ],
                       ),
-                    ))
+                    ),
                   ],
                 ),
               );

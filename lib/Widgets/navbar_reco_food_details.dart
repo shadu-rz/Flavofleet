@@ -36,7 +36,7 @@ class NavbarRecoFoodDetails extends StatelessWidget {
                 iconColor: Colors.white,
               ),
               BigText(
-                text: '\₹${snap['price']} ' "X " '0',
+                text: '₹${snap['price']} ' "X " '1',
                 color: AppColors.mainBlackColor,
                 size: Dimensions.font26,
               ),
@@ -83,7 +83,7 @@ class NavbarRecoFoodDetails extends StatelessWidget {
               GestureDetector(
                 onTap: ()async {
                   if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, snap['title'])) {
-                showCustomSnackBar('Already exist in the cart',title: 'Existing');
+                showCustomSnackBar('Already exist in the cart',title: 'Existing',color: Colors.red);
               }else{
                  RecommendedProductModel product = RecommendedProductModel(
                 title: snap['title'],
@@ -99,26 +99,16 @@ class NavbarRecoFoodDetails extends StatelessWidget {
               }
                 },
                 child: Container(
-                  height: Dimensions.height45,
-                  width: Dimensions.height10 * 17,
+                  padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius15),
                     color: AppColors.mainColor,
                   ),
                   child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        BigText(
-                          text: "₹${snap['price']}",
-                          color: Colors.white,
-                        ),
-                        BigText(
-                          text: "add to cart",
-                          color: Colors.white,
-                          size: Dimensions.font20/1.1,
-                        ),
-                      ],
+                    child: BigText(
+                      text: "add to cart",
+                      color: Colors.white,
+                      size: Dimensions.font20/1.1,
                     ),
                   ),
                 ),
