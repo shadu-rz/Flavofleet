@@ -1,14 +1,20 @@
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BottomNavCart extends StatelessWidget {
-  const BottomNavCart({
+  final FirebaseMethods firebase = Get.put(FirebaseMethods());
+  BottomNavCart({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      firebase.getCartDetails();
+    });
     return Positioned(
         bottom: double.minPositive,
         child: Container(
@@ -24,10 +30,14 @@ class BottomNavCart extends StatelessWidget {
                 width: Dimensions.height45 * 2.7,
                 decoration: BoxDecoration(
                     color: Colors.black12,
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.radius15)),
+                    borderRadius: BorderRadius.circular(Dimensions.radius15)),
                 child: Center(
-                  child: BigText(text: 'Total item: 6',size: Dimensions.font20/1.2,),
+                  child: Obx(
+                    () => BigText(
+                      text: 'Total item: ${firebase.observecartLength}',
+                      size: Dimensions.font20 / 1.2,
+                    ),
+                  ),
                 ),
               ),
               Container(
@@ -36,10 +46,13 @@ class BottomNavCart extends StatelessWidget {
                 width: Dimensions.height45 * 2,
                 decoration: BoxDecoration(
                     color: Colors.black12,
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.radius15)),
+                    borderRadius: BorderRadius.circular(Dimensions.radius15)),
                 child: Center(
-                  child: BigText(text: '₹ 360'),
+                  child: Obx(
+                    ()=> BigText(
+                      text: '₹ ${firebase.observetotalPrice}',
+                    ),
+                  ),
                 ),
               ),
               Container(
@@ -48,8 +61,7 @@ class BottomNavCart extends StatelessWidget {
                 width: Dimensions.height45 * 3,
                 decoration: BoxDecoration(
                     color: Colors.black12,
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.radius15)),
+                    borderRadius: BorderRadius.circular(Dimensions.radius15)),
                 child: Center(
                   child: BigText(text: 'Check Out'),
                 ),
@@ -59,4 +71,3 @@ class BottomNavCart extends StatelessWidget {
         ));
   }
 }
-

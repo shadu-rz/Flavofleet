@@ -51,10 +51,9 @@ class CartListWidget extends StatelessWidget {
                       width: Dimensions.height20 * 5,
                       height: Dimensions.height20 * 5,
                       decoration: BoxDecoration(
-                          image:  DecorationImage(
+                          image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                               snap['image']),
+                            image: NetworkImage(snap['image']),
                           ),
                           borderRadius:
                               BorderRadius.circular(Dimensions.radius20),
@@ -64,7 +63,7 @@ class CartListWidget extends StatelessWidget {
                       width: Dimensions.width10,
                     ),
                     Expanded(
-                        child: Container(
+                        child: SizedBox(
                       height: Dimensions.height20 * 5,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +78,7 @@ class CartListWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               BigText(
-                              text: '₹ ${snap['price']}',
+                                text: '₹ ${snap['price']}',
                                 size: Dimensions.font20,
                                 color: Colors.redAccent,
                               ),
@@ -98,19 +97,15 @@ class CartListWidget extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     GestureDetector(
-                                      // onTap: () => popularProduct
-                                      //     .setQuantity(false),
                                       child: const Icon(
                                         Icons.remove,
                                         color: Colors.grey,
                                       ),
                                     ),
-                                    BigText(text: "1" //popularProduct.quantity
-                                        // .toString()
+                                    BigText(text: "1"
                                         ),
                                     GestureDetector(
                                       onTap: () {
-                                        // popularProduct.setQuantity(true);
                                       },
                                       child: const Icon(
                                         Icons.add,

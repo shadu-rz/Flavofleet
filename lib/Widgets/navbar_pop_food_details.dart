@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
@@ -75,7 +74,7 @@ class NavBarPopFoodDetails extends StatelessWidget {
                 time: double.parse(snap['time']) ,
                 uId: FirebaseAuth.instance.currentUser!.uid,
               );
-              await FirebaseMethods().addToCart(product);
+              await FirebaseMethods().addToCartPopular(product);
               }
             },
             child: Container(

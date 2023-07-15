@@ -6,8 +6,7 @@ import 'package:flavour_fleet_main/Widgets/cart_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatelessWidget {
-  final int totalItemInCart = 10;
-  const CartPage({super.key});
+  const CartPage({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,8 @@ class CartPage extends StatelessWidget {
               ),
             ),
           ),
-          const BottomNavCart()
+          //nav bar
+           BottomNavCart()
         ],
       ),
     );

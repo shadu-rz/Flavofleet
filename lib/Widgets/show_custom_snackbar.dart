@@ -24,6 +24,6 @@ void showCustomSnackBar(String message,
         style: const TextStyle(color: Colors.white),
       ),
       colorText: Colors.white,
-      snackPosition: SnackPosition.TOP,
+      snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColors.mainColor);
 }

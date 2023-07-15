@@ -48,7 +48,9 @@ class RecommendedProductListWidget extends StatelessWidget {
                           },
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
+
                             var snap = snapshot.data!.docs[index].data();
+                            
                             return Container(
                               margin: EdgeInsets.only(
                                 left: Dimensions.width20,

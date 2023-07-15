@@ -8,6 +8,7 @@ class RecommendedProductModel {
   final double distance;
   final double rating;
   final double star;
+  final String uId;
 
   RecommendedProductModel({
     required this.title,
@@ -17,6 +18,7 @@ class RecommendedProductModel {
     required this.distance,
     required this.rating,
     required this.star,
+    required this.uId,
   });
 
     Map<String, dynamic> toJson() => {
@@ -27,6 +29,7 @@ class RecommendedProductModel {
         "distance": distance,
         "rating": rating,
         "star": star,
+        "uId":uId,
       };
 
   static RecommendedProductModel fromSnapshot(DocumentSnapshot snap) {
@@ -39,6 +42,7 @@ class RecommendedProductModel {
       distance: snapShot['distance'],
       rating: snapShot['rating'],
       star: snapShot['star'],
+      uId: snapShot['uId'],
     );
   }
 
