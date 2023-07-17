@@ -32,7 +32,7 @@ class AppTextField extends StatelessWidget {
             BoxShadow(
                 blurRadius: 10,
                 spreadRadius: 5,
-                offset: Offset(1, 10),
+                offset: const Offset(1, 10),
                 color: Colors.grey.withOpacity(0.2))
           ]),
       child: TextField(
@@ -50,7 +50,7 @@ class AppTextField extends StatelessWidget {
                 borderSide: const BorderSide(width: 1.0, color: Colors.white)),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(width: 1.0, color: Colors.white)),
+                borderSide: const BorderSide(width: 1.0, color: Colors.white)),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             )),

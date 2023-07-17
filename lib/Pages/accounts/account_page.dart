@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/accounts/update_profile.dart';
 import 'package:flavour_fleet_main/Pages/accounts/logout_page.dart';
-import 'package:flavour_fleet_main/Pages/address/add_address_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/account_widget.dart';
@@ -202,23 +201,18 @@ class _AccountPageState extends State<AccountPage> {
                               height: Dimensions.height10,
                             ),
                             //address
-                            GestureDetector(
-                              onTap: () => navigator!.push(MaterialPageRoute(
-                                builder: (context) => const AddAddressPage(),
-                              )),
-                              child: AccountWidget(
-                                containColor: Colors.white60,
-                                appIcon: AppIcon(
-                                  icon: Icons.location_on,
-                                  backgroundColor: Colors.greenAccent,
-                                  iconColor: Colors.white,
-                                  size: Dimensions.height10 * 5,
-                                  iconSize: Dimensions.height10 * 5 / 2,
-                                ),
-                                bigText: BigText(
-                                  text: 'Location not available',
-                                  size: Dimensions.screenWidth / 20,
-                                ),
+                            AccountWidget(
+                              containColor: Colors.white60,
+                              appIcon: AppIcon(
+                                icon: Icons.location_on,
+                                backgroundColor: Colors.greenAccent,
+                                iconColor: Colors.white,
+                                size: Dimensions.height10 * 5,
+                                iconSize: Dimensions.height10 * 5 / 2,
+                              ),
+                              bigText: BigText(
+                                text: 'Location not available',
+                                size: Dimensions.screenWidth / 20,
                               ),
                             ),
                             SizedBox(

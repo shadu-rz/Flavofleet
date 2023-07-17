@@ -9,6 +9,7 @@ void showCustomSnackBar(
   bool isError = true,
   String title = 'Error,',
   Color color = const Color.fromARGB(255, 116, 185, 181),
+  SnackPosition position = SnackPosition.BOTTOM,
 }) {
   Get.snackbar(
       duration: const Duration(milliseconds: 1250),
@@ -28,6 +29,6 @@ void showCustomSnackBar(
         style: const TextStyle(color: Colors.white),
       ),
       colorText: Colors.white,
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: position,
       backgroundColor: color);
 }

@@ -207,7 +207,7 @@ class _SignInPageState extends State<SignInPage> {
               onTap: () async {
                 final user = await signInWithGoogle();
                 if (user != null) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const AuthPage(),));
+                  navigator!.pushReplacement(MaterialPageRoute(builder: (context) => const AuthPage(),));
                 }
               },
               child: Container(

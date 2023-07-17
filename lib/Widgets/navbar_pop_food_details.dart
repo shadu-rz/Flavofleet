@@ -49,7 +49,7 @@ class NavBarPopFoodDetails extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 BigText(
-                  text: '20',
+                  text: '1',
                   size: Dimensions.font20,
                 ),
                 const Icon(

@@ -10,6 +10,7 @@ import 'package:flavour_fleet_main/model/popular_product_model.dart';
 class FirebaseMethods extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  // add user details
   Future<String> addUserDetails(
       {required String email,
       required String image,
@@ -33,6 +34,8 @@ class FirebaseMethods extends GetxController {
     return res;
   }
 
+
+  // add to cart popular product
   Future<void> addToCartPopular(PopularProductModel productModel) async {
     try {
       String id = const Uuid().v1();
@@ -47,6 +50,7 @@ class FirebaseMethods extends GetxController {
       log(e.toString());
     }
   }
+  // add to cart recommended product
 
   Future<void> addToCartRecommended(
       RecommendedProductModel productModel) async {
@@ -59,6 +63,8 @@ class FirebaseMethods extends GetxController {
       log(e.toString());
     }
   }
+
+  // to check is it already existing in the cart
 
   Future<bool> alreadyExistInCart(String uId, String title) async {
     try {
@@ -77,10 +83,10 @@ class FirebaseMethods extends GetxController {
     return false;
   }
 
-  // int cartLength = 0 ;
   RxInt observecartLength = RxInt(0);
-  // double totalPrice =0;
   RxNum observetotalPrice = RxNum(0);
+
+  // Get cart details
   Future<void> getCartDetails() async {
     observetotalPrice.value = 0;
     try {
@@ -96,4 +102,18 @@ class FirebaseMethods extends GetxController {
       log("errorr ${e.toString()}");
     }
   }
+  // delete collection
+
+  Future<void> deleteCollection(String collectionPath) async {
+  final QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection(collectionPath).get();
+
+  for (DocumentSnapshot snapshot in querySnapshot.docs) {
+    await snapshot.reference.delete();
+
+    final String subcollectionPath = '$collectionPath/${snapshot.id}';
+    await deleteCollection(subcollectionPath);
+  }
+}
+
 }

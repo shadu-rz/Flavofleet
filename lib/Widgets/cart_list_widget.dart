@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 
 class CartListWidget extends StatelessWidget {
@@ -102,6 +103,16 @@ class CartListWidget extends StatelessWidget {
                           color: Colors.white),
                       child: Row(
                         children: [
+                          GestureDetector(
+                            onTap: () async {
+                              await FirebaseMethods().deleteCollection('cart');
+                            },
+                            child: const Icon(
+                              Icons.delete_outline,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(width: Dimensions.width20),
                           GestureDetector(
                             child: const Icon(
                               Icons.remove,

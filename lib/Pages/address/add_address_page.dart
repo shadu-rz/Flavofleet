@@ -1,3 +1,4 @@
+import 'package:flavour_fleet_main/Pages/buy%20now/buy_now_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/app_text_field.dart';
@@ -15,15 +16,8 @@ class AddAddressPage extends StatefulWidget {
 }
 
 class _AddAddressPageState extends State<AddAddressPage> {
-  TextEditingController _addressController = TextEditingController();
-  // final TextEditingController _contactPersonName = TextEditingController();
-  // final TextEditingController _contactPersonNumber = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   late bool isLogged;
-  // final CameraPosition _cameraPosition = const CameraPosition(
-  //   target: LatLng(10.933406381023925, 76.00130423779683),
-  //   zoom: 17,
-  // );
-  // late LatLng _initialPosition = LatLng(10.933406381023925, 76.00130423779683);
 
   @override
   void initState() {
@@ -34,33 +28,13 @@ class _AddAddressPageState extends State<AddAddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Address page'),
+        title: const Text('Address page'),
         backgroundColor: AppColors.mainColor,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.only(
-                  top: Dimensions.height10,
-                  right: Dimensions.width20,
-                  left: Dimensions.width20),
-              height: Dimensions.height45 * 4,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                      width: 2, color: Theme.of(context).primaryColor)),
-              child: const Stack(
-                children: [
-                  // GoogleMap(
-                  //   initialCameraPosition:
-                  //       CameraPosition(target: _initialPosition, zoom: 70),
-                  // ),
-                ],
-              ),
-            ),
             SizedBox(height: Dimensions.height20),
             Padding(
               padding: EdgeInsets.only(left: Dimensions.width20),
@@ -110,40 +84,88 @@ class _AddAddressPageState extends State<AddAddressPage> {
             SizedBox(height: Dimensions.height20),
             Padding(
               padding: EdgeInsets.only(left: Dimensions.width20),
-              child: BigText(text: 'Delivery address'),
-            ),
-            SizedBox(
-              height: Dimensions.height20,
-            ),
-            AppTextField(
-                textController: _addressController,
-                hintText: 'Malappuram,Kerala,India',
-                icon: Icons.map),
-            SizedBox(
-              height: Dimensions.height20,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: Dimensions.width20),
               child: BigText(text: 'contact name'),
             ),
-            SizedBox(height: Dimensions.height20),
+            SizedBox(height: Dimensions.height10),
             AppTextField(
-                textController: _addressController,
+                textController: addressController,
                 hintText: 'ShaduRz',
                 icon: Icons.person),
             SizedBox(height: Dimensions.height20),
-            Padding(
+             Padding(
               padding: EdgeInsets.only(left: Dimensions.width20),
               child: BigText(text: 'contact number'),
             ),
-            SizedBox(height: Dimensions.height20),
+            SizedBox(height: Dimensions.height10),
             AppTextField(
-                textController: _addressController,
+                textController: addressController,
                 hintText: '9048184448',
                 icon: Icons.call),
-            SizedBox(height: Dimensions.height20),
+            SizedBox(height: Dimensions.height10),
+            Padding(
+              padding: EdgeInsets.only(left: Dimensions.width20),
+              child: BigText(text: 'Flat, House no., Building, company'),
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+            AppTextField(
+              textController: addressController,
+              hintText: '',
+              icon: Icons.map,
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+             Padding(
+              padding: EdgeInsets.only(left: Dimensions.width20),
+              child: BigText(text: 'Flat, House no., Building, company'),
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+            AppTextField(
+              textController: addressController,
+              hintText: '',
+              icon: Icons.map,
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+             Padding(
+              padding: EdgeInsets.only(left: Dimensions.width20),
+              child: BigText(text: 'Landmark'),
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+            AppTextField(
+              textController: addressController,
+              hintText: 'E.g near hello hospital',
+              icon: Icons.map,
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+             Padding(
+              padding: EdgeInsets.only(left: Dimensions.width20),
+              child: BigText(text: 'pincode'),
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+            AppTextField(
+              textController: addressController,
+              hintText: '6 digits[0-9] PIN code',
+              icon: Icons.map,
+            ),
+            SizedBox(
+              height: Dimensions.height30,
+            ),
+            
+           
             GestureDetector(
-              onTap: () => navigator!.pop(),
+              onTap: () => navigator!.push(MaterialPageRoute(builder: (context) => const BuyNowPage(),)),
               child: Container(
                 margin: EdgeInsets.only(
                     left: Dimensions.width20,
@@ -157,7 +179,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                     color: AppColors.mainColor),
                 child: Center(
                   child: BigText(
-                    text: 'Save Address',
+                    text: 'Next',
                     size: 18,
                     color: Colors.white,
                   ),

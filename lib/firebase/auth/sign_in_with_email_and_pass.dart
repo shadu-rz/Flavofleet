@@ -53,6 +53,14 @@ void signUserIn(context, String email, String password) async {
       wrongPasswordMessage(context);
     }
   }
+  // catch (e) {
+  // Navigator.pop(context);
+  // if (e is PlatformException && e.message.contains('network_error')) {
+  //   networkErrorMessage(context);
+  // } else {
+  //   // Handle other types of exceptions or unknown errors
+  //   unknownErrorMessage(context);
+  // }
 }
 
 void wrongEmailMessage(context) {

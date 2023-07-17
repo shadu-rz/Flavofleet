@@ -59,7 +59,7 @@ class CartHistory extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Container(
+                            SizedBox(
                               // color: Colors.amber,
                               height: 120,
                               child: Column(

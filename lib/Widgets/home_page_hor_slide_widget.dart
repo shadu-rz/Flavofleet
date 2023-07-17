@@ -14,7 +14,7 @@ class HomePageHorSlideWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       // color: Colors.yellow,
       height: Dimensions.screenHeight / 2.8,
       child: StreamBuilder(

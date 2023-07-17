@@ -3,6 +3,7 @@ import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AccountWidget extends StatelessWidget {
   AppIcon appIcon;
   BigText bigText;
@@ -26,7 +27,7 @@ class AccountWidget extends StatelessWidget {
         color: containColor,
         boxShadow: [BoxShadow(
           blurRadius: 2,
-          offset: Offset(0, 5),
+          offset: const Offset(0, 5),
           color: Colors.grey.withOpacity(0.2)
         )]
       ),
