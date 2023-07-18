@@ -47,10 +47,6 @@ class AppColumn extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             SmallText(text: snap['rating']),
-            SizedBox(width: Dimensions.width20 * 2),
-            SmallText(text: '1282'),
-            const SizedBox(width: 10),
-            SmallText(text: 'comments')
           ],
         ),
         SizedBox(height: Dimensions.height10),
