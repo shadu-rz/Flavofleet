@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flavour_fleet_main/model/popular_product_model.dart';
 
 class FirebaseMethods extends GetxController {
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   // add user details
@@ -38,31 +39,37 @@ class FirebaseMethods extends GetxController {
   // add to cart popular product
   Future<void> addToCartPopular(PopularProductModel productModel) async {
     try {
-      String id = const Uuid().v1();
-      await firestore.collection('cart').doc(id).set(productModel.toJson());
-      log('Popular product add to cart success');
-      showCustomSnackBar(
-        'Added to Cart successfull',
-        title: 'cart',
-        color: Colors.green,
-      );
+      await firestore.collection('cart').doc(productModel.productId).set(productModel.toJson());
+
+      showCustomSnackBar('Added to Cart successfull',
+          title: 'cart', color: Colors.green, position: SnackPosition.BOTTOM);
+    
+      
     } catch (e) {
       log(e.toString());
     }
   }
+
+
   // add to cart recommended product
 
   Future<void> addToCartRecommended(
       RecommendedProductModel productModel) async {
     try {
-      String id = const Uuid().v1();
-      await firestore.collection('cart').doc(id).set(productModel.toJson());
+      await firestore
+          .collection('cart')
+          .doc(productModel.productId)
+          .set(productModel.toJson());
+
       log('Recommende product add to cart success');
-      showCustomSnackBar('Added to Cart successfull', title: 'cart',color: Colors.green);
+      showCustomSnackBar('Added to Cart successfull',
+          title: 'cart', color: Colors.green,position: SnackPosition.BOTTOM);
     } catch (e) {
       log(e.toString());
     }
   }
+
+
 
   // to check is it already existing in the cart
 
@@ -83,16 +90,21 @@ class FirebaseMethods extends GetxController {
     return false;
   }
 
+
+
+  // Get cart details
+
   RxInt observecartLength = RxInt(0);
   RxNum observetotalPrice = RxNum(0);
 
-  // Get cart details
   Future<void> getCartDetails() async {
     observetotalPrice.value = 0;
     try {
       QuerySnapshot<Map<String, dynamic>> snap =
           await firestore.collection('cart').get();
+
       observecartLength.value = snap.docs.length;
+
       for (var element in snap.docs) {
         observetotalPrice.value = observetotalPrice.value + element['price'];
       }
@@ -102,18 +114,36 @@ class FirebaseMethods extends GetxController {
       log("errorr ${e.toString()}");
     }
   }
+
+
+
   // delete collection
 
-  Future<void> deleteCollection(String collectionPath) async {
-  final QuerySnapshot querySnapshot =
-      await FirebaseFirestore.instance.collection(collectionPath).get();
-
-  for (DocumentSnapshot snapshot in querySnapshot.docs) {
-    await snapshot.reference.delete();
-
-    final String subcollectionPath = '$collectionPath/${snapshot.id}';
-    await deleteCollection(subcollectionPath);
+  Future<void> deleteCollection(String productId) async {
+    log(productId);
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection('cart')
+        .doc(productId)
+        .get();
+    await doc.reference.delete();
   }
-}
 
+
+
+
+  //   RxBool isExistInCart = RxBool(false);
+  // Future containsInCart(String imageUrl)async{
+
+  //   QuerySnapshot doc = await firestore.collection('cart').get();
+  //   // DocumentSnapshot docSnap = await docRef.get();
+  //   for (var element in doc.docs) {
+  //     if (element['image']==imageUrl) {
+  //     isExistInCart = RxBool(true);
+  //     return ;
+  //   }
+  //   
+  
+  // isExistInCart = RxBool(false);
+
+  // }
 }

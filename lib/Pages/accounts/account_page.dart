@@ -35,22 +35,30 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              navigator!.pop();
+            },
+            icon:const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            )),
         title: Center(
             child: BigText(
           text: 'Account',
           size: 24,
-          color: Colors.white,
+          color: Colors.black,
         )),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
       ),
       body: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/image/food8.jpg'),
-                fit: BoxFit.cover,
-              ),
+              // image: DecorationImage(
+              //   image: AssetImage('assets/image/food8.jpg'),
+              //   fit: BoxFit.cover,
+              // ),
             ),
             // color: Colors.amber,
           ),
@@ -91,12 +99,11 @@ class _AccountPageState extends State<AccountPage> {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 content: CircleAvatar(
-                                  radius: Dimensions.height45 *2,
-                                  backgroundImage:
-                                    NetworkImage(snapshot
-                                    .data!['image'].isEmpty
-                                ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
-                                : snapshot.data!['image']),
+                                  radius: Dimensions.height45 * 2,
+                                  backgroundImage: NetworkImage(snapshot
+                                          .data!['image'].isEmpty
+                                      ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
+                                      : snapshot.data!['image']),
                                 ),
                               );
                             },
@@ -127,7 +134,7 @@ class _AccountPageState extends State<AccountPage> {
                           margin: EdgeInsets.symmetric(
                               horizontal: Dimensions.height15 + 3),
                           decoration: BoxDecoration(
-                              color: Colors.white70,
+                              color: Colors.black12,
                               borderRadius:
                                   BorderRadius.circular(Dimensions.radius15)),
                           height: Dimensions.height45 - 5,
@@ -267,7 +274,7 @@ class _AccountPageState extends State<AccountPage> {
             title: Text(
               'Are you sure want to log out?',
               style: TextStyle(
-                fontSize: Dimensions.font20-3,
+                fontSize: Dimensions.font20 - 3,
                 fontWeight: FontWeight.bold,
               ),
             ),

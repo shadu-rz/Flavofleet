@@ -1,7 +1,6 @@
-import 'package:flavour_fleet_main/Pages/Cart/orders.dart';
+import 'package:flavour_fleet_main/Pages/order/orders.dart';
 import 'package:flavour_fleet_main/Pages/Cart/cart_page.dart';
 import 'package:flavour_fleet_main/Pages/Home/main_food_page.dart';
-import 'package:flavour_fleet_main/Pages/accounts/account_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +27,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
     List<Widget> _buildScreens() {
       return [
         const MainFoodPage(),
-        const CartPage(),
+         CartPage(),
         const CartHistory(),
-        const AccountPage()
       ];
     }
 
@@ -51,12 +49,6 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
         PersistentBottomNavBarItem(
           icon: const Icon(CupertinoIcons.archivebox),
           title: ("orders"),
-          activeColorPrimary: AppColors.mainColor,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
-        ),
-        PersistentBottomNavBarItem(
-          icon: const Icon(CupertinoIcons.person),
-          title: ("me"),
           activeColorPrimary: AppColors.mainColor,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),

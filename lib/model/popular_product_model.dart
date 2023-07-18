@@ -10,6 +10,8 @@ class PopularProductModel {
   final double star;
   final double time;
   final String uId;
+  final String productId;
+
 
   PopularProductModel({
     required this.title,
@@ -21,6 +23,7 @@ class PopularProductModel {
     required this.star,
     required this.time,
     required this.uId,
+    required this.productId
   });
 
   Map<String, dynamic> toJson() => {
@@ -33,6 +36,7 @@ class PopularProductModel {
         "star": star,
         "time": time,
         "uId":uId,
+        "productId":productId
       };
 
   static PopularProductModel fromSnapshot(DocumentSnapshot snap) {
@@ -47,6 +51,7 @@ class PopularProductModel {
       star: snapShot['star'],
       time: snapShot['time'],
       uId: snapShot['uId'],
+      productId: snapShot['productId'],
     );
   }
 }

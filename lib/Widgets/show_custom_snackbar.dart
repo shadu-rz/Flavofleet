@@ -1,4 +1,3 @@
-
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flutter/material.dart';
@@ -12,23 +11,24 @@ void showCustomSnackBar(
   SnackPosition position = SnackPosition.BOTTOM,
 }) {
   Get.snackbar(
-      duration: const Duration(milliseconds: 1250),
-      margin: EdgeInsets.only(
-        bottom: Dimensions.height20,
-        right: Dimensions.height10,
-        left: Dimensions.height10,
-      ),
-      title,
+    duration: const Duration(milliseconds: 1250),
+    margin: EdgeInsets.only(
+      bottom: Dimensions.height20,
+      right: Dimensions.height10,
+      left: Dimensions.height10,
+    ),
+    title,
+    message,
+    titleText: BigText(
+      text: title,
+      color: Colors.white,
+    ),
+    messageText: Text(
       message,
-      titleText: BigText(
-        text: title,
-        color: Colors.white,
-      ),
-      messageText: Text(
-        message,
-        style: const TextStyle(color: Colors.white),
-      ),
-      colorText: Colors.white,
-      snackPosition: position,
-      backgroundColor: color);
+      style: const TextStyle(color: Colors.white),
+    ),
+    colorText: Colors.white,
+    snackPosition: position,
+    backgroundColor: color.withOpacity(0.5),
+  );
 }

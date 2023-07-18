@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/buy%20now/buy_now_page.dart';
+import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
@@ -9,9 +9,11 @@ import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/recommended_product_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class NavbarRecoFoodDetails extends StatelessWidget {
-  const NavbarRecoFoodDetails({
+  final FirebaseMethods firebase = Get.put(FirebaseMethods());
+   NavbarRecoFoodDetails({
     super.key,
     required this.snap,
   });
@@ -87,6 +89,7 @@ class NavbarRecoFoodDetails extends StatelessWidget {
                   if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, snap['title'])) {
                 showCustomSnackBar('Already exist in the cart',title: 'Existing',color: Colors.red);
               }else{
+                 String id = const Uuid().v1();
                  RecommendedProductModel product = RecommendedProductModel(
                 title: snap['title'],
                 price: double.parse(snap['price']) ,
@@ -96,8 +99,10 @@ class NavbarRecoFoodDetails extends StatelessWidget {
                 rating: double.parse(snap['rating'])  ,
                 star: double.parse(snap['star']) ,
                 uId: FirebaseAuth.instance.currentUser!.uid,
+                productId: id,
               );
               await FirebaseMethods().addToCartRecommended(product);
+              firebase.getCartDetails();
               }
                 },
                 child: Container(
@@ -124,7 +129,7 @@ class NavbarRecoFoodDetails extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTap: () {
-                     navigator!.push(MaterialPageRoute(builder: (context) => const BuyNowPage(),));
+                     navigator!.push(MaterialPageRoute(builder: (context) =>  CheckoutPage(),));
                   },
                   child: Center(
                     child: BigText(

@@ -1,3 +1,4 @@
+import 'package:flavour_fleet_main/Pages/accounts/account_page.dart';
 import 'package:flavour_fleet_main/Pages/favorite/favorite.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
@@ -62,18 +63,16 @@ class HomeScreenAppBar extends StatelessWidget {
               ),
             ],
           ),
-          Center(
-            child: Container(
-              width: Dimensions.screenWidth / 10,
-              height: Dimensions.screenWidth / 10,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.mainColor,
-              ),
-              child: const Icon(
-                Icons.search,
-                color: Colors.white,
-                size: 24,
+          GestureDetector(
+            onTap: () {
+              navigator!.push(MaterialPageRoute(builder: (context) => const AccountPage(),));            },
+            child: const Center(
+              child: CircleAvatar(
+                backgroundColor: AppColors.mainColor,
+                radius: 25,
+                child: Image(image: NetworkImage('https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png')),
+                
+              
               ),
             ),
           )

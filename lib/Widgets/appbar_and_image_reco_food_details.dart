@@ -34,7 +34,7 @@ class AppbarAndImageRecoFoodDetails extends StatelessWidget {
           GestureDetector(
             onTap: () => navigator!.push(
               MaterialPageRoute(
-                builder: (context) => const CartPage(),
+                builder: (context) =>  CartPage(),
               ),
             ),
             child: const AppIcon(

@@ -1,11 +1,17 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flavour_fleet_main/Pages/Food/recomended_food_details.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CartListWidget extends StatelessWidget {
-  const CartListWidget({
+  final FirebaseMethods firebase = Get.put(FirebaseMethods());
+  CartListWidget({
     super.key,
   });
 
@@ -41,96 +47,111 @@ class CartListWidget extends StatelessWidget {
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               var snap = snapshot.data!.docs[index].data();
-              return Container(
-                margin: EdgeInsets.only(top: Dimensions.height10),
-                // color: Colors.amber,
-                height: 100,
-                width: double.maxFinite,
-                child: Row(
-                  children: [
-                    Container(
-                      width: Dimensions.height20 * 4,
-                      height: Dimensions.height20 * 4,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(snap['image']),
-                          ),
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radius15),
-                          color: Colors.white),
-                    ),
-                    SizedBox(
-                      width: Dimensions.width10,
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                        height: Dimensions.height20 * 5,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            BigText(
-                              text: snap['title'],
-                              size: Dimensions.font20 - 2,
-                              color: Colors.black54,
+              return GestureDetector(
+                onTap: () {
+                  navigator!.push(MaterialPageRoute(
+                    builder: (context) => RecomendedFoodDetails(snap: snap),
+                  ));
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: Dimensions.height10),
+                  // color: Colors.amber,
+                  height: 100,
+                  width: double.maxFinite,
+                  child: Row(
+                    children: [
+                      Container(
+                        width: Dimensions.height20 * 4,
+                        height: Dimensions.height20 * 4,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(snap['image']),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                BigText(
-                                  text: '₹ ${snap['price']}',
-                                  size: Dimensions.font20 - 2,
-                                  color: Colors.redAccent,
-                                ),
-                                //containerrr
-                              ],
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius15),
+                            color: Colors.white),
+                      ),
+                      SizedBox(
+                        width: Dimensions.width10,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: Dimensions.height20 * 5,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              BigText(
+                                text: snap['title'],
+                                size: Dimensions.font20 - 2,
+                                color: Colors.black54,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  BigText(
+                                    text: '₹ ${snap['price']}',
+                                    size: Dimensions.font20 - 2,
+                                    color: Colors.redAccent,
+                                  ),
+                                  //containerrr
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: Dimensions.height10,
+                          bottom: Dimensions.height10,
+                          right: Dimensions.width20 / 2,
+                          left: Dimensions.width20 / 2,
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius15),
+                            color: Colors.white),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                await FirebaseMethods()
+                                    .deleteCollection(snap['productId']);
+                                showCustomSnackBar(
+                                  '${snap['title']} ',
+                                  title: 'removed',
+                                  color: Colors.red,
+                                );
+                                await firebase.getCartDetails();
+                              },
+                              child: const Icon(
+                                Icons.delete_outline,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            SizedBox(width: Dimensions.width20),
+                            GestureDetector(
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            BigText(text: "1"),
+                            GestureDetector(
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.grey,
+                              ),
                             )
                           ],
                         ),
                       ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        top: Dimensions.height10,
-                        bottom: Dimensions.height10,
-                        right: Dimensions.width20 / 2,
-                        left: Dimensions.width20 / 2,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radius15),
-                          color: Colors.white),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              await FirebaseMethods().deleteCollection('cart');
-                            },
-                            child: const Icon(
-                              Icons.delete_outline,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          SizedBox(width: Dimensions.width20),
-                          GestureDetector(
-                            child: const Icon(
-                              Icons.remove,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          BigText(text: "1"),
-                          GestureDetector(
-                            onTap: () {},
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.grey,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },

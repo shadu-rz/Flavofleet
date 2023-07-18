@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({
+  final FirebaseMethods firebase = Get.put(FirebaseMethods());
+   CartPage({
     super.key,
   });
 
@@ -54,7 +55,7 @@ class CartPage extends StatelessWidget {
                               for (var document in querySnapshot.docs) {
                                 document.reference.delete();
                               }
-                              await FirebaseMethods().deleteCollection('cart');
+                              firebase.getCartDetails();
                               showCustomSnackBar('All items cleared',
                                   title: 'success',
                                   color: Colors.green,
@@ -81,7 +82,7 @@ class CartPage extends StatelessWidget {
               child: MediaQuery.removePadding(
                 context: context,
                 removeTop: true,
-                child: const CartListWidget(),
+                child:  CartListWidget(),
               ),
             ),
           ),

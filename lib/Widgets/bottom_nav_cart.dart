@@ -58,6 +58,7 @@ class BottomNavCart extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
+                  
                   navigator!.push(MaterialPageRoute(builder: (context) =>  CheckoutPage(),));
                 },
                 child: Container(

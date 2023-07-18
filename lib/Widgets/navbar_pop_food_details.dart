@@ -1,5 +1,8 @@
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/buy%20now/buy_now_page.dart';
+import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
@@ -8,9 +11,11 @@ import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/popular_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 class NavBarPopFoodDetails extends StatelessWidget {
-  const NavBarPopFoodDetails({
+  final FirebaseMethods firebase = Get.put(FirebaseMethods());
+   NavBarPopFoodDetails({
     super.key,
     required this.snap,
   });
@@ -60,11 +65,11 @@ class NavBarPopFoodDetails extends StatelessWidget {
             ),
           ),
           GestureDetector(
-
             onTap: () async {
                if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, snap['title'])) {
-                showCustomSnackBar('Already exist in the cart',title: 'Existing',color: Colors.red);
+                showCustomSnackBar('Already exist in the cart',title: 'Existing',color: Colors.red,);
               }else{
+                 String id = const Uuid().v1();
                  PopularProductModel product = PopularProductModel(
                 title: snap['title'],
                 price: double.parse(snap['price']) ,
@@ -75,31 +80,33 @@ class NavBarPopFoodDetails extends StatelessWidget {
                 star: double.parse(snap['star']) ,
                 time: double.parse(snap['time']) ,
                 uId: FirebaseAuth.instance.currentUser!.uid,
+                productId: id,
               );
               await FirebaseMethods().addToCartPopular(product);
+              firebase.getCartDetails();
               }
             },
             child: Container(
-              height: Dimensions.height45,
-              width: Dimensions.height45 * 3,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius15),
-                color: AppColors.mainColor,
-              ),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    
-                    BigText(
-                      text: "Add to cart",
-                      color: Colors.white,
-                      size: Dimensions.font20 / 1.2,
-                    ),
-                  ],
+                height: Dimensions.height45,
+                width: Dimensions.height45 * 3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius15),
+                  color: AppColors.mainColor,
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                        BigText(
+                            text:  "Add to cart",
+                            color: Colors.white,
+                            size: Dimensions.font20 / 1.2,
+                          ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+            
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
@@ -109,7 +116,7 @@ class NavBarPopFoodDetails extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () {
-                navigator!.push(MaterialPageRoute(builder: (context) => const BuyNowPage(),));
+                navigator!.push(MaterialPageRoute(builder: (context) =>  CheckoutPage(),));
               },
               child: Center(
                 child: BigText(
@@ -124,4 +131,7 @@ class NavBarPopFoodDetails extends StatelessWidget {
       ),
     );
   }
+
+  
+
 }
