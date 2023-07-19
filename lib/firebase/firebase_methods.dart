@@ -1,15 +1,12 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
-import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/model/address_model.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
-import 'package:flavour_fleet_main/model/recommended_product_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flavour_fleet_main/model/popular_product_model.dart';
 
 class FirebaseMethods extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;

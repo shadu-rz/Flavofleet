@@ -102,7 +102,7 @@ class HorizontalScrollWidget extends StatelessWidget {
                           ),
                           IconAndTextWidget(
                             icon: Icons.location_on,
-                            text: '${int.parse(snap['distance'])} km',
+                            text: "${snap['distance']} km",
                             iconColor: Colors.deepOrangeAccent,
                           ),
                           const SizedBox(width: 10),
