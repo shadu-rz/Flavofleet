@@ -35,7 +35,7 @@ class BottomNavCart extends StatelessWidget {
                 child: Center(
                   child: Obx(
                     () => BigText(
-                      text: 'Total item: ${firebase.observecartLength}',
+                      text: '${firebase.observecartLength} Items',
                       size: Dimensions.font20 / 1.2,
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/Food/recomended_food_details.dart';
+import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
@@ -131,33 +132,46 @@ class CartListWidget extends StatelessWidget {
                               ),
                             ),
                             SizedBox(width: Dimensions.width20),
-                            GestureDetector(
-                              onTap: () async {
-                                int count = CartController()
-                                    .decrementInCart(snap['itemCount']);
-                                await FirebaseMethods()
-                                    .updateItemCount(snap['productId'], count);
-                                firebase.getCartDetails();
-                              },
-                              child: const Icon(
-                                Icons.remove,
-                                color: Colors.grey,
+                            CircleAvatar(
+                              backgroundColor: AppColors.mainColor,
+                              radius: 12,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  int count = CartController()
+                                      .decrementInCart(snap['itemCount']);
+                                  await FirebaseMethods()
+                                      .updateItemCount(snap['productId'], count);
+                                  firebase.getCartDetails();
+                                },
+                                child: const Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                            BigText(
-                              text: "${snap['itemCount']}",
+                              SizedBox(width: Dimensions.width10,),
+                            CircleAvatar(
+                               backgroundColor: AppColors.mainColor,
+                              child: BigText(
+                                text: "${snap['itemCount']}",color: Colors.white,
+                              ),
                             ),
-                            GestureDetector(
-                              onTap: () async {
-                                int count = CartController()
-                                    .incrementInCart(snap['itemCount']);
-                                await FirebaseMethods()
-                                    .updateItemCount(snap['productId'], count);
-                                firebase.getCartDetails();
-                              },
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.grey,
+                            SizedBox(width: Dimensions.width10,),
+                            CircleAvatar(
+                               backgroundColor: AppColors.mainColor,
+                              radius: 12,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  int count = CartController()
+                                      .incrementInCart(snap['itemCount']);
+                                  await FirebaseMethods()
+                                      .updateItemCount(snap['productId'], count);
+                                  firebase.getCartDetails();
+                                },
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                ),
                               ),
                             )
                           ],
