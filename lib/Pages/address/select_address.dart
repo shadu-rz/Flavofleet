@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class CheckoutPage extends StatelessWidget {
-  CheckoutPage({super.key});
+class SelectAddress extends StatelessWidget {
+  SelectAddress({super.key});
   TextEditingController addressController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class CheckoutPage extends StatelessWidget {
                 }
                 if (!snapshot.hasData) {
                   return Center(
-                    child: BigText(text: 'No Adress'),
+                    child: BigText(text: 'No Adress found'),
                   );
                 }
                 if (snapshot.hasError) {
@@ -69,6 +69,12 @@ class CheckoutPage extends StatelessWidget {
                     child: BigText(text: 'Check your internet'),
                   );
                 }
+                 if (snapshot.data!.docs.isEmpty) {
+                  return Center(
+                    child: BigText(text: 'No Adress found'),
+                  );
+                }
+
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {

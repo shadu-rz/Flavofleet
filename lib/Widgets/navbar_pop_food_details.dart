@@ -1,9 +1,7 @@
 
 
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
+import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
@@ -11,7 +9,6 @@ import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
-import 'package:flavour_fleet_main/model/popular_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -149,7 +146,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
             ),
             child: GestureDetector(
               onTap: () {
-                navigator!.push(MaterialPageRoute(builder: (context) =>  CheckoutPage(),));
+                navigator!.push(MaterialPageRoute(builder: (context) =>  SelectAddress(),));
               },
               child: Center(
                 child: BigText(

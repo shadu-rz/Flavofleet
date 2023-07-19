@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
+import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
@@ -157,7 +157,7 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                 ),
                 child: GestureDetector(
                   onTap: () {
-                     navigator!.push(MaterialPageRoute(builder: (context) =>  CheckoutPage(),));
+                     navigator!.push(MaterialPageRoute(builder: (context) =>  SelectAddress(),));
                   },
                   child: Center(
                     child: BigText(

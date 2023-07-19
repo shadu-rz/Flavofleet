@@ -1,4 +1,4 @@
-import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
+import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
@@ -59,7 +59,7 @@ class BottomNavCart extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   
-                  navigator!.push(MaterialPageRoute(builder: (context) =>  CheckoutPage(),));
+                  navigator!.push(MaterialPageRoute(builder: (context) =>  SelectAddress(),));
                 },
                 child: Container(
                   height: Dimensions.font20*2,

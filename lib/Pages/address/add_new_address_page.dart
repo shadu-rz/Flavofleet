@@ -1,4 +1,4 @@
-import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
+import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
@@ -109,7 +109,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
               );
               await FirebaseMethods().addAddress(addressModel);
               navigator!.push(MaterialPageRoute(
-                builder: (context) => CheckoutPage(),
+                builder: (context) => SelectAddress(),
               ));
             },
             child: Container(

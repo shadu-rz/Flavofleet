@@ -123,14 +123,7 @@ class CartListWidget extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () async {
-                                await FirebaseMethods()
-                                    .deleteCollection(snap['productId']);
-                                showCustomSnackBar(
-                                  '${snap['title']} ',
-                                  title: 'removed',
-                                  color: Colors.red,
-                                );
-                                await firebase.getCartDetails();
+                                await _showMyDialog(context,snap);
                               },
                               child: const Icon(
                                 Icons.delete_outline,
@@ -139,9 +132,11 @@ class CartListWidget extends StatelessWidget {
                             ),
                             SizedBox(width: Dimensions.width20),
                             GestureDetector(
-                              onTap: () async{
-                                 int count = CartController().decrementInCart(snap['itemCount']);
-                              await  FirebaseMethods().updateItemCount(snap['productId'], count);
+                              onTap: () async {
+                                int count = CartController()
+                                    .decrementInCart(snap['itemCount']);
+                                await FirebaseMethods()
+                                    .updateItemCount(snap['productId'], count);
                                 firebase.getCartDetails();
                               },
                               child: const Icon(
@@ -149,18 +144,16 @@ class CartListWidget extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                             ),
-                            
-                              BigText(
-                                text: "${snap['itemCount']}" ,
-                              ),
-                            
+                            BigText(
+                              text: "${snap['itemCount']}",
+                            ),
                             GestureDetector(
-                              onTap: () async{
-
-                               int count = CartController().incrementInCart(snap['itemCount']);
-                             await   FirebaseMethods().updateItemCount(snap['productId'], count);
+                              onTap: () async {
+                                int count = CartController()
+                                    .incrementInCart(snap['itemCount']);
+                                await FirebaseMethods()
+                                    .updateItemCount(snap['productId'], count);
                                 firebase.getCartDetails();
-
                               },
                               child: const Icon(
                                 Icons.add,
@@ -175,6 +168,43 @@ class CartListWidget extends StatelessWidget {
                 ),
               );
             },
+          );
+        });
+  }
+
+  Future<void> _showMyDialog(context,Map<String,dynamic>snap) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              'Are you sure want to delete ${snap['title']}',
+              style: TextStyle(
+                fontSize: Dimensions.font20 - 3,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            actions: [
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Confirm'),
+                onPressed: () async {
+                  await FirebaseMethods().deleteCollection(snap['productId']);
+                  showCustomSnackBar(
+                    '${snap['title']} ',
+                    title: 'removed',
+                    color: Colors.red,
+                  );
+                  await firebase.getCartDetails();
+                  navigator!.pop();
+                },
+              ),
+            ],
           );
         });
   }
