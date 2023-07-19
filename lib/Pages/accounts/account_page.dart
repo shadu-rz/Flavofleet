@@ -93,7 +93,7 @@ class _AccountPageState extends State<AccountPage> {
                     children: [
                       //profile icon
                       GestureDetector(
-                        onTap: () {
+                        onLongPress: () {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
