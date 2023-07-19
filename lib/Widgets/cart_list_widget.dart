@@ -139,8 +139,9 @@ class CartListWidget extends StatelessWidget {
                             ),
                             SizedBox(width: Dimensions.width20),
                             GestureDetector(
-                              onTap: () {
-                                countController.decrement();
+                              onTap: () async{
+                                 int count = CartController().decrementInCart(snap['itemCount']);
+                              await  FirebaseMethods().updateItemCount(snap['productId'], count);
                                 firebase.getCartDetails();
                               },
                               child: const Icon(
@@ -148,15 +149,18 @@ class CartListWidget extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                             ),
-                            Obx(
-                              () => BigText(
-                                text: countController.count.value.toString(),
+                            
+                              BigText(
+                                text: "${snap['itemCount']}" ,
                               ),
-                            ),
+                            
                             GestureDetector(
-                              onTap: () {
-                                countController.increment();
+                              onTap: () async{
+
+                               int count = CartController().incrementInCart(snap['itemCount']);
+                             await   FirebaseMethods().updateItemCount(snap['productId'], count);
                                 firebase.getCartDetails();
+
                               },
                               child: const Icon(
                                 Icons.add,

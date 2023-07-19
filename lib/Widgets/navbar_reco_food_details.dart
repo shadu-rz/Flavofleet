@@ -5,20 +5,35 @@ import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
+import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
-import 'package:flavour_fleet_main/model/recommended_product_mode.dart';
+import 'package:flavour_fleet_main/model/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
-class NavbarRecoFoodDetails extends StatelessWidget {
-  final FirebaseMethods firebase = Get.put(FirebaseMethods());
+class NavbarRecoFoodDetails extends StatefulWidget {
+
    NavbarRecoFoodDetails({
     super.key,
     required this.snap,
   });
-
   final Map<String, dynamic> snap;
+
+  @override
+  State<NavbarRecoFoodDetails> createState() => _NavbarRecoFoodDetailsState();
+}
+
+class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
+  final FirebaseMethods firebase = Get.put(FirebaseMethods());
+
+  final CartController countController = Get.find();
+
+  @override
+  void dispose() {
+    countController.count=RxInt(1);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +49,32 @@ class NavbarRecoFoodDetails extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const AppIcon(
-                icon: Icons.remove,
-                backgroundColor: AppColors.mainColor,
-                iconColor: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  countController.decrement();
+                },
+                child: const AppIcon(
+                  icon: Icons.remove,
+                  backgroundColor: AppColors.mainColor,
+                  iconColor: Colors.white,
+                ),
               ),
-              BigText(
-                text: '₹${snap['price']} ' "X " '1',
-                color: AppColors.mainBlackColor,
-                size: Dimensions.font26,
+              Obx(
+                ()=> BigText(
+                  text: "₹${widget.snap['price'] }  X  ${countController.count.value.toString()}",
+                  color: AppColors.mainBlackColor,
+                  size: Dimensions.font26,
+                ),
               ),
-              const AppIcon(
-                icon: Icons.add,
-                backgroundColor: AppColors.mainColor,
-                iconColor: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  countController.increment();
+                },
+                child: const AppIcon(
+                  icon: Icons.add,
+                  backgroundColor: AppColors.mainColor,
+                  iconColor: Colors.white,
+                ),
               ),
             ],
           ),
@@ -86,22 +113,23 @@ class NavbarRecoFoodDetails extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: ()async {
-                  if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, snap['title'])) {
+                  if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, widget.snap['title'])) {
                 showCustomSnackBar('Already exist in the cart',title: 'Existing',color: Colors.red);
               }else{
                  String id = const Uuid().v1();
-                 RecommendedProductModel product = RecommendedProductModel(
-                title: snap['title'],
-                price: double.parse(snap['price']) ,
-                image: snap['image'],
-                description: snap['description'],
-                distance: double.parse(snap['distance']) ,
-                rating: double.parse(snap['rating'])  ,
-                star: double.parse(snap['star']) ,
+                 CartModel product = CartModel(
+                title: widget.snap['title'],
+                price: double.parse(widget.snap['price']) ,
+                image: widget.snap['image'],
+                description: widget.snap['description'],
+                distance: double.parse(widget.snap['distance']) ,
+                rating: double.parse(widget.snap['rating'])  ,
+                star: double.parse(widget.snap['star']) ,
                 uId: FirebaseAuth.instance.currentUser!.uid,
                 productId: id,
+                itemCount: countController.count.value
               );
-              await FirebaseMethods().addToCartRecommended(product);
+              await FirebaseMethods().addToCart(product);
               firebase.getCartDetails();
               }
                 },

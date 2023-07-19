@@ -10,20 +10,38 @@ import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
+import 'package:flavour_fleet_main/model/cart_model.dart';
 import 'package:flavour_fleet_main/model/popular_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
-class NavBarPopFoodDetails extends StatelessWidget {
-  final FirebaseMethods firebase = Get.put(FirebaseMethods());
-   final CartController countController = Get.find();
+class NavBarPopFoodDetails extends StatefulWidget {
+
    NavBarPopFoodDetails({
     super.key,
     required this.snap,
   });
 
   final Map<String, dynamic> snap;
+
+  @override
+  State<NavBarPopFoodDetails> createState() => _NavBarPopFoodDetailsState();
+}
+
+
+
+class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
+
+  final FirebaseMethods firebase = Get.put(FirebaseMethods());
+
+   final CartController countController = Get.find();
+
+   @override
+  void dispose() {
+    countController.count=RxInt(1);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,23 +99,23 @@ class NavBarPopFoodDetails extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () async {
-               if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, snap['title'])) {
+               if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, widget.snap['title'])) {
                 showCustomSnackBar('Already exist in the cart',title: 'Existing',color: Colors.red,);
               }else{
                  String id = const Uuid().v1();
-                 PopularProductModel product = PopularProductModel(
-                title: snap['title'],
-                price: double.parse(snap['price']) ,
-                image: snap['image'],
-                description: snap['description'],
-                distance: double.parse(snap['distance']) ,
-                rating: double.parse(snap['rating'])  ,
-                star: double.parse(snap['star']) ,
-                time: double.parse(snap['time']) ,
+                 CartModel product = CartModel(
+                title: widget.snap['title'],
+                price: double.parse(widget.snap['price']) ,
+                image: widget.snap['image'],
+                description: widget.snap['description'],
+                distance: double.parse(widget.snap['distance']) ,
+                rating: double.parse(widget.snap['rating'])  ,
+                star: double.parse(widget.snap['star']) ,
                 uId: FirebaseAuth.instance.currentUser!.uid,
                 productId: id,
+                itemCount: countController.count.value
               );
-              await FirebaseMethods().addToCartPopular(product);
+              await FirebaseMethods().addToCart(product);
               firebase.getCartDetails();
               }
             },
@@ -146,7 +164,4 @@ class NavBarPopFoodDetails extends StatelessWidget {
       ),
     );
   }
-
-  
-
 }

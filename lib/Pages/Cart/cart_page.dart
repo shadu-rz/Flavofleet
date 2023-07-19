@@ -50,8 +50,7 @@ class CartPage extends StatelessWidget {
                             onPressed: () async {
                               final CollectionReference collectionReference =
                                   FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('cart');
-                              final QuerySnapshot querySnapshot =
-                                  await collectionReference.get();
+                              final QuerySnapshot querySnapshot = await collectionReference.get();
 
                               for (var document in querySnapshot.docs) {
                                 document.reference.delete();

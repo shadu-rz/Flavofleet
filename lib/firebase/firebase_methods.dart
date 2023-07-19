@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/model/address_model.dart';
+import 'package:flavour_fleet_main/model/cart_model.dart';
 import 'package:flavour_fleet_main/model/recommended_product_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,14 +39,14 @@ class FirebaseMethods extends GetxController {
   }
 
   // add to cart popular product
-  Future<void> addToCartPopular(PopularProductModel productModel) async {
+  Future<void> addToCart(CartModel cartModel) async {
     try {
       await firestore
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('cart')
-          .doc(productModel.productId)
-          .set(productModel.toJson());
+          .doc(cartModel.productId)
+          .set(cartModel.toJson());
 
       showCustomSnackBar('Added to Cart successfull',
           title: 'cart', color: Colors.green, position: SnackPosition.BOTTOM);
@@ -56,20 +57,11 @@ class FirebaseMethods extends GetxController {
 
   // add to cart recommended product
 
-  Future<void> addToCartRecommended(
-      RecommendedProductModel productModel) async {
+  Future<void> updateItemCount(String id, int count)async{
     try {
-       await firestore
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('cart')
-          .doc(productModel.productId)
-          .set(productModel.toJson());
-
-
-      log('Recommende product add to cart success');
-      showCustomSnackBar('Added to Cart successfull',
-          title: 'cart', color: Colors.green, position: SnackPosition.BOTTOM);
+      await firestore.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('cart').doc(id).update({
+        'itemCount':count,
+      });
     } catch (e) {
       log(e.toString());
     }
@@ -101,16 +93,18 @@ class FirebaseMethods extends GetxController {
 
   Future<void> getCartDetails() async {
     observetotalPrice.value = 0;
-    CartController controller = Get.put(CartController());
-    final count = controller.count;
+    // CartController controller = Get.put(CartController());
+    // final count = controller.count;
     try {
       QuerySnapshot<Map<String, dynamic>> snap =
           await firestore.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('cart').get();
-
-      observecartLength.value = snap.docs.length*count.toInt();
+      
+      observecartLength.value = snap.docs.length;
 
       for (var element in snap.docs) {
-        observetotalPrice.value = observetotalPrice.value + element['price']*count.toInt();
+        double total = element['price']*element['itemCount'];
+        log(total.toString());
+        observetotalPrice.value = observetotalPrice.value + total;
       }
       // log(observecartLength.toString());
       // log(observetotalPrice.toString());

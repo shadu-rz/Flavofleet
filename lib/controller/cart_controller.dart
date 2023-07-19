@@ -3,23 +3,43 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  
-   var count = 1.obs;
+  var count = 1.obs;
 
   void increment() {
-    if (count>=15) {
-      showCustomSnackBar("you can't add more than 15",title: 'Limit reached',color: Colors.red);
-    } else{
-       count.value++;
+    if (count >= 15) {
+      showCustomSnackBar("you can't add more than 15",
+          title: 'Limit reached', color: Colors.red);
+    } else {
+      count.value++;
     }
   }
 
-  void decrement() {
-    if (count>1) {
-       count.value--;
-    }else{
-      showCustomSnackBar("you can't less than 1",title: 'Minimun count',color: Colors.red); 
+  int incrementInCart(int countInCart) {
+    if (countInCart >= 15) {
+      showCustomSnackBar("you can't add more than 15",
+          title: 'Limit reached', color: Colors.red);
+    } else {
+      countInCart++;
     }
-   
+    return countInCart;
+  }
+
+  int decrementInCart(int countInCart) {
+    if (countInCart > 1) {
+      countInCart--;
+    } else {
+      showCustomSnackBar("you can't less than 1",
+          title: 'Minimun count', color: Colors.red);
+    }
+    return countInCart;
+  }
+
+  void decrement() {
+    if (count > 1) {
+      count.value--;
+    } else {
+      showCustomSnackBar("you can't less than 1",
+          title: 'Minimun count', color: Colors.red);
+    }
   }
 }
