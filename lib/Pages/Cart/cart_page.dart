@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
@@ -48,7 +49,7 @@ class CartPage extends StatelessWidget {
                             child: const Text('Confirm'),
                             onPressed: () async {
                               final CollectionReference collectionReference =
-                                  FirebaseFirestore.instance.collection('cart');
+                                  FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('cart');
                               final QuerySnapshot querySnapshot =
                                   await collectionReference.get();
 

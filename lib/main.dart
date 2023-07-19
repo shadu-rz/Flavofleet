@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/usercontroller.dart';
 import 'package:flavour_fleet_main/Pages/Splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Get.put(UserController()); 
+  Get.put(CartController());
   runApp(const MyApp());  
 }
 

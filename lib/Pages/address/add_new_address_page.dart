@@ -1,8 +1,9 @@
-import 'package:flavour_fleet_main/Pages/buy%20now/buy_now_page.dart';
 import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
+import 'package:flavour_fleet_main/model/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,10 @@ class AddAddressPage extends StatefulWidget {
 }
 
 class _AddAddressPageState extends State<AddAddressPage> {
+  TextEditingController nameController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController pincodeController = TextEditingController();
   late bool isLogged;
 
   @override
@@ -29,7 +33,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title:  BigText(text: 'Address new address'),
+        title: BigText(text: 'Address new address'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,19 +50,20 @@ class _AddAddressPageState extends State<AddAddressPage> {
           Container(
             margin: EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
-              controller: addressController,
+              controller: nameController,
             ),
           ),
           SizedBox(height: Dimensions.height20),
           Padding(
             padding: EdgeInsets.only(left: Dimensions.width20),
-            child: SmallText(
-                text: 'contact number', size: 15, color: Colors.grey),
+            child:
+                SmallText(text: 'contact number', size: 15, color: Colors.grey),
           ),
           Container(
             margin: EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
-              controller: addressController,
+              controller: phoneController,
+              keyboardType: TextInputType.number,
             ),
           ),
           SizedBox(
@@ -66,12 +71,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
           ),
           Padding(
             padding: EdgeInsets.only(left: Dimensions.width20),
-            child: SmallText(
-                text: 'Address',
-                size: 15,
-                color: Colors.grey),
+            child: SmallText(text: 'Address', size: 15, color: Colors.grey),
           ),
-          
           Container(
             margin: EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
@@ -93,14 +94,24 @@ class _AddAddressPageState extends State<AddAddressPage> {
           Container(
             margin: EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
-              controller: addressController,
+              controller: pincodeController,
+              keyboardType: TextInputType.number,
             ),
           ),
-           Spacer(),
+          Spacer(),
           GestureDetector(
-            onTap: () => navigator!.push(MaterialPageRoute(
-              builder: (context) =>  CheckoutPage(),
-            )),
+            onTap: () async{
+              AddressModel addressModel = AddressModel(
+                name: nameController.text,
+                address: addressController.text,
+                phone: phoneController.text,
+                pincode: pincodeController.text,
+              );
+              await FirebaseMethods().addAddress(addressModel);
+              navigator!.push(MaterialPageRoute(
+                builder: (context) => CheckoutPage(),
+              ));
+            },
             child: Container(
               margin: EdgeInsets.only(
                   left: Dimensions.width20,
@@ -109,8 +120,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
               width: Dimensions.screenWidth,
               height: Dimensions.screenHeight / 14,
               decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(Dimensions.radius20 / 2),
+                  borderRadius: BorderRadius.circular(Dimensions.radius20 / 2),
                   color: AppColors.mainColor),
               child: Center(
                 child: BigText(

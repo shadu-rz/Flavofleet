@@ -6,8 +6,8 @@ import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BuyNowPage extends StatelessWidget {
-  const BuyNowPage({super.key});
+class PaymentMethodSelect extends StatelessWidget {
+  const PaymentMethodSelect({super.key});
 
   @override
   Widget build(BuildContext context) {

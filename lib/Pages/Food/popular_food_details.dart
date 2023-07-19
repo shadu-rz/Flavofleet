@@ -6,6 +6,7 @@ import 'package:flavour_fleet_main/Widgets/navbar_pop_food_details.dart';
 import 'package:flutter/material.dart';
 
 class PopularFoodDetails extends StatelessWidget {
+  
   const PopularFoodDetails({
     super.key,
     required this.snap,

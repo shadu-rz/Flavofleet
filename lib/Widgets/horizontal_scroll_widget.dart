@@ -24,8 +24,10 @@ class HorizontalScrollWidget extends StatelessWidget {
         onTap: () {
           navigator!.push(
             MaterialPageRoute(
+              
               builder: (context) => PopularFoodDetails(
                 snap: snap,
+                
               ),
             ),
           );

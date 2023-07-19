@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/address/add_new_address_page.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/check_out_address_widget.dart';
@@ -49,10 +50,37 @@ class CheckoutPage extends StatelessWidget {
               ),
             ),
           ),
-          const CheckOutAddressWidget(),
+          Expanded(
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('delivery_address').snapshots(),
+              builder: (context,AsyncSnapshot<QuerySnapshot<Map<String,dynamic>>>snapshot) {
+                if (snapshot.connectionState==ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: BigText(text: 'No Adress'),
+                  );
+                }
+                if (snapshot.hasError) {
+                  return Center(
+                    child: BigText(text: 'Check your internet'),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    var snap = snapshot.data!.docs[index].data();
+                    return   CheckOutAddressWidget(snap: snap,);
+                  },
+                );
+              }
+            ),
+          )
         ],
       ),
     );
   }
 }
-

@@ -1,12 +1,14 @@
 
 
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/buy%20now/buy_now_page.dart';
 import 'package:flavour_fleet_main/Pages/checkout/checkout_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
+import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/popular_product_model.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ import 'package:uuid/uuid.dart';
 
 class NavBarPopFoodDetails extends StatelessWidget {
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
+   final CartController countController = Get.find();
    NavBarPopFoodDetails({
     super.key,
     required this.snap,
@@ -49,17 +52,29 @@ class NavBarPopFoodDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.remove,
-                  color: Colors.grey,
+                GestureDetector(
+                  onTap: () {
+                    countController.decrement();
+                  },
+                  child: const Icon(
+                    Icons.remove,
+                    color: Colors.grey,
+                  ),
                 ),
-                BigText(
-                  text: '1',
-                  size: Dimensions.font20,
+                Obx(
+                  ()=> BigText(
+                    text: countController.count.value.toString(),
+                    size: Dimensions.font20,
+                  ),
                 ),
-                const Icon(
-                  Icons.add,
-                  color: Colors.grey,
+                GestureDetector(
+                  onTap: () {
+                    countController.increment();
+                  },
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.grey,
+                  ),
                 )
               ],
             ),

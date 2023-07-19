@@ -1,16 +1,17 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/Food/recomended_food_details.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
+import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartListWidget extends StatelessWidget {
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
+  final CartController countController = Get.put(CartController());
   CartListWidget({
     super.key,
   });
@@ -18,7 +19,11 @@ class CartListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('cart').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection('cart')
+            .snapshots(),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -134,14 +139,25 @@ class CartListWidget extends StatelessWidget {
                             ),
                             SizedBox(width: Dimensions.width20),
                             GestureDetector(
+                              onTap: () {
+                                countController.decrement();
+                                firebase.getCartDetails();
+                              },
                               child: const Icon(
                                 Icons.remove,
                                 color: Colors.grey,
                               ),
                             ),
-                            BigText(text: "1"),
+                            Obx(
+                              () => BigText(
+                                text: countController.count.value.toString(),
+                              ),
+                            ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                countController.increment();
+                                firebase.getCartDetails();
+                              },
                               child: const Icon(
                                 Icons.add,
                                 color: Colors.grey,
