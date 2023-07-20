@@ -36,7 +36,7 @@ class PaymentMethodSelect extends StatelessWidget {
             width: Dimensions.screenWidth,
            child: Row(
             children: [
-              Checkbox(value: isBlank, onChanged: (value) {
+              Checkbox(value: true, onChanged: (value) {
                 
               },),
               SmallText(text: 'Cash on delivery / Pay on delivery',color: AppColors.mainBlackColor,size: 14,)
@@ -53,7 +53,7 @@ class PaymentMethodSelect extends StatelessWidget {
             width: Dimensions.screenWidth,
            child: Row(
             children: [
-              Checkbox(value: true, onChanged: (value) {
+              Checkbox(value: false, onChanged: (value) {
               },),
               SmallText(text: 'UPI or other payment',color: AppColors.mainBlackColor,size: 14,)
             ],

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BottomNavCart extends StatelessWidget {
+  
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
   BottomNavCart({
     super.key,
@@ -35,7 +36,7 @@ class BottomNavCart extends StatelessWidget {
                 child: Center(
                   child: Obx(
                     () => BigText(
-                      text: '${firebase.observecartLength} Items',
+                      text: "${firebase.observecartLength} ${toCheckOneOrMore()?'items':'item'}",
                       size: Dimensions.font20 / 1.2,
                     ),
                   ),
@@ -77,4 +78,11 @@ class BottomNavCart extends StatelessWidget {
           ),
         ));
   }
+  bool toCheckOneOrMore(){
+  if (firebase.observecartLength > 1) {
+    return true;
+  }
+  return false;
+ }
+
 }
