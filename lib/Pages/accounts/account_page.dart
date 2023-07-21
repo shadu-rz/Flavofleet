@@ -8,7 +8,7 @@ import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/account_widget.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
-import 'package:flavour_fleet_main/firebase/usercontroller.dart';
+import 'package:flavour_fleet_main/firebase/auth/usercontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
