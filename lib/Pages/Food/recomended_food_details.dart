@@ -3,7 +3,9 @@ import 'package:flavour_fleet_main/Widgets/appbar_and_image_reco_food_details.da
 
 import 'package:flavour_fleet_main/Widgets/expandable_text_widget.dart';
 import 'package:flavour_fleet_main/Widgets/navbar_reco_food_details.dart';
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RecomendedFoodDetails extends StatelessWidget {
   const RecomendedFoodDetails({
@@ -11,8 +13,13 @@ class RecomendedFoodDetails extends StatelessWidget {
     required this.snap,
   });
   final Map<String, dynamic> snap;
+
   @override
   Widget build(BuildContext context) {
+    final FirebaseMethods firebase = Get.put(FirebaseMethods());
+     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      firebase.getSelectedProduct('recommendedProducts',snap['productId']);
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(

@@ -48,7 +48,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
             ),
           ),
           Container(
-            margin: EdgeInsetsDirectional.symmetric(horizontal: 20),
+            margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
               controller: nameController,
             ),
@@ -60,7 +60,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 SmallText(text: 'contact number', size: 15, color: Colors.grey),
           ),
           Container(
-            margin: EdgeInsetsDirectional.symmetric(horizontal: 20),
+            margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
               controller: phoneController,
               keyboardType: TextInputType.number,
@@ -74,7 +74,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
             child: SmallText(text: 'Address', size: 15, color: Colors.grey),
           ),
           Container(
-            margin: EdgeInsetsDirectional.symmetric(horizontal: 20),
+            margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
               controller: addressController,
             ),
@@ -92,13 +92,13 @@ class _AddAddressPageState extends State<AddAddressPage> {
             ),
           ),
           Container(
-            margin: EdgeInsetsDirectional.symmetric(horizontal: 20),
+            margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
               controller: pincodeController,
               keyboardType: TextInputType.number,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           GestureDetector(
             onTap: () async{
               AddressModel addressModel = AddressModel(

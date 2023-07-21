@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/accounts/account_page.dart';
 import 'package:flavour_fleet_main/Pages/favorite/favorite.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
@@ -17,8 +19,8 @@ class HomeScreenAppBar extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(
           top: Dimensions.height15, bottom: Dimensions.height15),
-      padding: EdgeInsets.only(
-          left: Dimensions.width15, right: Dimensions.width15),
+      padding:
+          EdgeInsets.only(left: Dimensions.width15, right: Dimensions.width15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -65,15 +67,47 @@ class HomeScreenAppBar extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              navigator!.push(MaterialPageRoute(builder: (context) => const AccountPage(),));            },
-            child: const Center(
-              child: CircleAvatar(
-                backgroundColor: AppColors.mainColor,
-                radius: 25,
-                child: Image(image: NetworkImage('https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png')),
-                
-              
-              ),
+              navigator!.push(MaterialPageRoute(
+                builder: (context) => const AccountPage(),
+              ));
+            },
+            child: Center(
+              child: FutureBuilder(
+                  future: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .get(),
+                  builder: (context,
+                      AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    if (!snapshot.hasData) {
+                      return const CircleAvatar(
+                        radius: 25,
+                        backgroundImage: NetworkImage(
+                          'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png',
+                        ),
+                      );
+                    }
+
+                    return CircleAvatar(
+                      radius: 25,
+                       backgroundColor: AppColors.mainColor,
+                      child: CircleAvatar(
+                        radius: 23,
+                        backgroundImage: NetworkImage(
+                          snapshot.data!['image'].isEmpty
+                              ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
+                              : snapshot.data!['image'],
+                        ),
+                      ),
+                    );
+                  }),
             ),
           )
         ],

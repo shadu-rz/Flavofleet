@@ -14,7 +14,7 @@ import 'package:uuid/uuid.dart';
 
 class NavbarRecoFoodDetails extends StatefulWidget {
 
-   NavbarRecoFoodDetails({
+   const NavbarRecoFoodDetails({
     super.key,
     required this.snap,
   });

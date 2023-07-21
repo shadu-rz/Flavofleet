@@ -17,7 +17,7 @@ class OrderdSuccessfully extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 60,
               child: Icon(
                 Icons.check,
@@ -25,11 +25,11 @@ class OrderdSuccessfully extends StatelessWidget {
                 color: Colors.green,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             BigText(text: 'Ordered Successfully'),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             GestureDetector(

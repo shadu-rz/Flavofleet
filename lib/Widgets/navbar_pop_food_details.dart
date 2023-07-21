@@ -15,7 +15,7 @@ import 'package:uuid/uuid.dart';
 
 class NavBarPopFoodDetails extends StatefulWidget {
 
-   NavBarPopFoodDetails({
+   const NavBarPopFoodDetails({
     super.key,
     required this.snap,
   });

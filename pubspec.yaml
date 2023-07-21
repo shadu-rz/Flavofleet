@@ -17,6 +17,8 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.5
+  flutter_stripe: ^9.3.0
+  http:
   google_sign_in: ^6.1.4
   persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: null
@@ -24,6 +26,7 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^2.0.0
+  
   flutter_test:
     sdk: flutter
 
@@ -47,6 +50,7 @@ flutter:
     - assets/image/google-logo.png
     - assets/image/login_image.jpg
     - assets/image/splashImage.jpg
+    - assets/image/location.png
 
   fonts:
     - family: Roboto

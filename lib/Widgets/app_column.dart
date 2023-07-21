@@ -1,3 +1,4 @@
+import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,23 @@ class AppColumn extends StatelessWidget {
               text: "₹${snap['price']}",
               size: Dimensions.font20,
             ),
+           const Spacer(),
+            Container(
+                padding: EdgeInsets.only(
+                  top: Dimensions.height10,
+                  bottom: Dimensions.height10,
+                  right: Dimensions.width20 / 2,
+                  left: Dimensions.width20 / 2,
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius15),
+                    color: Colors.blueGrey[100]),
+                child: AppIcon(
+                  icon: Icons.favorite,
+                  iconColor: AppColors.mainColor,
+                  size: Dimensions.iconSize24,
+                ),
+              ),
           ],
         ),
         SizedBox(height: Dimensions.height10),

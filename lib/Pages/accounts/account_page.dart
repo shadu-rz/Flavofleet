@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/accounts/update_profile.dart';
 import 'package:flavour_fleet_main/Pages/accounts/logout_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
@@ -123,25 +122,26 @@ class _AccountPageState extends State<AccountPage> {
                         ),
                       ),
                       SizedBox(
-                        height: Dimensions.height10,
+                        height: Dimensions.height10*5,
                       ),
-                      GestureDetector(
-                        onTap: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const EditProfile(),
-                        )),
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: Dimensions.height15 + 3),
-                          decoration: BoxDecoration(
-                              color: Colors.black12,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius15)),
-                          height: Dimensions.height45 - 5,
-                          width: double.maxFinite,
-                          child: Center(child: BigText(text: 'update profile')),
-                        ),
-                      ),
+                      
+                      // GestureDetector(
+                      //   onTap: () =>
+                      //       Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => const EditProfile(),
+                      //   )),
+                      //   child: Container(
+                      //     margin: EdgeInsets.symmetric(
+                      //         horizontal: Dimensions.height15 + 3),
+                      //     decoration: BoxDecoration(
+                      //         color: Colors.black12,
+                      //         borderRadius:
+                      //             BorderRadius.circular(Dimensions.radius15)),
+                      //     height: Dimensions.height45 - 5,
+                      //     width: double.maxFinite,
+                      //     child: Center(child: BigText(text: 'update profile')),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: Dimensions.height10,
                       ),

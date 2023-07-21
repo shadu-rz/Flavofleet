@@ -88,6 +88,16 @@ class FirebaseMethods extends GetxController {
   RxInt observecartLength = RxInt(1);
   RxNum observetotalPrice = RxNum(0);
 
+  Future<void> getSelectedProduct(String collection,String productId )async{
+    observetotalPrice.value=0;
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snap = await firestore.collection(collection).doc(productId).get();
+      observetotalPrice.value = double.parse( snap['price']);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
   Future<void> getCartDetails() async {
     observetotalPrice.value = 0;
     // CartController controller = Get.put(CartController());
@@ -100,11 +110,9 @@ class FirebaseMethods extends GetxController {
 
       for (var element in snap.docs) {
         double total = element['price']*element['itemCount'];
-        log(total.toString());
+        // log(total.toString());
         observetotalPrice.value = observetotalPrice.value + total;
       }
-      // log(observecartLength.toString());
-      // log(observetotalPrice.toString());
     } catch (e) {
       log("errorr ${e.toString()}");
     }
@@ -126,7 +134,7 @@ class FirebaseMethods extends GetxController {
 
 
   Future<void> addAddress(AddressModel address) async {
-    String id = Uuid().v1();
+    String id = const Uuid().v1();
     try {
       await firestore
           .collection('users')
@@ -138,4 +146,7 @@ class FirebaseMethods extends GetxController {
       log(e.toString());
     }
   }
+
+
+  
 }
