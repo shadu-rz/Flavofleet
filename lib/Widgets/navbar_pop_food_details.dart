@@ -1,5 +1,3 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
@@ -9,13 +7,13 @@ import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
+import 'package:flavour_fleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 class NavBarPopFoodDetails extends StatefulWidget {
-
-   const NavBarPopFoodDetails({
+  const NavBarPopFoodDetails({
     super.key,
     required this.snap,
   });
@@ -26,17 +24,14 @@ class NavBarPopFoodDetails extends StatefulWidget {
   State<NavBarPopFoodDetails> createState() => _NavBarPopFoodDetailsState();
 }
 
-
-
 class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
-
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
 
-   final CartController countController = Get.find();
+  final CartController countController = Get.find();
 
-   @override
+  @override
   void dispose() {
-    countController.count=RxInt(1);
+    countController.count = RxInt(1);
     super.dispose();
   }
 
@@ -77,7 +72,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
                   ),
                 ),
                 Obx(
-                  ()=> BigText(
+                  () => BigText(
                     text: countController.count.value.toString(),
                     size: Dimensions.font20,
                   ),
@@ -96,58 +91,66 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
           ),
           GestureDetector(
             onTap: () async {
-               if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, widget.snap['title'])) {
-                showCustomSnackBar('Already exist in the cart',title: 'Existing',color: Colors.red,);
-              }else{
-                 String id = const Uuid().v1();
-                 CartModel product = CartModel(
-                title: widget.snap['title'],
-                price: double.parse(widget.snap['price']) ,
-                image: widget.snap['image'],
-                description: widget.snap['description'],
-                distance: double.parse(widget.snap['distance']) ,
-                rating: double.parse(widget.snap['rating'])  ,
-                star: double.parse(widget.snap['star']) ,
-                uId: FirebaseAuth.instance.currentUser!.uid,
-                productId: id,
-                itemCount: countController.count.value
-              );
-              await FirebaseMethods().addToCart(product);
-              firebase.getCartDetails();
+              if (await FirebaseMethods().alreadyExistInCart(
+                  FirebaseAuth.instance.currentUser!.uid,
+                  widget.snap['title'])) {
+                showCustomSnackBar(
+                  'Already exist in the cart',
+                  title: 'Existing',
+                  color: Colors.red,
+                );
+              } else {
+                String id = const Uuid().v1();
+                CartModel product = CartModel(
+                    title: widget.snap['title'],
+                    price: double.parse(widget.snap['price']),
+                    image: widget.snap['image'],
+                    description: widget.snap['description'],
+                    distance: double.parse(widget.snap['distance']),
+                    rating: double.parse(widget.snap['rating']),
+                    star: double.parse(widget.snap['star']),
+                    uId: FirebaseAuth.instance.currentUser!.uid,
+                    productId: id,
+                    itemCount: countController.count.value);
+                await FirebaseMethods().addToCart(product);
+                firebase.getCartDetails();
               }
             },
             child: Container(
-                height: Dimensions.height45,
-                width: Dimensions.height45 * 3,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius15),
-                  color: AppColors.mainColor,
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                        BigText(
-                            text:  "Add to cart",
-                            color: Colors.white,
-                            size: Dimensions.font20 / 1.2,
-                          ),
-                    ],
-                  ),
+              height: Dimensions.height45,
+              width: Dimensions.height45 * 3,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius15),
+                color: AppColors.mainColor,
+              ),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    BigText(
+                      text: "Add to cart",
+                      color: Colors.white,
+                      size: Dimensions.font20 / 1.2,
+                    ),
+                  ],
                 ),
               ),
-            
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius15),
-              color: AppColors.mainColor,
             ),
-            child: GestureDetector(
-              onTap: () {
-                navigator!.push(MaterialPageRoute(builder: (context) =>  SelectAddress(),));
-              },
+          ),
+          GestureDetector(
+            onTap: ()  {
+                  navigator!.push(MaterialPageRoute(
+                    builder: (context) => SelectAddress( 
+                      productSnap: widget.snap,
+                     ),
+                  ));
+                },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius15),
+                color: AppColors.mainColor,
+              ),
               child: Center(
                 child: BigText(
                   text: "Buy Now",

@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
-   CartPage({
+  CartPage({
     super.key,
   });
 
@@ -49,8 +49,13 @@ class CartPage extends StatelessWidget {
                             child: const Text('Confirm'),
                             onPressed: () async {
                               final CollectionReference collectionReference =
-                                  FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('cart');
-                              final QuerySnapshot querySnapshot = await collectionReference.get();
+                                  FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .collection('cart');
+                              final QuerySnapshot querySnapshot =
+                                  await collectionReference.get();
 
                               for (var document in querySnapshot.docs) {
                                 document.reference.delete();
@@ -82,7 +87,48 @@ class CartPage extends StatelessWidget {
               child: MediaQuery.removePadding(
                 context: context,
                 removeTop: true,
-                child:  CartListWidget(),
+                child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .collection('cart')
+                        .snapshots(),
+                    builder: (context,
+                        AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                            snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: BigText(text: 'No items found'),
+                        );
+                      }
+                      if (snapshot.data!.docs.isEmpty) {
+                        return Center(
+                          child: BigText(text: 'No items found'),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                          child:
+                              BigText(text: 'Check your internet connection'),
+                        );
+                      }
+                      return ListView.separated(
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: Dimensions.height10,
+                        ),
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          var snap = snapshot.data!.docs[index].data();
+                          return CartListWidget(
+                            snap: snap,
+                          );
+                        },
+                        itemCount: snapshot.data!.docs.length,
+                      );
+                    }),
               ),
             ),
           ),

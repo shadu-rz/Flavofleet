@@ -2,7 +2,9 @@ import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/home_page_hor_slide_widget.dart';
 import 'package:flavour_fleet_main/Widgets/recommended_list_home_page.dart';
 import 'package:flavour_fleet_main/Widgets/recommended_title_widget.dart';
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({super.key});
@@ -26,6 +28,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseMethods firebase = Get.put(FirebaseMethods());
+     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+     firebase.getCartDetails();
+    });
     return SizedBox(
       width: double.maxFinite,
       child: Column(

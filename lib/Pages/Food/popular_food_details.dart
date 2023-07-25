@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 class PopularFoodDetails extends StatelessWidget {
   
+  
   const PopularFoodDetails({
     super.key,
     required this.snap,
@@ -26,7 +27,7 @@ class PopularFoodDetails extends StatelessWidget {
             //background Image
             ImagePopFoodDetails(snap: snap),
             // Icon Widgets
-            const AppbarPopFoodDetails(),
+             AppbarPopFoodDetails( ),
             // Indroduction of food
             BodyPopFoodDetails(snap: snap),
           ],

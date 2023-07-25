@@ -9,9 +9,13 @@ import 'package:get/get.dart';
 // ignore: must_be_immutable
 class CheckOutAddressWidget extends StatelessWidget {
   Map<String, dynamic> snap;
+  Map<String, dynamic>? productSnap;
   CheckOutAddressWidget({
     super.key,
     required this.snap,
+     this.productSnap,
+
+     
   });
 
   @override
@@ -37,14 +41,17 @@ class CheckOutAddressWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           SmallText(
-            text: "phone number : ${ snap['phone']}",
+            text: "phone number : ${snap['phone']}",
             color: Colors.black,
           ),
           const SizedBox(height: 10),
           GestureDetector(
             onTap: () {
               navigator!.push(MaterialPageRoute(
-                builder: (context) => PaymentMethodSelect(snap: snap,),
+                builder: (context) => PaymentMethodSelect(
+                  snap: snap,
+                   productSnap: productSnap!,
+                ),
               ));
             },
             child: Container(

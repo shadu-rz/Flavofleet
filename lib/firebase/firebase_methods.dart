@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/model/address_model.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
+import 'package:flavour_fleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -35,7 +36,7 @@ class FirebaseMethods extends GetxController {
     return res;
   }
 
-  // add to cart popular product
+  // add to cart
   Future<void> addToCart(CartModel cartModel) async {
     try {
       await firestore
@@ -44,6 +45,18 @@ class FirebaseMethods extends GetxController {
           .collection('cart')
           .doc(cartModel.productId)
           .set(cartModel.toJson());
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  //add to order
+  Future<void> addToOrder(OrderModel orderModel) async {
+    try {
+      await firestore
+          .collection('orders')
+          .doc(orderModel.productId)
+          .set(orderModel.toJson());
 
       showCustomSnackBar('Added to Cart successfull',
           title: 'cart', color: Colors.green, position: SnackPosition.BOTTOM);
@@ -52,12 +65,15 @@ class FirebaseMethods extends GetxController {
     }
   }
 
-  // add to cart recommended product
-
-  Future<void> updateItemCount(String id, int count)async{
+  Future<void> updateItemCount(String id, int count) async {
     try {
-      await firestore.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('cart').doc(id).update({
-        'itemCount':count,
+      await firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .doc(id)
+          .update({
+        'itemCount': count,
       });
     } catch (e) {
       log(e.toString());
@@ -68,8 +84,11 @@ class FirebaseMethods extends GetxController {
 
   Future<bool> alreadyExistInCart(String uId, String title) async {
     try {
-      QuerySnapshot<Map<String, dynamic>> doc =
-          await firestore.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('cart').get();
+      QuerySnapshot<Map<String, dynamic>> doc = await firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .get();
       for (var element in doc.docs) {
         // log(element['title']);
         if (element['title'] == title && element['uId'] == uId) {
@@ -88,11 +107,12 @@ class FirebaseMethods extends GetxController {
   RxInt observecartLength = RxInt(1);
   RxNum observetotalPrice = RxNum(0);
 
-  Future<void> getSelectedProduct(String collection,String productId )async{
-    observetotalPrice.value=0;
+  Future<void> getSelectedProduct(String collection, String productId) async {
+    observetotalPrice.value = 0;
     try {
-      DocumentSnapshot<Map<String, dynamic>> snap = await firestore.collection(collection).doc(productId).get();
-      observetotalPrice.value = double.parse( snap['price']);
+      DocumentSnapshot<Map<String, dynamic>> snap =
+          await firestore.collection(collection).doc(productId).get();
+      observetotalPrice.value = double.parse(snap['price']);
     } catch (e) {
       log(e.toString());
     }
@@ -103,13 +123,16 @@ class FirebaseMethods extends GetxController {
     // CartController controller = Get.put(CartController());
     // final count = controller.count;
     try {
-      QuerySnapshot<Map<String, dynamic>> snap =
-          await firestore.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).collection('cart').get();
-      
+      QuerySnapshot<Map<String, dynamic>> snap = await firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .get();
+
       observecartLength.value = snap.docs.length;
 
       for (var element in snap.docs) {
-        double total = element['price']*element['itemCount'];
+        double total = element['price'] * element['itemCount'];
         // log(total.toString());
         observetotalPrice.value = observetotalPrice.value + total;
       }
@@ -124,14 +147,12 @@ class FirebaseMethods extends GetxController {
     log(productId);
     DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('cart')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('cart')
         .doc(productId)
         .get();
     await doc.reference.delete();
   }
-
-
 
   Future<void> addAddress(AddressModel address) async {
     String id = const Uuid().v1();
@@ -147,6 +168,23 @@ class FirebaseMethods extends GetxController {
     }
   }
 
+  Future<void> cartToOrder() async {
+    try {
+      final CollectionReference sourceCollectionRef = firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart');
 
-  
+      final CollectionReference destinationCollectionRef =
+          firestore.collection('orders');
+
+      QuerySnapshot snap = await sourceCollectionRef.get();
+      String id = Uuid().v1();
+      snap.docs.forEach((element) {
+        destinationCollectionRef.doc(id).set(element.data());
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

@@ -1,17 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
 import 'package:flavour_fleet_main/Pages/order/ordered_successfully.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
+import 'package:flavour_fleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class PlaceOrder extends StatelessWidget {
   Map<String, dynamic> snap;
+  Map<String, dynamic>? productSnap;
 
-  PlaceOrder({super.key, required this.snap});
+  PlaceOrder({
+    super.key,
+    required this.snap,
+     this.productSnap,
+     
+  });
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
   late RxNum total = firebase.observetotalPrice;
 
@@ -20,17 +29,17 @@ class PlaceOrder extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         title: SmallText(
-            text: 'Order Now',
-            color: AppColors.mainBlackColor,
-            size: 18,
-          ),
+          text: 'Order Now',
+          color: AppColors.mainBlackColor,
+          size: 18,
+        ),
         actions: [
           TextButton(
               onPressed: () {
                 navigator!.push(MaterialPageRoute(
-                  builder: (context) => const HomePage(),
+                  builder: (context) =>  HomePage( ),
                 ));
               },
               child: SmallText(
@@ -42,7 +51,6 @@ class PlaceOrder extends StatelessWidget {
       ),
       body: Column(
         children: [
-          
           const SizedBox(
             height: 20,
           ),
@@ -72,7 +80,7 @@ class PlaceOrder extends StatelessWidget {
                 Row(
                   children: [
                     SmallText(
-                      text: 'Delivery :',
+                      text: 'Delivery charge:',
                       color: AppColors.mainBlackColor,
                     ),
                     const Spacer(),
@@ -132,9 +140,21 @@ class PlaceOrder extends StatelessWidget {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: () {
+            onTap: () async {
+              String id = const Uuid().v1();
+                  OrderModel order = OrderModel(
+                    title: productSnap!['title'],
+                    price: productSnap!['price'],
+                    date: DateTime.now(),
+                    image: productSnap!['image'],
+                    productId: id,
+                    uId: FirebaseAuth.instance.currentUser!.uid,
+                  );
+                  await FirebaseMethods().addToOrder(order);
+                  // await FirebaseMethods().cartToOrder();
+
               navigator!.push(MaterialPageRoute(
-                builder: (context) => const OrderdSuccessfully(),
+                builder: (context) =>  OrderdSuccessfully( ),
               ));
             },
             child: Container(

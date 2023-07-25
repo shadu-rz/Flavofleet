@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class AppbarPopFoodDetails extends StatelessWidget {
   const AppbarPopFoodDetails({
     super.key,
+     
   });
 
   @override
@@ -31,7 +32,7 @@ class AppbarPopFoodDetails extends StatelessWidget {
           GestureDetector(
             onTap: () => navigator!.push(
               MaterialPageRoute(
-                builder: (context) =>  CartPage(),
+                builder: (context) =>  CartPage( ),
               ),
             ),
             child: AppIcon(

@@ -194,7 +194,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 if (user != null) {
                   navigator!.pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const AuthPage(),
+                      builder: (context) =>  AuthPage(),
                     ),
                   );
                 }

@@ -8,13 +8,13 @@ import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
+import 'package:flavour_fleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 class NavbarRecoFoodDetails extends StatefulWidget {
-
-   const NavbarRecoFoodDetails({
+  const NavbarRecoFoodDetails({
     super.key,
     required this.snap,
   });
@@ -31,7 +31,7 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
 
   @override
   void dispose() {
-    countController.count=RxInt(1);
+    countController.count = RxInt(1);
     super.dispose();
   }
 
@@ -41,6 +41,7 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
+          // color: Colors.red,
           padding: EdgeInsets.only(
               left: Dimensions.width20 * 2.5,
               right: Dimensions.width20 * 2.5,
@@ -60,8 +61,9 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                 ),
               ),
               Obx(
-                ()=> BigText(
-                  text: "₹${widget.snap['price'] }  X  ${countController.count.value.toString()}",
+                () => BigText(
+                  text:
+                      "₹${widget.snap['price']}  X  ${countController.count.value.toString()}",
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),
@@ -89,11 +91,12 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
           ),
           decoration: BoxDecoration(
               color: Colors.grey[200],
+              // color: Colors.amber,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(Dimensions.radius20 * 2),
                   topRight: Radius.circular(Dimensions.radius20 * 2))),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
                 padding: EdgeInsets.only(
@@ -106,35 +109,43 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                     borderRadius: BorderRadius.circular(Dimensions.radius15),
                     color: Colors.white),
                 child: AppIcon(
-                  icon: Icons.favorite,
+                  icon: Icons.favorite_border_outlined, // fav icon
                   iconColor: AppColors.mainColor,
                   size: Dimensions.iconSize24,
                 ),
               ),
               GestureDetector(
-                onTap: ()async {
-                  if (await FirebaseMethods().alreadyExistInCart(FirebaseAuth.instance.currentUser!.uid, widget.snap['title'])) {
-                showCustomSnackBar('Already exist in the cart',title: 'Existing',color: Colors.red);
-              }else{
-                 String id = const Uuid().v1();
-                 CartModel product = CartModel(
-                title: widget.snap['title'],
-                price: double.parse(widget.snap['price']) ,
-                image: widget.snap['image'],
-                description: widget.snap['description'],
-                distance: double.parse(widget.snap['distance']) ,
-                rating: double.parse(widget.snap['rating'])  ,
-                star: double.parse(widget.snap['star']) ,
-                uId: FirebaseAuth.instance.currentUser!.uid,
-                productId: id,
-                itemCount: countController.count.value
-              );
-              await FirebaseMethods().addToCart(product);
-              firebase.getCartDetails();
-              }
+                onTap: () async {
+                  if (await FirebaseMethods().alreadyExistInCart(
+                    FirebaseAuth.instance.currentUser!.uid,
+                    widget.snap['title'],
+                  )) {
+                    showCustomSnackBar('Already exist in the cart',
+                        title: 'Existing', color: Colors.red);
+                  } else {
+                    String id = const Uuid().v1();
+                    CartModel product = CartModel(
+                        title: widget.snap['title'],
+                        price: double.parse(widget.snap['price']),
+                        image: widget.snap['image'],
+                        description: widget.snap['description'],
+                        distance: double.parse(widget.snap['distance']),
+                        rating: double.parse(widget.snap['rating']),
+                        star: double.parse(widget.snap['star']),
+                        uId: FirebaseAuth.instance.currentUser!.uid,
+                        productId: id,
+                        itemCount: countController.count.value);
+                    await FirebaseMethods().addToCart(product);
+                    showCustomSnackBar('Added to Cart successfull',
+                        title: 'cart',
+                        color: Colors.green,
+                        position: SnackPosition.BOTTOM);
+                    firebase.getCartDetails();
+                  }
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+                  height: Dimensions.height45,
+                  width: Dimensions.height10 * 10,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius15),
                     color: AppColors.mainColor,
@@ -143,22 +154,26 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                     child: BigText(
                       text: "add to cart",
                       color: Colors.white,
-                      size: Dimensions.font20/1.1,
+                      size: Dimensions.font20 / 1.1,
                     ),
                   ),
                 ),
               ),
-              Container(
-                height: Dimensions.height45,
-                width: Dimensions.height10 * 10,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius15),
-                  color: AppColors.mainColor,
-                ),
-                child: GestureDetector(
-                  onTap: () {
-                     navigator!.push(MaterialPageRoute(builder: (context) =>  SelectAddress(),));
-                  },
+              GestureDetector(
+                onTap: () {
+                  navigator!.push(MaterialPageRoute(
+                    builder: (context) => SelectAddress(
+                      productSnap: widget.snap,
+                    ),
+                  ));
+                },
+                child: Container(
+                  height: Dimensions.height45,
+                  width: Dimensions.height10 * 10,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius15),
+                    color: AppColors.mainColor,
+                  ),
                   child: Center(
                     child: BigText(
                       text: "Buy Now",
@@ -175,4 +190,3 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
     );
   }
 }
-

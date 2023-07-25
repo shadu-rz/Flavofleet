@@ -16,17 +16,19 @@ dependencies:
   firebase_storage: ^11.2.0
   flutter:
     sdk: flutter
-  get: ^4.6.5
   flutter_stripe: ^9.3.0
-  http:
+  geolocator: ^9.0.2
+  get: ^4.6.5
   google_sign_in: ^6.1.4
+  http: null
+  intl: ^0.18.1
   persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: null
   uuid: ^3.0.7
 
 dev_dependencies:
   flutter_lints: ^2.0.0
-  
+
   flutter_test:
     sdk: flutter
 

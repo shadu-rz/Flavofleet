@@ -14,24 +14,27 @@ import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class PaymentMethodSelect extends StatefulWidget {
-   Map<String,dynamic> snap;
-   PaymentMethodSelect({super.key,required this.snap});
+  Map<String, dynamic> snap;
+  Map<String, dynamic>? productSnap;
+  PaymentMethodSelect({
+    super.key,
+    required this.snap,
+     this.productSnap,
+  });
 
   @override
   State<PaymentMethodSelect> createState() => _PaymentMethodSelectState();
 }
-  
-class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
 
-  
+class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
   Map<String, dynamic>? paymentIntentData;
 
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
-  
+
   late RxNum total = firebase.observetotalPrice;
 
-  RxBool codChecked= false.obs;
-  RxBool upiChecked= false.obs;
+  RxBool codChecked = false.obs;
+  RxBool upiChecked = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +70,12 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
             child: Row(
               children: [
                 Obx(
-                  ()=> Checkbox(
+                  () => Checkbox(
                     value: codChecked.value,
                     onChanged: (value) {
                       codChecked.value = !codChecked.value;
                       if (codChecked.value) {
-                        upiChecked.value=false;
+                        upiChecked.value = false;
                       }
                     },
                   ),
@@ -100,12 +103,12 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
             child: Row(
               children: [
                 Obx(
-                 ()=> Checkbox(
-                    value: upiChecked.value ,
+                  () => Checkbox(
+                    value: upiChecked.value,
                     onChanged: (value) {
                       upiChecked.value = !upiChecked.value;
                       if (upiChecked.value) {
-                        codChecked.value=false;
+                        codChecked.value = false;
                       }
                     },
                   ),
@@ -139,17 +142,21 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
             onTap: () async {
               String amount = total.floor().toString();
               if (upiChecked.value) {
-                 await makePayment(amount: amount, currency: "INR");
-                 log('card Payment called');
-              }else if(codChecked.value){
-                  Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => PlaceOrder(snap: widget.snap,),
-                ),
-               );
-               log('cash on delivery called');
-              } else{
-                showCustomSnackBar('Select any Payment method',color: Colors.red);
+                await makePayment(amount: amount, currency: "INR");
+                log('card Payment called');
+              } else if (codChecked.value) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PlaceOrder(
+                      productSnap: widget.productSnap!,
+                      snap: widget.snap,
+                    ),
+                  ),
+                );
+                log('cash on delivery called');
+              } else {
+                showCustomSnackBar('Select any Payment method',
+                    color: Colors.red);
               }
             },
             child: Container(
@@ -198,7 +205,10 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
       await Stripe.instance.presentPaymentSheet();
       log('success');
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => PlaceOrder(snap: widget.snap,),
+        builder: (context) => PlaceOrder(
+          productSnap: widget.productSnap!,
+          snap: widget.snap,
+        ),
       ));
     } on Exception catch (e) {
       if (e is StripeException) {

@@ -9,10 +9,19 @@ import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class SelectAddress extends StatelessWidget {
-  SelectAddress({super.key});
+  Map<String, dynamic>? productSnap;
+
+  SelectAddress({
+    super.key,
+    this.productSnap,
+  });
   TextEditingController addressController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+   
+       Map<String,dynamic> snapp = productSnap ?? {};
+    
+   
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -50,7 +59,9 @@ class SelectAddress extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   navigator!.push(MaterialPageRoute(
-                    builder: (context) => const AddAddressPage(),
+                    builder: (context) => AddAddressPage(
+                      productSnap: productSnap,
+                    ),
                   ));
                 },
                 child: Container(
@@ -74,12 +85,12 @@ class SelectAddress extends StatelessWidget {
                 ),
               );
             }
-
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 var snap = snapshot.data!.docs[index].data();
                 return CheckOutAddressWidget(
+                  productSnap: snapp,
                   snap: snap,
                 );
               },

@@ -10,7 +10,11 @@ import 'package:get/get.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 
 class AddAddressPage extends StatefulWidget {
-  const AddAddressPage({super.key});
+  Map<String, dynamic>? productSnap;
+   
+    AddAddressPage({super.key,
+    this.productSnap
+   });
 
   @override
   State<AddAddressPage> createState() => _AddAddressPageState();
@@ -109,7 +113,9 @@ class _AddAddressPageState extends State<AddAddressPage> {
               );
               await FirebaseMethods().addAddress(addressModel);
               navigator!.push(MaterialPageRoute(
-                builder: (context) => SelectAddress(),
+                builder: (context) => SelectAddress(
+                  productSnap: widget.productSnap,
+                ),
               ));
             },
             child: Container(

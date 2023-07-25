@@ -41,9 +41,9 @@ class AppColumn extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius15),
-                    color: Colors.blueGrey[100]),
+                    color: Colors.black12),
                 child: AppIcon(
-                  icon: Icons.favorite,
+                  icon: Icons.favorite_border_outlined,
                   iconColor: AppColors.mainColor,
                   size: Dimensions.iconSize24,
                 ),

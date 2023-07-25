@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderdSuccessfully extends StatelessWidget {
-  const OrderdSuccessfully({super.key});
+  const OrderdSuccessfully({super.key, });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class OrderdSuccessfully extends StatelessWidget {
             GestureDetector(
                 onTap: () => navigator!.pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => const HomePage(),
+                        builder: (context) =>  HomePage( ),
                       ),
                     ),
                 child: SmallText(
