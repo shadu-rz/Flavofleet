@@ -10,6 +10,7 @@ import 'package:flavour_fleet_main/model/cart_model.dart';
 import 'package:flavour_fleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:uuid/uuid.dart';
 
 class NavBarPopFoodDetails extends StatefulWidget {
@@ -141,6 +142,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
             onTap: ()  {
                   navigator!.push(MaterialPageRoute(
                     builder: (context) => SelectAddress( 
+                      isCart: false,
                       productSnap: widget.snap,
                      ),
                   ));

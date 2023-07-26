@@ -7,15 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class CheckOutAddressWidget extends StatelessWidget {
+class UserAddressWidget extends StatelessWidget {
   Map<String, dynamic> snap;
   Map<String, dynamic>? productSnap;
-  CheckOutAddressWidget({
+  final bool isCart;
+
+  UserAddressWidget({
     super.key,
     required this.snap,
      this.productSnap,
-
-     
+     required this.isCart
   });
 
   @override
@@ -49,6 +50,7 @@ class CheckOutAddressWidget extends StatelessWidget {
             onTap: () {
               navigator!.push(MaterialPageRoute(
                 builder: (context) => PaymentMethodSelect(
+                  isCart: isCart,
                   snap: snap,
                    productSnap: productSnap!,
                 ),

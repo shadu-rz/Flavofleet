@@ -16,10 +16,12 @@ import 'package:http/http.dart' as http;
 class PaymentMethodSelect extends StatefulWidget {
   Map<String, dynamic> snap;
   Map<String, dynamic>? productSnap;
+  final bool isCart;
   PaymentMethodSelect({
     super.key,
     required this.snap,
      this.productSnap,
+     required this.isCart,
   });
 
   @override
@@ -148,6 +150,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => PlaceOrder(
+                      isCart: widget.isCart,
                       productSnap: widget.productSnap!,
                       snap: widget.snap,
                     ),
@@ -206,6 +209,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
       log('success');
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => PlaceOrder(
+          isCart: widget.isCart,
           productSnap: widget.productSnap!,
           snap: widget.snap,
         ),

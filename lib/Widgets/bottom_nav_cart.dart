@@ -64,7 +64,9 @@ class BottomNavCart extends StatelessWidget {
                 onTap: () {
                   navigator!.push(
                     MaterialPageRoute(
-                      builder: (context) => SelectAddress(),
+                      builder: (context) => SelectAddress(
+                        isCart: true,
+                      ),
                     ),
                   );
                 },

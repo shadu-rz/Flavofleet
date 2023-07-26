@@ -3,17 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/address/add_new_address_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/check_out_address_widget.dart';
+import 'package:flavour_fleet_main/Widgets/user_address_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// ignore: must_be_immutable
 class SelectAddress extends StatelessWidget {
-  Map<String, dynamic>? productSnap;
+  final bool isCart;
+  final Map<String, dynamic>? productSnap;
 
   SelectAddress({
     super.key,
     this.productSnap,
+    required this.isCart,
   });
   TextEditingController addressController = TextEditingController();
   @override
@@ -89,7 +90,8 @@ class SelectAddress extends StatelessWidget {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 var snap = snapshot.data!.docs[index].data();
-                return CheckOutAddressWidget(
+                return UserAddressWidget(
+                  isCart: isCart,
                   productSnap: snapp,
                   snap: snap,
                 );

@@ -159,6 +159,7 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                 onTap: () {
                   navigator!.push(MaterialPageRoute(
                     builder: (context) => SelectAddress(
+                      isCart: false,
                       productSnap: widget.snap,
                     ),
                   ));

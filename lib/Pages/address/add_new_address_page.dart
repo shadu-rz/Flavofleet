@@ -114,6 +114,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
               await FirebaseMethods().addAddress(addressModel);
               navigator!.push(MaterialPageRoute(
                 builder: (context) => SelectAddress(
+                  isCart: true,
                   productSnap: widget.productSnap,
                 ),
               ));

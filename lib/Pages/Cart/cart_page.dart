@@ -42,26 +42,16 @@ class CartPage extends StatelessWidget {
                         actions: [
                           TextButton(
                             child: const Text('Cancel'),
-                            onPressed: () {
+                            onPressed: ()async{
                               Navigator.of(context).pop();
+                              await FirebaseMethods().getCartDetails();
                             },
                           ),
                           TextButton(
                             child: const Text('Confirm'),
                             onPressed: () async {
-                              final CollectionReference collectionReference =
-                                  FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser!.uid)
-                                      .collection('cart');
-                              final QuerySnapshot querySnapshot =
-                                  await collectionReference.get();
-
-                              for (var document in querySnapshot.docs) {
-                                document.reference.delete();
-                              }
-                              firebase.getCartDetails();
+                              FirebaseMethods().clearCart();
+                              FirebaseMethods().getCartDetails();
                               showCustomSnackBar('All items cleared',
                                   title: 'success',
                                   color: Colors.green,

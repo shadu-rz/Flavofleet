@@ -2,8 +2,10 @@ import 'package:flavour_fleet_main/Pages/order/orders_page.dart';
 import 'package:flavour_fleet_main/Pages/Cart/cart_page.dart';
 import 'package:flavour_fleet_main/Pages/Home/main_food_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,12 +19,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+   final FirebaseMethods firebase = Get.put(FirebaseMethods());
   late PersistentTabController _controller;
 
   @override
   void initState() {
     _controller = PersistentTabController(initialIndex: 0);
     super.initState();
+    firebase.getCartDetails();
   }
 
   List<Widget> _buildScreens() {

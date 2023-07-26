@@ -53,7 +53,6 @@ class FirebaseMethods extends GetxController {
     }
   }
 
-
   //update item count
 
   Future<void> updateItemCount(String id, int count) async {
@@ -132,19 +131,40 @@ class FirebaseMethods extends GetxController {
     }
   }
 
-  // delete collection
-
+  // delete 1 item from cart
   Future<void> deleteCollection(String productId) async {
-    log(productId);
-    DocumentSnapshot doc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('cart')
-        .doc(productId)
-        .get();
-    await doc.reference.delete();
+    try {
+      log(productId);
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart')
+          .doc(productId)
+          .get();
+      await doc.reference.delete();
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
+  // clear cart
+  Future<void> clearCart() async {
+    try {
+      final CollectionReference collectionReference = FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('cart');
+      final QuerySnapshot querySnapshot = await collectionReference.get();
+
+      for (var document in querySnapshot.docs) {
+        document.reference.delete();
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  //ADD ADDRESS
   Future<void> addAddress(AddressModel address) async {
     String id = const Uuid().v1();
     try {
@@ -170,16 +190,29 @@ class FirebaseMethods extends GetxController {
           firestore.collection('orders');
 
       QuerySnapshot snap = await sourceCollectionRef.get();
-      String id = Uuid().v1();
-      snap.docs.forEach((element) {
-        destinationCollectionRef.doc(id).set(element.data());
-      });
+
+      log(snap.docs.length.toString());
+
+      for (var element in snap.docs) {
+        String id = const Uuid().v1();
+        OrderModel order = OrderModel(
+          price: element['price'],
+          title: element['title'],
+          date: DateTime.now(),
+          image: element['image'],
+          productId: element['productId'],
+          uId: element['uId'],
+        );
+        destinationCollectionRef.doc(id).set(order.toJson());
+      }
+      showCustomSnackBar('Successfull',
+          title: 'Order', color: Colors.green, position: SnackPosition.BOTTOM);
     } catch (e) {
       log(e.toString());
     }
   }
 
-    //add to order
+  //add to order
 
   Future<void> addToOrder(OrderModel orderModel) async {
     try {
@@ -188,11 +221,10 @@ class FirebaseMethods extends GetxController {
           .doc(orderModel.productId)
           .set(orderModel.toJson());
 
-      showCustomSnackBar('Added to Cart successfull',
-          title: 'cart', color: Colors.green, position: SnackPosition.BOTTOM);
+      showCustomSnackBar('Successfull',
+          title: 'Order', color: Colors.green, position: SnackPosition.BOTTOM);
     } catch (e) {
       log(e.toString());
     }
   }
-  
 }

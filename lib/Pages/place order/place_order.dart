@@ -14,12 +14,13 @@ import 'package:uuid/uuid.dart';
 class PlaceOrder extends StatelessWidget {
   Map<String, dynamic> snap;
   Map<String, dynamic>? productSnap;
+  final bool isCart;
 
   PlaceOrder({
     super.key,
     required this.snap,
      this.productSnap,
-     
+     required this.isCart,
   });
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
   late RxNum total = firebase.observetotalPrice;
@@ -141,6 +142,11 @@ class PlaceOrder extends StatelessWidget {
           const Spacer(),
           GestureDetector(
             onTap: () async {
+              if (isCart) {
+                 await FirebaseMethods().cartToOrder();
+                 await FirebaseMethods().clearCart();
+                 await FirebaseMethods().getCartDetails();
+              }else{
               String id = const Uuid().v1();
                   OrderModel order = OrderModel(
                     title: productSnap!['title'],
@@ -151,7 +157,7 @@ class PlaceOrder extends StatelessWidget {
                     uId: FirebaseAuth.instance.currentUser!.uid,
                   );
                   await FirebaseMethods().addToOrder(order);
-                  // await FirebaseMethods().cartToOrder();
+              }
 
               navigator!.push(MaterialPageRoute(
                 builder: (context) => const OrderdSuccessfully( ),
