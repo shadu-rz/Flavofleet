@@ -19,7 +19,7 @@ class SelectAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    
-       Map<String,dynamic> snapp = productSnap ?? {};
+    Map<String,dynamic> snapp = productSnap ?? {};
     
    
     return Scaffold(

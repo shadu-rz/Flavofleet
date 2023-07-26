@@ -37,6 +37,7 @@ class FirebaseMethods extends GetxController {
   }
 
   // add to cart
+
   Future<void> addToCart(CartModel cartModel) async {
     try {
       await firestore
@@ -45,25 +46,15 @@ class FirebaseMethods extends GetxController {
           .collection('cart')
           .doc(cartModel.productId)
           .set(cartModel.toJson());
-    } catch (e) {
-      log(e.toString());
-    }
-  }
-
-  //add to order
-  Future<void> addToOrder(OrderModel orderModel) async {
-    try {
-      await firestore
-          .collection('orders')
-          .doc(orderModel.productId)
-          .set(orderModel.toJson());
-
       showCustomSnackBar('Added to Cart successfull',
           title: 'cart', color: Colors.green, position: SnackPosition.BOTTOM);
     } catch (e) {
       log(e.toString());
     }
   }
+
+
+  //update item count
 
   Future<void> updateItemCount(String id, int count) async {
     try {
@@ -187,4 +178,21 @@ class FirebaseMethods extends GetxController {
       log(e.toString());
     }
   }
+
+    //add to order
+
+  Future<void> addToOrder(OrderModel orderModel) async {
+    try {
+      await firestore
+          .collection('orders')
+          .doc(orderModel.productId)
+          .set(orderModel.toJson());
+
+      showCustomSnackBar('Added to Cart successfull',
+          title: 'cart', color: Colors.green, position: SnackPosition.BOTTOM);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+  
 }

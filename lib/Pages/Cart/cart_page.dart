@@ -18,6 +18,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    firebase.getCartDetails();
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,

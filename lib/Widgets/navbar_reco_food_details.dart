@@ -136,10 +136,6 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                         productId: id,
                         itemCount: countController.count.value);
                     await FirebaseMethods().addToCart(product);
-                    showCustomSnackBar('Added to Cart successfull',
-                        title: 'cart',
-                        color: Colors.green,
-                        position: SnackPosition.BOTTOM);
                     firebase.getCartDetails();
                   }
                 },

@@ -1,4 +1,3 @@
-
 import 'package:flavour_fleet_main/Pages/Food/recomended_food_details.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
@@ -14,147 +13,143 @@ class CartListWidget extends StatelessWidget {
   Map<String, dynamic> snap;
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
   final CartController countController = Get.put(CartController());
-  CartListWidget({
-    super.key,
-    required this.snap
-  });
+  CartListWidget({super.key, required this.snap});
 
   @override
   Widget build(BuildContext context) {
-   
-        
-        return GestureDetector(
-          onTap: () {
-            navigator!.push(MaterialPageRoute(
-              builder: (context) => RecomendedFoodDetails(snap: snap),
-            ));
-          },
-          child: Container(
-            margin: EdgeInsets.only(top: Dimensions.height10),
-            // color: Colors.amber,
-            height: 100,
-            width: double.maxFinite,
-            child: Row(
-              children: [
-                Container(
-                  width: Dimensions.height20 * 4,
-                  height: Dimensions.height20 * 4,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(snap['image']),
-                      ),
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.radius15),
-                      color: Colors.white),
-                ),
-                SizedBox(
-                  width: Dimensions.width10,
-                ),
-                Expanded(
-                  child: SizedBox(
-                    height: Dimensions.height20 * 5,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+    return GestureDetector(
+      onTap: () {
+        navigator!.push(MaterialPageRoute(
+          builder: (context) => RecomendedFoodDetails(snap: snap),
+        ));
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: Dimensions.height10),
+        // color: Colors.amber,
+        height: 100,
+        width: double.maxFinite,
+        child: Row(
+          children: [
+            Container(
+              width: Dimensions.height20 * 4,
+              height: Dimensions.height20 * 4,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(snap['image']),
+                  ),
+                  borderRadius: BorderRadius.circular(Dimensions.radius15),
+                  color: Colors.white),
+            ),
+            SizedBox(
+              width: Dimensions.width10,
+            ),
+            Expanded(
+              child: SizedBox(
+                height: Dimensions.height20 * 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BigText(
+                      text: snap['title'],
+                      size: Dimensions.font20 - 2,
+                      color: Colors.black54,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         BigText(
-                          text: snap['title'],
+                          text: '₹ ${snap['price']}',
                           size: Dimensions.font20 - 2,
-                          color: Colors.black54,
+                          color: Colors.redAccent,
                         ),
-                        Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                          children: [
-                            BigText(
-                              text: '₹ ${snap['price']}',
-                              size: Dimensions.font20 - 2,
-                              color: Colors.redAccent,
-                            ),
-                            //containerrr
-                          ],
-                        )
+                        //containerrr
                       ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                top: Dimensions.height10,
+                bottom: Dimensions.height10,
+                right: Dimensions.width20 / 2,
+                left: Dimensions.width20 / 2,
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius15),
+                  color: Colors.white),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      await _showMyDialog(context, snap);
+                    },
+                    child: const Icon(
+                      Icons.delete_outline,
+                      color: Colors.grey,
                     ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                    top: Dimensions.height10,
-                    bottom: Dimensions.height10,
-                    right: Dimensions.width20 / 2,
-                    left: Dimensions.width20 / 2,
+                  SizedBox(width: Dimensions.width20),
+                  CircleAvatar(
+                    backgroundColor: AppColors.mainColor,
+                    radius: 12,
+                    child: GestureDetector(
+                      onTap: () async {
+                        int count =
+                            CartController().decrementInCart(snap['itemCount']);
+                        await FirebaseMethods()
+                            .updateItemCount(snap['productId'], count);
+                        firebase.getCartDetails();
+                      },
+                      child: const Icon(
+                        Icons.remove,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.radius15),
-                      color: Colors.white),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          await _showMyDialog(context,snap);
-                        },
-                        child: const Icon(
-                          Icons.delete_outline,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      SizedBox(width: Dimensions.width20),
-                      CircleAvatar(
-                        backgroundColor: AppColors.mainColor,
-                        radius: 12,
-                        child: GestureDetector(
-                          onTap: () async {
-                            int count = CartController()
-                                .decrementInCart(snap['itemCount']);
-                            await FirebaseMethods()
-                                .updateItemCount(snap['productId'], count);
-                            firebase.getCartDetails();
-                          },
-                          child: const Icon(
-                            Icons.remove,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                        SizedBox(width: Dimensions.width10,),
-                      CircleAvatar(
-                         backgroundColor: Colors.black38,
-                        child: BigText(
-                          text: "${snap['itemCount']}",color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(width: Dimensions.width10,),
-                      CircleAvatar(
-                         backgroundColor: AppColors.mainColor,
-                        radius: 12,
-                        child: GestureDetector(
-                          onTap: () async {
-                            int count = CartController()
-                                .incrementInCart(snap['itemCount']);
-                            await FirebaseMethods()
-                                .updateItemCount(snap['productId'], count);
-                            firebase.getCartDetails();
-                          },
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )
-                    ],
+                  SizedBox(
+                    width: Dimensions.width10,
                   ),
-                ),
-              ],
+                  CircleAvatar(
+                    backgroundColor: const Color.fromARGB(255, 63, 198, 191),
+                    child: BigText(
+                      text: "${snap['itemCount']}",
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(
+                    width: Dimensions.width10,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: AppColors.mainColor,
+                    radius: 12,
+                    child: GestureDetector(
+                      onTap: () async {
+                        int count =
+                            CartController().incrementInCart(snap['itemCount']);
+                        await FirebaseMethods()
+                            .updateItemCount(snap['productId'], count);
+                        firebase.getCartDetails();
+                      },
+                      child: const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        );
-     
+          ],
+        ),
+      ),
+    );
   }
 
-  Future<void> _showMyDialog(context,Map<String,dynamic>snap) async {
+  Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
     return showDialog(
         context: context,
         builder: (BuildContext context) {

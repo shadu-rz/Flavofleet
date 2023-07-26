@@ -55,6 +55,11 @@ class CartHistory extends StatelessWidget {
                         child: Text('No items'),
                       );
                     }
+                     if (snapshot.data!.docs.isEmpty) {
+                        return Center(
+                          child: BigText(text: 'No items found'),
+                        );
+                      }
                     return ListView.separated(
                       shrinkWrap: true,
                       separatorBuilder: (context, index) {
@@ -70,11 +75,11 @@ class CartHistory extends StatelessWidget {
                          DateTime date= (snap['date'] as Timestamp).toDate();
                          
                         return GestureDetector(
-                          onTap: () {
-                            navigator!.push(MaterialPageRoute(
-                              builder: (context) => const OrderDetailsPage(),
-                            ));
-                          },
+                          // onTap: () {
+                          //   navigator!.push(MaterialPageRoute(
+                          //     builder: (context) => const OrderDetailsPage(),
+                          //   ));
+                          // },
                           child: SizedBox(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,6 +121,8 @@ class CartHistory extends StatelessWidget {
                                     ),
                                     const Spacer(),
                                     SmallText(text: "₹ ${snap['price']}",size: 18,color: Colors.blueGrey,),
+                                    // const Spacer(),
+                                    // SmallText(text: "2 items",size: 16,color: Colors.black45),
                                     const Spacer(),
                                     const SizedBox(
                                       height: 120,

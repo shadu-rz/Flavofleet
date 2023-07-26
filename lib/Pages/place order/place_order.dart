@@ -154,7 +154,7 @@ class PlaceOrder extends StatelessWidget {
                   // await FirebaseMethods().cartToOrder();
 
               navigator!.push(MaterialPageRoute(
-                builder: (context) =>  OrderdSuccessfully( ),
+                builder: (context) => const OrderdSuccessfully( ),
               ));
             },
             child: Container(
