@@ -92,24 +92,25 @@ class FirebaseMethods extends GetxController {
     return false;
   }
 
-  // Get cart details
-
-  RxInt observecartLength = RxInt(1);
-  RxNum observetotalPrice = RxNum(0);
-
-  Future<void> getSelectedProduct(String collection, String productId) async {
-    observetotalPrice.value = 0;
+    Future<void> getSelectedProduct(String collection, String productId) async {
+    totalPrice.value = 0;
     try {
       DocumentSnapshot<Map<String, dynamic>> snap =
           await firestore.collection(collection).doc(productId).get();
-      observetotalPrice.value = double.parse(snap['price']);
+      totalPrice.value = double.parse(snap['price']);
     } catch (e) {
       log(e.toString());
     }
   }
 
+  // Get cart details
+
+  RxInt cartLength = RxInt(1);
+  RxNum totalPrice = RxNum(0);
+
   Future<void> getCartDetails() async {
-    observetotalPrice.value = 0;
+
+    totalPrice.value = 0;
     // CartController controller = Get.put(CartController());
     // final count = controller.count;
     try {
@@ -119,12 +120,11 @@ class FirebaseMethods extends GetxController {
           .collection('cart')
           .get();
 
-      observecartLength.value = snap.docs.length;
+      cartLength.value = snap.docs.length;
 
       for (var element in snap.docs) {
         double total = element['price'] * element['itemCount'];
-        // log(total.toString());
-        observetotalPrice.value = observetotalPrice.value + total;
+        totalPrice.value = totalPrice.value + total;
       }
     } catch (e) {
       log("errorr ${e.toString()}");
@@ -132,6 +132,7 @@ class FirebaseMethods extends GetxController {
   }
 
   // delete 1 item from cart
+
   Future<void> deleteCollection(String productId) async {
     try {
       log(productId);
@@ -148,6 +149,7 @@ class FirebaseMethods extends GetxController {
   }
 
   // clear cart
+
   Future<void> clearCart() async {
     try {
       final CollectionReference collectionReference = FirebaseFirestore.instance
@@ -165,19 +167,35 @@ class FirebaseMethods extends GetxController {
   }
 
   //ADD ADDRESS
+
   Future<void> addAddress(AddressModel address) async {
-    String id = const Uuid().v1();
+
     try {
       await firestore
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('delivery_address')
-          .doc(id)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .set(address.toJson());
     } catch (e) {
       log(e.toString());
     }
   }
+  // delete address
+   Future<void> deleteAddress() async {
+    try {
+      DocumentReference addressRef = firestore
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('delivery_address')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+    await addressRef.delete();
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  // add to order from cart
 
   Future<void> cartToOrder() async {
     try {

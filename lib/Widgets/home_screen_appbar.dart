@@ -97,8 +97,8 @@ class HomeScreenAppBar extends StatelessWidget {
 
                     return CircleAvatar(
                       radius: 25,
-                       backgroundColor: AppColors.mainColor,
                       child: CircleAvatar(
+                        backgroundColor: AppColors.mainColor,
                         radius: 23,
                         backgroundImage: NetworkImage(
                           snapshot.data!['image'].isEmpty

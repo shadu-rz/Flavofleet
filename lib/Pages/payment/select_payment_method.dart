@@ -33,7 +33,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
 
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
 
-  late RxNum total = firebase.observetotalPrice;
+  late RxNum total = firebase.totalPrice;
 
   RxBool codChecked = false.obs;
   RxBool upiChecked = false.obs;

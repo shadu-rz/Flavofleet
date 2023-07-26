@@ -47,37 +47,7 @@ class LogoutPage extends StatelessWidget {
               ),
               child: Center(
                 child: BigText(
-                  text: 'Sign In',
-                  size: Dimensions.font20,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: Dimensions.height10,
-          ),
-          GestureDetector(
-            onTap: () => navigator!.pushReplacement(
-
-              MaterialPageRoute(
-                builder: (context) => const SignUpPage(),
-              ),
-            ),
-            child: Container(
-              margin: EdgeInsets.only(
-                left: Dimensions.width10,
-                right: Dimensions.width10,
-              ),
-              width: double.maxFinite,
-              height: Dimensions.screenHeight / 12,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius20 / 2),
-                color: AppColors.mainColor,
-              ),
-              child: Center(
-                child: BigText(
-                  text: 'Sign Up',
+                  text: 'Sign in to your account',
                   size: Dimensions.font20,
                   color: Colors.white,
                 ),

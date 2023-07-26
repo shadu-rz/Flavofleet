@@ -38,7 +38,7 @@ class BottomNavCart extends StatelessWidget {
                   child: Obx(
                     () => BigText(
                       text:
-                          "${firebase.observecartLength} ${toCheckOneOrMore() ? 'items' : 'item'}",
+                          "${firebase.cartLength} ${toCheckOneOrMore() ? 'items' : 'item'}",
                       size: Dimensions.font20 / 1.2,
                     ),
                   ),
@@ -54,7 +54,7 @@ class BottomNavCart extends StatelessWidget {
                 child: Center(
                   child: Obx(
                     () => BigText(
-                      text: '₹ ${firebase.observetotalPrice}',
+                      text: '₹ ${firebase.totalPrice}',
                     ),
                   ),
                 ),
@@ -88,7 +88,7 @@ class BottomNavCart extends StatelessWidget {
   }
 
   bool toCheckOneOrMore() {
-    if (firebase.observecartLength > 1) {
+    if (firebase.cartLength > 1) {
       return true;
     }
     return false;

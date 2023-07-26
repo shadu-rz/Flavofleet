@@ -23,7 +23,7 @@ class PlaceOrder extends StatelessWidget {
      required this.isCart,
   });
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
-  late RxNum total = firebase.observetotalPrice;
+  late RxNum total = firebase.totalPrice;
 
   @override
   Widget build(BuildContext context) {
