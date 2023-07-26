@@ -92,6 +92,13 @@ class FirebaseMethods extends GetxController {
     return false;
   }
 
+
+
+  // Get cart details
+
+  RxInt cartLength = RxInt(1);
+  RxNum totalPrice = RxNum(0);
+  
     Future<void> getSelectedProduct(String collection, String productId) async {
     totalPrice.value = 0;
     try {
@@ -103,16 +110,9 @@ class FirebaseMethods extends GetxController {
     }
   }
 
-  // Get cart details
-
-  RxInt cartLength = RxInt(1);
-  RxNum totalPrice = RxNum(0);
-
   Future<void> getCartDetails() async {
 
     totalPrice.value = 0;
-    // CartController controller = Get.put(CartController());
-    // final count = controller.count;
     try {
       QuerySnapshot<Map<String, dynamic>> snap = await firestore
           .collection('users')
@@ -240,7 +240,7 @@ class FirebaseMethods extends GetxController {
           .set(orderModel.toJson());
 
       showCustomSnackBar('Successfull',
-          title: 'Order', color: Colors.green, position: SnackPosition.BOTTOM);
+          title: 'Order', color: Colors.green, position: SnackPosition.TOP);
     } catch (e) {
       log(e.toString());
     }

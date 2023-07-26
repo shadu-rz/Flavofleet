@@ -19,10 +19,8 @@ class SelectAddress extends StatelessWidget {
   TextEditingController addressController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-   
-    Map<String,dynamic> snapp = productSnap ?? {};
-    
-   
+    Map<String, dynamic> snapp = productSnap ?? {};
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -57,33 +55,48 @@ class SelectAddress extends StatelessWidget {
               );
             }
             if (snapshot.data!.docs.isEmpty) {
-              return GestureDetector(
-                onTap: () {
-                  navigator!.push(MaterialPageRoute(
-                    builder: (context) => AddAddressPage(
-                      productSnap: productSnap,
-                    ),
-                  ));
-                },
-                child: Container(
-                  margin: EdgeInsets.only(
-                      left: Dimensions.width20,
-                      right: Dimensions.width20,
-                      bottom: Dimensions.height20),
-                  width: Dimensions.screenWidth,
-                  height: Dimensions.screenHeight / 14,
-                  decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.radius20 / 2),
-                      color: Colors.blueGrey),
-                  child: Center(
-                    child: BigText(
-                      text: 'Add new address',
-                      size: 18,
-                      color: Colors.white,
+              return Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      navigator!.push(MaterialPageRoute(
+                        builder: (context) => AddAddressPage(
+                          productSnap: productSnap,
+                        ),
+                      ));
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          left: Dimensions.width20,
+                          right: Dimensions.width20,
+                          bottom: Dimensions.height20),
+                      width: Dimensions.screenWidth,
+                      height: Dimensions.screenHeight / 14,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20 / 2),
+                          color: Colors.blueGrey),
+                      child: Center(
+                        child: BigText(
+                          text: 'Add new address',
+                          size: 18,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: Dimensions.screenWidth/3,
+                  ),
+                  Container(
+                    height: 300,
+                    width: 300,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/image/location.png'))),
+                  ),
+                ],
               );
             }
             return ListView.builder(

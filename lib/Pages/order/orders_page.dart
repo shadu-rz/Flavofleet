@@ -2,13 +2,11 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/order/order_details_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class CartHistory extends StatelessWidget {
@@ -113,7 +111,7 @@ class CartHistory extends StatelessWidget {
                                           size: 16,
                                         ),
                                         SmallText(
-                                          text: "${DateFormat.yMEd().format(date)} \n ${DateFormat.jm().format(date)}",
+                                          text: "${DateFormat.yMMMEd().format(date)} \n ${DateFormat.jm().format(date)}",
                                           color: AppColors.mainBlackColor,
                                           size: 16,
                                         ),
@@ -128,7 +126,7 @@ class CartHistory extends StatelessWidget {
                                       height: 120,
                                       child: Icon(
                                         Icons.arrow_forward_ios,
-                                        size: 20,
+                                        size: 0,
                                       ),
                                     )
                                   ],

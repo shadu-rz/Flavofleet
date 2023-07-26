@@ -197,6 +197,14 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
           customerEphemeralKeySecret: paymentIntentData!['ephemeralKey'],
         ));
         await displayPaymentSheet();
+        
+        Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => PlaceOrder(
+          isCart: widget.isCart,
+          productSnap: widget.productSnap!,
+          snap: widget.snap,
+        ),
+      ));
       }
     } catch (e, s) {
       log('exception:$e$s');
@@ -207,14 +215,9 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
     try {
       await Stripe.instance.presentPaymentSheet();
       log('success');
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => PlaceOrder(
-          isCart: widget.isCart,
-          productSnap: widget.productSnap!,
-          snap: widget.snap,
-        ),
-      ));
+      
     } on Exception catch (e) {
+
       if (e is StripeException) {
         log("Error from Stripe: ${e.error.localizedMessage}");
       } else {

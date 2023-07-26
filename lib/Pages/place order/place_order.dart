@@ -19,8 +19,8 @@ class PlaceOrder extends StatelessWidget {
   PlaceOrder({
     super.key,
     required this.snap,
-     this.productSnap,
-     required this.isCart,
+    this.productSnap,
+    required this.isCart,
   });
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
   late RxNum total = firebase.totalPrice;
@@ -40,7 +40,7 @@ class PlaceOrder extends StatelessWidget {
           TextButton(
               onPressed: () {
                 navigator!.push(MaterialPageRoute(
-                  builder: (context) =>  HomePage( ),
+                  builder: (context) => HomePage(),
                 ));
               },
               child: SmallText(
@@ -143,25 +143,29 @@ class PlaceOrder extends StatelessWidget {
           GestureDetector(
             onTap: () async {
               if (isCart) {
-                 await FirebaseMethods().cartToOrder();
-                 await FirebaseMethods().clearCart();
-                 await FirebaseMethods().getCartDetails();
-              }else{
-              String id = const Uuid().v1();
-                  OrderModel order = OrderModel(
-                    title: productSnap!['title'],
-                    price: productSnap!['price'],
-                    date: DateTime.now(),
-                    image: productSnap!['image'],
-                    productId: id,
-                    uId: FirebaseAuth.instance.currentUser!.uid,
-                  );
-                  await FirebaseMethods().addToOrder(order);
-              }
+                await FirebaseMethods().cartToOrder();
+                await FirebaseMethods().clearCart();
+                await FirebaseMethods().getCartDetails();
+                
+                navigator!.push(MaterialPageRoute(
+                  builder: (context) => const OrderdSuccessfully(),
+                ));
+              } else {
+                String id = const Uuid().v1();
+                OrderModel order = OrderModel(
+                  title: productSnap!['title'],
+                  price: double.parse(productSnap!['price']),
+                  date: DateTime.now(),
+                  image: productSnap!['image'],
+                  productId: id,
+                  uId: FirebaseAuth.instance.currentUser!.uid,
+                );
+                await FirebaseMethods().addToOrder(order);
 
-              navigator!.push(MaterialPageRoute(
-                builder: (context) => const OrderdSuccessfully( ),
-              ));
+                navigator!.push(MaterialPageRoute(
+                  builder: (context) => const OrderdSuccessfully(),
+                ));
+              }
             },
             child: Container(
               decoration: BoxDecoration(

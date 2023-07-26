@@ -18,7 +18,7 @@ class RecomendedFoodDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final FirebaseMethods firebase = Get.put(FirebaseMethods());
      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // firebase.getSelectedProduct('recommendedProducts',snap['productId']);
+      firebase.getSelectedProduct('recommendedProducts',snap['productId']);
     });
     return Scaffold(
       backgroundColor: Colors.white,
