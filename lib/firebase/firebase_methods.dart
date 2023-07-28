@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/model/address_model.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
+import 'package:flavour_fleet_main/model/favorite_model.dart';
 import 'package:flavour_fleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -133,7 +134,7 @@ class FirebaseMethods extends GetxController {
 
   // delete 1 item from cart
 
-  Future<void> deleteCollection(String productId) async {
+  Future<void> removeItemFromCart(String productId) async {
     try {
       log(productId);
       DocumentSnapshot doc = await FirebaseFirestore.instance
@@ -241,6 +242,62 @@ class FirebaseMethods extends GetxController {
 
       showCustomSnackBar('Successfull',
           title: 'Order', color: Colors.green, position: SnackPosition.TOP);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+    // add to favorite
+
+  Future<void> addToFav(FavoriteModel favModel) async {
+    try {
+      await firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('favorite')
+          .doc(favModel.productId)
+          .set(favModel.toJson());
+      showCustomSnackBar('Added to favorite successfull',
+          title: 'Favorite', color: Colors.green, position: SnackPosition.BOTTOM);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+    // to check is it already existing in the favorite
+
+  Future<bool> alreadyExistInFavorite(String uId, String title) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> doc = await firestore
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('favorite')
+          .get();
+      for (var element in doc.docs) {
+        // log(element['title']);
+        if (element['title'] == title && element['uId'] == uId) {
+          return true;
+        }
+      }
+      return false;
+    } catch (e) {
+      log(e.toString());
+    }
+    return false;
+  }
+
+    // delete 1 item from favorite
+
+  Future<void> removeItemFromFavorite(String productId) async {
+    try {
+      log(productId);
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('favorite')
+          .doc(productId)
+          .get();
+      await doc.reference.delete();
     } catch (e) {
       log(e.toString());
     }

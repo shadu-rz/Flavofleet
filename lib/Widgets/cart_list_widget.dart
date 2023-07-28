@@ -174,7 +174,7 @@ class CartListWidget extends StatelessWidget {
               TextButton(
                 child: const Text('Confirm'),
                 onPressed: () async {
-                  await FirebaseMethods().deleteCollection(snap['productId']);
+                  await FirebaseMethods().removeItemFromCart(snap['productId']);
                   showCustomSnackBar(
                     '${snap['title']} ',
                     title: 'removed',

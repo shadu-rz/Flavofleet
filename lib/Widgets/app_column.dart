@@ -1,6 +1,11 @@
-import 'package:flavour_fleet_main/Widgets/app_icon.dart';
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
+import 'package:flavour_fleet_main/model/favorite_model.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import 'Utils/colors.dart';
 import 'Utils/diamensions.dart';
@@ -8,9 +13,11 @@ import 'big_text.dart';
 import 'icon_and_text.dart';
 
 class AppColumn extends StatelessWidget {
+   bool isFav;
   final String text;
-  const AppColumn({
+   AppColumn({
     super.key,
+    this.isFav=false,
     required this.text,
     required this.snap,
   });
@@ -31,8 +38,36 @@ class AppColumn extends StatelessWidget {
               text: "₹${snap['price']}",
               size: Dimensions.font20,
             ),
-           const Spacer(),
-            Container(
+            const Spacer(),
+            GestureDetector(
+              onTap: () async {
+                if (await FirebaseMethods().alreadyExistInFavorite(
+                  FirebaseAuth.instance.currentUser!.uid,
+                  snap['title'])) {
+                    isFav = true;
+                showCustomSnackBar(
+                  'Already exist in the favorites',
+                  title: 'Existing',
+                  color: Colors.red,
+                );
+              } else{
+                 String id = const Uuid().v1();
+                FavoriteModel product = FavoriteModel(
+                  title: snap['title'],
+                  price: double.parse(snap['price']),
+                  image: snap['image'],
+                  description: snap['description'],
+                  distance: double.parse(snap['distance']),
+                  rating: double.parse(snap['rating']),
+                  star: double.parse(snap['star']),
+                  uId: FirebaseAuth.instance.currentUser!.uid,
+                  productId: id,
+                );
+                await FirebaseMethods().addToFav(product);
+                log('favoriteeeeeeee');
+              }
+              },
+              child: Container(
                 padding: EdgeInsets.only(
                   top: Dimensions.height10,
                   bottom: Dimensions.height10,
@@ -42,12 +77,13 @@ class AppColumn extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius15),
                     color: Colors.black12),
-                child: AppIcon(
-                  icon: Icons.favorite_border_outlined,
-                  iconColor: AppColors.mainColor,
+                child: Icon(
+                   isFav? Icons.favorite_border_outlined:Icons.favorite_border_outlined,
+                  color: AppColors.mainColor,
                   size: Dimensions.iconSize24,
                 ),
               ),
+            ),
           ],
         ),
         SizedBox(height: Dimensions.height10),
