@@ -35,10 +35,10 @@ class HomeScreenAppBar extends StatelessWidget {
               width: Dimensions.screenWidth / 10,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.black),  //change color to main color
+                  color: AppColors.mainColor),  //change color to main color
               child: const Icon(
                 Icons.favorite,
-                color: Colors.black, //change color to main color
+                color: Colors.white, //change color to white color
               ),
             ),
           ),

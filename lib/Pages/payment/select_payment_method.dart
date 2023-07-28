@@ -198,13 +198,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
         ));
         await displayPaymentSheet();
         
-        navigator!.push(MaterialPageRoute(
-        builder: (context) => PlaceOrder(
-          isCart: widget.isCart,
-          productSnap: widget.productSnap!,
-          snap: widget.snap,
-        ),
-      ));
+      
       }
     } catch (e, s) {
       log('exception:$e$s');
@@ -214,6 +208,13 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
   displayPaymentSheet() async {
     try {
       await Stripe.instance.presentPaymentSheet();
+        navigator!.push(MaterialPageRoute(
+        builder: (context) => PlaceOrder(
+          isCart: widget.isCart,
+          productSnap: widget.productSnap!,
+          snap: widget.snap,
+        ),
+      ));
       log('success');
       
     } on Exception catch (e) {
