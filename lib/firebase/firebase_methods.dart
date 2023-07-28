@@ -224,7 +224,7 @@ class FirebaseMethods extends GetxController {
         destinationCollectionRef.doc(id).set(order.toJson());
       }
       showCustomSnackBar('Successfull',
-          title: 'Order', color: Colors.green, position: SnackPosition.BOTTOM);
+          title: 'Order', color: Colors.green, position: SnackPosition.TOP);
     } catch (e) {
       log(e.toString());
     }

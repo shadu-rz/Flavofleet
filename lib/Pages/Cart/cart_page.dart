@@ -18,7 +18,6 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    firebase.getCartDetails();
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
@@ -28,12 +27,12 @@ class CartPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () async {
-                return showDialog(
+                await showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: Text(
-                          'Do you want to clear all items in cart?',
+                          'Are you sure want to delete ?',
                           style: TextStyle(
                             fontSize: Dimensions.font20 - 3,
                             fontWeight: FontWeight.bold,
@@ -42,16 +41,15 @@ class CartPage extends StatelessWidget {
                         actions: [
                           TextButton(
                             child: const Text('Cancel'),
-                            onPressed: ()async{
+                            onPressed: () {
                               Navigator.of(context).pop();
-                              await FirebaseMethods().getCartDetails();
                             },
                           ),
                           TextButton(
                             child: const Text('Confirm'),
                             onPressed: () async {
-                              FirebaseMethods().clearCart();
-                              FirebaseMethods().getCartDetails();
+                              await firebase.clearCart();
+                              await firebase.getCartDetails();
                               showCustomSnackBar('All items cleared',
                                   title: 'success',
                                   color: Colors.green,
@@ -130,3 +128,47 @@ class CartPage extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+// return showDialog(
+//                     context: context,
+//                     builder: (BuildContext context) {
+//                       return AlertDialog(
+//                         title: Text(
+//                           'Do you want to clear all items in cart?',
+//                           style: TextStyle(
+//                             fontSize: Dimensions.font20 - 3,
+//                             fontWeight: FontWeight.bold,
+//                           ),
+//                         ),
+//                         actions: [
+//                           TextButton(
+//                             child: const Text('Cancel'),
+//                             onPressed: ()async{
+//                               Navigator.of(context).pop();
+//                               await FirebaseMethods().getCartDetails();
+//                             },
+//                           ),
+//                           TextButton(
+//                             child: const Text('Confirm'),
+//                             onPressed: () async {
+//                              await FirebaseMethods().clearCart();
+//                              await FirebaseMethods().getCartDetails();
+//                               showCustomSnackBar('All items cleared',
+//                                   title: 'success',
+//                                   color: Colors.green,
+//                                   position: SnackPosition.TOP);
+//                               navigator!.pop();
+//                             },
+//                           ),
+//                         ],
+//                       );
+//                     });

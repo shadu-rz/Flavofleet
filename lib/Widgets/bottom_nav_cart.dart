@@ -1,8 +1,8 @@
-
 import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,15 +60,19 @@ class BottomNavCart extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                
                 onTap: () {
-                  navigator!.push(
-                    MaterialPageRoute(
-                      builder: (context) => SelectAddress(
-                        isCart: true,
+                  if (firebase.cartLength <= 0) {
+                    showCustomSnackBar('No items in cart',
+                        title: 'cart', color: Colors.red);
+                  } else {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SelectAddress(
+                          isCart: true,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  }
                 },
                 child: Container(
                   height: Dimensions.font20 * 2,
@@ -78,7 +82,10 @@ class BottomNavCart extends StatelessWidget {
                       color: AppColors.mainColor,
                       borderRadius: BorderRadius.circular(Dimensions.radius15)),
                   child: Center(
-                    child: BigText(text: 'Check Out',color: Colors.white,),
+                    child: BigText(
+                      text: 'Check Out',
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

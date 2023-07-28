@@ -13,7 +13,10 @@ class CartListWidget extends StatelessWidget {
   Map<String, dynamic> snap;
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
   final CartController countController = Get.put(CartController());
-  CartListWidget({super.key, required this.snap});
+  CartListWidget({
+    super.key,
+    required this.snap,
+  });
 
   @override
   Widget build(BuildContext context) {

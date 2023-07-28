@@ -7,14 +7,18 @@ import 'package:get/get.dart';
 
 void signUserIn(context, String email, String password) async {
   if (email.isEmpty) {
-    showCustomSnackBar('Type in your emai address', title: 'Email address');
-  } else if (password.isEmpty) {
-    showCustomSnackBar('Type in your password', title: 'Password');
+    showCustomSnackBar('Type in your emai address', title: 'Email address',color: Colors.red);
+  }
+  // else if (email.isEmail) {
+  //   showCustomSnackBar('enter proper email address', title: 'Email',color: Colors.red);
+  // }  
+  else if (password.isEmpty) {
+    showCustomSnackBar('Type in your password', title: 'Password',color: Colors.red);
   } else if (password.length < 6) {
     showCustomSnackBar('Password cannot be less than six character',
-        title: 'Password');
+        title: 'Password',color: Colors.red);
   } else {
-    showCustomSnackBar('All went well', title: 'perfect');
+    showCustomSnackBar('All went well', title: 'perfect',color: Colors.green);
   }
 
   showDialog(

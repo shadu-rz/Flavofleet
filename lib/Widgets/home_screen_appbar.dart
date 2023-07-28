@@ -35,10 +35,10 @@ class HomeScreenAppBar extends StatelessWidget {
               width: Dimensions.screenWidth / 10,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: AppColors.mainColor),
+                  color: Colors.black),  //change color to main color
               child: const Icon(
                 Icons.favorite,
-                color: Colors.white,
+                color: Colors.black, //change color to main color
               ),
             ),
           ),
@@ -96,10 +96,10 @@ class HomeScreenAppBar extends StatelessWidget {
                     }
 
                     return CircleAvatar(
-                      radius: 25,
+                      radius: 24,
                       child: CircleAvatar(
                         backgroundColor: AppColors.mainColor,
-                        radius: 23,
+                        radius: 22,
                         backgroundImage: NetworkImage(
                           snapshot.data!['image'].isEmpty
                               ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'

@@ -198,7 +198,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
         ));
         await displayPaymentSheet();
         
-        Navigator.of(context).push(MaterialPageRoute(
+        navigator!.push(MaterialPageRoute(
         builder: (context) => PlaceOrder(
           isCart: widget.isCart,
           productSnap: widget.productSnap!,
