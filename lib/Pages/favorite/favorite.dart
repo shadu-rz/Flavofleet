@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/Food/popular_food_details.dart';
-import 'package:flavour_fleet_main/Pages/Food/recomended_food_details.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
@@ -19,7 +17,7 @@ class FavoritePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
-        title: BigText(text: 'Favorites'),
+        title: BigText(text: 'Favorites', color: Colors.white),
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
@@ -47,13 +45,20 @@ class FavoritePage extends StatelessWidget {
                 child: BigText(text: 'Check your internet connection'),
               );
             }
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (context, index) {
+                return Container(
+                  height: 1,
+                  color: Colors.grey,
+                  margin: EdgeInsets.symmetric(horizontal: Dimensions.width20),
+                );
+              },
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                 var snap = snapshot.data!.docs[index].data();
+                var snap = snapshot.data!.docs[index].data();
                 return GestureDetector(
                   // onTap: () {
-                  //   navigator!.push(MaterialPageRoute(builder: (context) => RecomendedFoodDetails(snap: snap),));
+                  //   navigator!.push(MaterialPageRoute(builder: (context) => PopularFoodDetails(snap: snap),));
                   // },
                   child: Container(
                     margin: EdgeInsets.only(top: Dimensions.height10),
@@ -67,10 +72,9 @@ class FavoritePage extends StatelessWidget {
                           width: Dimensions.height20 * 4,
                           height: Dimensions.height20 * 4,
                           decoration: BoxDecoration(
-                              image:  DecorationImage(
+                              image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: NetworkImage(
-                                   snap['image']),
+                                image: NetworkImage(snap['image']),
                               ),
                               borderRadius:
                                   BorderRadius.circular(Dimensions.radius15),
@@ -118,20 +122,17 @@ class FavoritePage extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.circular(Dimensions.radius15),
                               color: Colors.white),
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () async {
-                                  await _showMyDialog(context,snap);
-                                },
-                                child: const Icon(
-                                  Icons.delete_outline,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
+                          child: GestureDetector(
+                            onTap: () async {
+                              await _showMyDialog(context, snap);
+                            },
+                            child: const Icon(
+                              Icons.delete_outline,
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
+                        SizedBox(width: Dimensions.height20)
                       ],
                     ),
                   ),
@@ -143,39 +144,40 @@ class FavoritePage extends StatelessWidget {
   }
 }
 
-  Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              'Are you sure want to delete ${snap['title']}',
-              style: TextStyle(
-                fontSize: Dimensions.font20 - 3,
-                fontWeight: FontWeight.bold,
-              ),
+Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Are you sure want to delete ${snap['title']}',
+            style: TextStyle(
+              fontSize: Dimensions.font20 - 3,
+              fontWeight: FontWeight.bold,
             ),
-            actions: [
-              TextButton(
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: const Text('Confirm'),
-                onPressed: () async {
-                  await FirebaseMethods().removeItemFromFavorite(snap['productId']);
-                  showCustomSnackBar(
-                    '${snap['title']} ',
-                    title: 'removed',
-                    color: Colors.red,
-                  );
-                  // await firebase.getCartDetails();
-                  navigator!.pop();
-                },
-              ),
-            ],
-          );
-        });
-  }
+          ),
+          actions: [
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Confirm'),
+              onPressed: () async {
+                await FirebaseMethods()
+                    .removeItemFromFavorite(snap['productId']);
+                showCustomSnackBar(
+                  '${snap['title']} ',
+                  title: 'removed',
+                  color: Colors.red,
+                );
+                // await firebase.getCartDetails();
+                navigator!.pop();
+              },
+            ),
+          ],
+        );
+      });
+}
