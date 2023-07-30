@@ -1,7 +1,6 @@
 import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/address_model.dart';
@@ -47,14 +46,17 @@ class _AddAddressPageState extends State<AddAddressPage> {
           Padding(
             padding: EdgeInsets.only(left: Dimensions.width20),
             child: SmallText(
-              text: 'Full name',
+              text: 'Name',
               size: 15,
               color: Colors.grey,
             ),
           ),
           Container(
             margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-            child: TextField(
+            child: TextFormField(
+              decoration: const InputDecoration(
+                hintText: 'Your full name',
+              ),
               controller: nameController,
             ),
           ),
@@ -67,6 +69,9 @@ class _AddAddressPageState extends State<AddAddressPage> {
           Container(
             margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
+              decoration: const InputDecoration(
+                hintText: '10 digit mobile number',
+              ),
               controller: phoneController,
               keyboardType: TextInputType.number,
             ),
@@ -81,6 +86,9 @@ class _AddAddressPageState extends State<AddAddressPage> {
           Container(
             margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
+              decoration: const InputDecoration(
+                hintText: 'Provide complete address to the destination',
+              ),
               controller: addressController,
             ),
           ),
@@ -99,6 +107,9 @@ class _AddAddressPageState extends State<AddAddressPage> {
           Container(
             margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
+              decoration: const InputDecoration(
+                hintText: '6 digit picode',
+              ),
               controller: pincodeController,
               keyboardType: TextInputType.number,
             ),
