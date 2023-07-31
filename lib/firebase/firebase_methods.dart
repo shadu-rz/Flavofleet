@@ -215,11 +215,15 @@ class FirebaseMethods extends GetxController {
       for (var element in snap.docs) {
         String id = const Uuid().v1();
         OrderModel order = OrderModel(
+          delivered: false,
+          orderRecived: true,
+          outOfDelivery: false,
+          preparing: false,
           price: element['price'],
           title: element['title'],
           date: DateTime.now(),
           image: element['image'],
-          productId: element['productId'],
+          productId: id,
           uId: element['uId'],
         );
         destinationCollectionRef.doc(id).set(order.toJson());

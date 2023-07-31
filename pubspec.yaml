@@ -10,16 +10,13 @@ environment:
 dependencies:
   cloud_firestore: ^4.7.0
   cupertino_icons: ^1.0.2
-  dots_indicator: ^3.0.0
   firebase_auth: null
   firebase_core: null
   firebase_storage: ^11.2.0
   flutter:
     sdk: flutter
   flutter_stripe: ^9.3.0
-  geolocator: ^9.0.2
   get: ^4.6.5
-  google_sign_in: ^6.1.4
   http: null
   intl: ^0.18.1
   persistent_bottom_nav_bar: ^5.0.2

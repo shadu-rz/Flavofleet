@@ -153,6 +153,10 @@ class PlaceOrder extends StatelessWidget {
               } else {
                 String id = const Uuid().v1();
                 OrderModel order = OrderModel(
+                  delivered: false,
+                  orderRecived: true,
+                  outOfDelivery: false,
+                  preparing: false,
                   title: productSnap!['title'],
                   price: double.parse(productSnap!['price']),
                   date: DateTime.now(),

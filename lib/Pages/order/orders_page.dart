@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavour_fleet_main/Pages/order/order_details_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
@@ -38,6 +39,8 @@ class CartHistory extends StatelessWidget {
                   builder: (context,
                       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                           snapshot) {
+
+
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(
                         child: CircularProgressIndicator(),
@@ -73,11 +76,11 @@ class CartHistory extends StatelessWidget {
                          DateTime date= (snap['date'] as Timestamp).toDate();
                          
                         return GestureDetector(
-                          // onTap: () {
-                          //   navigator!.push(MaterialPageRoute(
-                          //     builder: (context) => const OrderDetailsPage(),
-                          //   ));
-                          // },
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>  OrderDetailsPage(productId: snap['productId'],),
+                            ));
+                          },
                           child: SizedBox(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,

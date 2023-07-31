@@ -7,6 +7,10 @@ class OrderModel {
   final DateTime date;
   final String productId;
   final String uId;
+  final bool orderRecived;
+  final bool preparing;
+  final bool outOfDelivery;
+  final bool delivered;
   OrderModel({
     required this.price,
     required this.title,
@@ -14,6 +18,10 @@ class OrderModel {
     required this.image,
     required this.productId,
     required this.uId,
+    required this.orderRecived,
+    required this.preparing,
+    required this.outOfDelivery,
+    required this.delivered,
   });
 
   Map<String, dynamic> toJson() => {
@@ -23,6 +31,10 @@ class OrderModel {
         'productId':productId,
         'uId':uId,
         'title':title,
+        'orderRecived':orderRecived,
+        'preparing':preparing,
+        'outOfDelivery':outOfDelivery,
+        'delivered':delivered,
       };
   static OrderModel fromSnapshot(DocumentSnapshot snap) {
     var snapShot = snap.data() as Map<String, dynamic>;
@@ -33,6 +45,10 @@ class OrderModel {
       productId:snapShot['productId'],
       uId: snapShot['uId'],
       title: snapShot['title'],
+      orderRecived: snapShot['orderRecived'],
+      preparing: snapShot['preparing'],
+      outOfDelivery: snapShot['outOfDelivery'],
+      delivered: snapShot['delivered'],
     );
   }
 }
