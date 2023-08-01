@@ -48,7 +48,7 @@ class OrderStatusPage extends StatelessWidget {
           DateTime date = (snap!['date'] as Timestamp).toDate();
           return Column(
             children: [
-              Container(
+              SizedBox(
                 width: Dimensions.screenWidth,
                 height: Dimensions.height45 * 2,
                 // color: Colors.grey,

@@ -6,7 +6,6 @@ import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/favorite_model.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-
 import 'Utils/colors.dart';
 import 'Utils/diamensions.dart';
 import 'big_text.dart';
@@ -14,7 +13,7 @@ import 'icon_and_text.dart';
 
 class AppColumn extends StatelessWidget {
   final String text;
-  AppColumn({
+  const AppColumn({
     super.key,
     required this.text,
     required this.snap,

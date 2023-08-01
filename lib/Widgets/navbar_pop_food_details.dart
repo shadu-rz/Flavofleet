@@ -7,7 +7,6 @@ import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
-import 'package:flavour_fleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';

@@ -40,7 +40,7 @@ class PlaceOrder extends StatelessWidget {
           TextButton(
               onPressed: () {
                 navigator!.push(MaterialPageRoute(
-                  builder: (context) => HomePage(),
+                  builder: (context) => const  HomePage(),
                 ));
               },
               child: SmallText(

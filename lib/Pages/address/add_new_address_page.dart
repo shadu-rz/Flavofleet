@@ -1,7 +1,6 @@
 import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/address_model.dart';
@@ -11,11 +10,12 @@ import 'package:get/get.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 
 class AddAddressPage extends StatefulWidget {
-  Map<String, dynamic>? productSnap;
-   
-    AddAddressPage({super.key,
-    this.productSnap
-   });
+  final Map<String, dynamic>? productSnap;
+
+  const AddAddressPage({
+    super.key,
+    this.productSnap,
+  });
 
   @override
   State<AddAddressPage> createState() => _AddAddressPageState();
@@ -33,10 +33,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -119,8 +117,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
           ),
           const Spacer(),
           GestureDetector(
-            
-            onTap: () async{
+            onTap: () async {
               AddressModel addressModel = AddressModel(
                 name: nameController.text,
                 address: addressController.text,

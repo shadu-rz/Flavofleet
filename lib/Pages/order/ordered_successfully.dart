@@ -35,7 +35,7 @@ class OrderdSuccessfully extends StatelessWidget {
             GestureDetector(
                 onTap: () => navigator!.pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) =>  HomePage( ),
+                        builder: (context) =>  const HomePage( ),
                       ),
                     ),
                 child: SmallText(

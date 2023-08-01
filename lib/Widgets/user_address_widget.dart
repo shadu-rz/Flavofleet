@@ -6,7 +6,6 @@ import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class UserAddressWidget extends StatelessWidget {

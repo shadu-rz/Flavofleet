@@ -7,6 +7,7 @@ import 'package:flavour_fleet_main/Widgets/user_address_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class SelectAddress extends StatelessWidget {
   final bool isCart;
   final Map<String, dynamic>? productSnap;
