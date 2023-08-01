@@ -73,7 +73,7 @@ class AppColumn extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius15),
-                    color: Colors.black12),
+                    color: Colors.grey[200]),
                 child: Icon( Icons.favorite_border_outlined,
                     color: AppColors.mainColor,
                     size: Dimensions.iconSize24,

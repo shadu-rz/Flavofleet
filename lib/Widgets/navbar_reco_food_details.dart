@@ -11,7 +11,6 @@ import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
 import 'package:flavour_fleet_main/model/favorite_model.dart';
-import 'package:flavour_fleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -31,6 +30,9 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
 
   final CartController countController = Get.find();
+
+  @override
+
 
   @override
   void dispose() {
@@ -106,11 +108,8 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                   if (await FirebaseMethods().alreadyExistInFavorite(
                       FirebaseAuth.instance.currentUser!.uid,
                       widget.snap['title'])) {
-                    showCustomSnackBar(
-                      'Already exist in the favorite',
-                      title: 'Existing',
-                      color: Colors.red,
-                    );
+                        
+                   showCustomSnackBar('FAVORITE',title: 'Already exist in',color: Colors.red);
                   } else {
                     String id = const Uuid().v1();
                     FavoriteModel product = FavoriteModel(
@@ -139,10 +138,11 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                       borderRadius: BorderRadius.circular(Dimensions.radius15),
                       color: const Color.fromRGBO(255, 255, 255, 1)),
                   child: AppIcon(
-                    icon: Icons.favorite_border_outlined, // fav icon
-                    iconColor: AppColors.mainColor,
-                    size: Dimensions.iconSize24,
-                  ),
+                      icon: Icons.favorite_border ,// fav icon
+                      iconColor: AppColors.mainColor,
+                      iconSize: Dimensions.iconSize24,
+                      size: Dimensions.iconSize24,
+                    ),
                 ),
               ),
               GestureDetector(
@@ -217,4 +217,6 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
       ],
     );
   }
+
+
 }

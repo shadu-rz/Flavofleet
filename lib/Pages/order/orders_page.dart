@@ -1,8 +1,7 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/order/order_details_page.dart';
+import 'package:flavour_fleet_main/Pages/order/order_status_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
@@ -78,7 +77,7 @@ class CartHistory extends StatelessWidget {
                         return GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>  OrderDetailsPage(productId: snap['productId'],),
+                              builder: (context) =>  OrderStatusPage(productId: snap['productId'],),
                             ));
                           },
                           child: SizedBox(

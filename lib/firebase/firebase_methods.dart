@@ -285,7 +285,7 @@ class FirebaseMethods extends GetxController {
       }
       return false;
     } catch (e) {
-      log(e.toString());
+      log( "error in checking fav ${e.toString()}");
     }
     return false;
   }

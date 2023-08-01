@@ -35,35 +35,18 @@ class HomeScreenAppBar extends StatelessWidget {
               width: Dimensions.screenWidth / 10,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: AppColors.mainColor),  //change color to main color
+                  color: AppColors.mainColor), //change color to main color
               child: const Icon(
                 Icons.favorite,
                 color: Colors.white, //change color to white color
               ),
             ),
           ),
-          Column(
-            children: [
-              BigText(
-                text: 'India',
-                color: Colors.white,
-                size: 30,
-                fontWeight: FontWeight.w800,
-              ),
-              Row(
-                children: [
-                  SmallText(
-                    size: 15,
-                    text: 'Malappuram',
-                    color: Colors.white,
-                  ),
-                  const Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.white,
-                  )
-                ],
-              ),
-            ],
+          BigText(
+            text: 'Flavour Fleet',
+            color: Colors.white,
+            size: 25,
+            fontWeight: FontWeight.w800,
           ),
           GestureDetector(
             onTap: () {

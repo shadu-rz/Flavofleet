@@ -121,16 +121,11 @@ class RecommendedProductListWidget extends StatelessWidget {
                                         text: 'Normal',
                                         iconColor: Colors.orangeAccent,
                                       ),
+                                        SizedBox(width: Dimensions.width20),
                                       IconAndTextWidget(
                                         icon: Icons.location_on,
                                         text: '${snap['distance']} Km',
                                         iconColor: Colors.deepOrangeAccent,
-                                      ),
-                                      const SizedBox(width: 10),
-                                      const IconAndTextWidget(
-                                        icon: Icons.access_time_filled_rounded,
-                                        text: '32 min',
-                                        iconColor: Colors.brown,
                                       ),
                                     ],
                                   )
