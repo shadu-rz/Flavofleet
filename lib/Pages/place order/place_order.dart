@@ -143,7 +143,7 @@ class PlaceOrder extends StatelessWidget {
           GestureDetector(
             onTap: () async {
               if (isCart) {
-                await FirebaseMethods().cartToOrder();
+                await FirebaseMethods().cartToOrder(snap['id']);
                 await FirebaseMethods().clearCart();
                 await FirebaseMethods().getCartDetails();
                 
@@ -153,6 +153,7 @@ class PlaceOrder extends StatelessWidget {
               } else {
                 String id = const Uuid().v1();
                 OrderModel order = OrderModel(
+                  selectedAddress: snap['id'],
                   delivered: false,
                   orderRecived: true,
                   outOfDelivery: false,

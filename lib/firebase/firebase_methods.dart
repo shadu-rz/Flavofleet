@@ -170,26 +170,26 @@ class FirebaseMethods extends GetxController {
   //ADD ADDRESS
 
   Future<void> addAddress(AddressModel address) async {
-
+    
     try {
       await firestore
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('delivery_address')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(address.id)
           .set(address.toJson());
     } catch (e) {
       log(e.toString());
     }
   }
   // delete address
-   Future<void> deleteAddress() async {
+   Future<void> deleteAddress(String id) async {
     try {
       DocumentReference addressRef = firestore
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('delivery_address')
-        .doc(FirebaseAuth.instance.currentUser!.uid);
+        .doc(id);
     await addressRef.delete();
     } catch (e) {
       log(e.toString());
@@ -198,7 +198,7 @@ class FirebaseMethods extends GetxController {
 
   // add to order from cart
 
-  Future<void> cartToOrder() async {
+  Future<void> cartToOrder(String selectedAddress) async {
     try {
       final CollectionReference sourceCollectionRef = firestore
           .collection('users')
@@ -213,7 +213,9 @@ class FirebaseMethods extends GetxController {
       log(snap.docs.length.toString());
 
       for (var element in snap.docs) {
+
         String id = const Uuid().v1();
+
         OrderModel order = OrderModel(
           delivered: false,
           orderRecived: true,
@@ -225,6 +227,8 @@ class FirebaseMethods extends GetxController {
           image: element['image'],
           productId: id,
           uId: element['uId'],
+          selectedAddress: selectedAddress,
+          itemCount: element['itemCount'],
         );
         destinationCollectionRef.doc(id).set(order.toJson());
       }
@@ -261,6 +265,7 @@ class FirebaseMethods extends GetxController {
           .collection('favorite')
           .doc(favModel.productId)
           .set(favModel.toJson());
+          
       showCustomSnackBar('Added to favorite successfull',
           title: 'Favorite', color: Colors.green, position: SnackPosition.BOTTOM);
     } catch (e) {

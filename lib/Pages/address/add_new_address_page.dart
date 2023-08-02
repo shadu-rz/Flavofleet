@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
+import 'package:uuid/uuid.dart';
 
 class AddAddressPage extends StatefulWidget {
   final Map<String, dynamic>? productSnap;
@@ -49,7 +50,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
             child: SmallText(
               text: 'Name',
               size: 15,
-              color: Colors.grey,
+              color: AppColors.mainBlackColor,
             ),
           ),
           Container(
@@ -64,8 +65,11 @@ class _AddAddressPageState extends State<AddAddressPage> {
           SizedBox(height: Dimensions.height20),
           Padding(
             padding: EdgeInsets.only(left: Dimensions.width20),
-            child:
-                SmallText(text: 'contact number', size: 15, color: Colors.grey),
+            child: SmallText(
+              text: 'contact number',
+              size: 15,
+              color: AppColors.mainBlackColor,
+            ),
           ),
           Container(
             margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
@@ -82,7 +86,11 @@ class _AddAddressPageState extends State<AddAddressPage> {
           ),
           Padding(
             padding: EdgeInsets.only(left: Dimensions.width20),
-            child: SmallText(text: 'Address', size: 15, color: Colors.grey),
+            child: SmallText(
+              text: 'Address',
+              size: 15,
+              color: AppColors.mainBlackColor,
+            ),
           ),
           Container(
             margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
@@ -102,7 +110,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
             child: SmallText(
               text: 'pincode',
               size: 15,
-              color: Colors.grey,
+              color: AppColors.mainBlackColor,
             ),
           ),
           Container(
@@ -118,19 +126,18 @@ class _AddAddressPageState extends State<AddAddressPage> {
           const Spacer(),
           GestureDetector(
             onTap: () async {
+              String id = const Uuid().v1();
               AddressModel addressModel = AddressModel(
                 name: nameController.text,
                 address: addressController.text,
                 phone: phoneController.text,
                 pincode: pincodeController.text,
+                id: id,
               );
+
               await FirebaseMethods().addAddress(addressModel);
-              navigator!.push(MaterialPageRoute(
-                builder: (context) => SelectAddress(
-                  isCart: true,
-                  productSnap: widget.productSnap,
-                ),
-              ));
+
+              navigator!.pop();
             },
             child: Container(
               margin: EdgeInsets.only(

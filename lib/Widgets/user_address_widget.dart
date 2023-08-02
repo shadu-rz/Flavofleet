@@ -28,24 +28,47 @@ class UserAddressWidget extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             width: double.maxFinite,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SmallText(
-                  text: snap['name'].toString().toUpperCase(),
-                  color: Colors.black,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SmallText(
+                          text: snap['name'].toString().toUpperCase(),
+                          color: Colors.black,
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          "${snap['address'].toString().toUpperCase()}, ${snap['pincode']}",
+                          style:const TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        SmallText(
+                          text: "phone number : ${snap['phone']}",
+                          color: Colors.black,
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        await _showMyDialog(context, snap);
+                      },
+                      icon: const Icon(
+                        Icons.delete_outline_rounded,
+                        color: Colors.red,
+                        size: 22,
+                      ),
+                    )
+                  ],
                 ),
-                const SizedBox(height: 10),
-                SmallText(
-                  text:
-                      "${snap['address'].toString().toUpperCase()}, ${snap['pincode']}",
-                  color: Colors.black,
-                ),
-                const SizedBox(height: 10),
-                SmallText(
-                  text: "phone number : ${snap['phone']}",
-                  color: Colors.black,
-                ),
-                const SizedBox(height: 10),
                 GestureDetector(
                   onTap: () {
                     navigator!.push(MaterialPageRoute(
@@ -75,20 +98,13 @@ class UserAddressWidget extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: Dimensions.screenHeight / 1.8),
-          CircleAvatar(
-            backgroundColor: AppColors.mainColor,
-            child: IconButton(
-                onPressed: () async {
-                  await _showMyDialog(context, snap);
-                },
-                icon: const Icon(Icons.delete,color: Colors.white70)),
-          )
         ],
       ),
     );
   }
 }
+
+// SizedBox(height: Dimensions.screenHeight / 1.8),
 
 Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
   return showDialog(
@@ -112,7 +128,7 @@ Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () async {
-                await FirebaseMethods().deleteAddress();
+                await FirebaseMethods().deleteAddress(snap['id']);
                 navigator!.pop();
               },
             ),

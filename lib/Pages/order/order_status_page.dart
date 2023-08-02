@@ -48,32 +48,37 @@ class OrderStatusPage extends StatelessWidget {
           DateTime date = (snap!['date'] as Timestamp).toDate();
           return Column(
             children: [
-              SizedBox(
-                width: Dimensions.screenWidth,
-                height: Dimensions.height45 * 2,
-                // color: Colors.grey,
-                child: Row(
-                  children: [
-                    SizedBox(width: Dimensions.width20 + 5),
-                    BigText(text: snap['title'].toString().toUpperCase()),
-                    const Spacer(),
-                    Container(
-                      height: 90,
-                      width: 90,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                            snap['image'],
-                          ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  BigText(text: snap['title'].toString().toUpperCase()),
+                  Column(
+                    children: [
+                      // BigText(text: 'price 12'),
+                      snap['itemCount'] != null
+                      ? BigText(
+                          text: "${snap['itemCount'].toString()} items",
+                          size: 15,
+                          color: Colors.grey,
+                        )
+                      : const SizedBox(),
+
+                    ],
+                  ),
+                  Container(
+                    height: 90,
+                    width: 90,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius20),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                          snap['image'],
                         ),
                       ),
                     ),
-                    SizedBox(width: Dimensions.height10),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(height: Dimensions.height20),
               OrderStatusWidget(
@@ -100,7 +105,7 @@ class OrderStatusPage extends StatelessWidget {
                       .collection('users')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
                       .collection('delivery_address')
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .doc(snap['selectedAddress'])
                       .get(),
                   builder: (context,
                       AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
@@ -130,8 +135,8 @@ class OrderStatusPage extends StatelessWidget {
                         horizontal: 10,
                         vertical: 10,
                       ),
-                      margin:  EdgeInsets.symmetric(
-                        horizontal: Dimensions.height20+5,
+                      margin: EdgeInsets.symmetric(
+                        horizontal: Dimensions.height20 + 5,
                         vertical: 10,
                       ),
                       width: double.maxFinite,

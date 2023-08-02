@@ -216,7 +216,6 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
         ),
       ));
       log('success');
-      
     } on Exception catch (e) {
 
       if (e is StripeException) {
