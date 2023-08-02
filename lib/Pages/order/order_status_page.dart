@@ -46,6 +46,7 @@ class OrderStatusPage extends StatelessWidget {
           }
           Map<String, dynamic>? snap = snapshot.data!.data();
           DateTime date = (snap!['date'] as Timestamp).toDate();
+          String amount = calculateTotalPrice(snap['itemCount'] ?? 1, snap['price']);
           return Column(
             children: [
               Row(
@@ -54,15 +55,19 @@ class OrderStatusPage extends StatelessWidget {
                   BigText(text: snap['title'].toString().toUpperCase()),
                   Column(
                     children: [
-                      // BigText(text: 'price 12'),
+                      
+                      BigText(
+                        text: "₹ ${amount}",
+                        size: 20,
+                        color: Colors.green,
+                      ),
                       snap['itemCount'] != null
-                      ? BigText(
-                          text: "${snap['itemCount'].toString()} items",
-                          size: 15,
-                          color: Colors.grey,
-                        )
-                      : const SizedBox(),
-
+                          ? BigText(
+                              text: "${snap['itemCount'].toString()} items",
+                              size: 16,
+                              color: Colors.grey,
+                            )
+                          : const SizedBox(),
                     ],
                   ),
                   Container(
@@ -174,5 +179,10 @@ class OrderStatusPage extends StatelessWidget {
         },
       ),
     );
+  }
+  calculateTotalPrice(num itemCount,num price ) {
+    num totalPrice;
+    totalPrice = price*itemCount;
+    return totalPrice.floor().toString();
   }
 }
