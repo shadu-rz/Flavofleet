@@ -36,50 +36,8 @@ class AppColumn extends StatelessWidget {
               text: "₹${snap['price']}",
               size: Dimensions.font20,
             ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () async {
-                if (await FirebaseMethods().alreadyExistInFavorite(
-                    FirebaseAuth.instance.currentUser!.uid, snap['title'])) {
-                  showCustomSnackBar(
-                    'Already exist in the favorites',
-                    title: 'Existing',
-                    color: Colors.red,
-                  );
-                } else {
-                  String id = const Uuid().v1();
-                  FavoriteModel product = FavoriteModel(
-                    title: snap['title'],
-                    price: double.parse(snap['price']),
-                    image: snap['image'],
-                    description: snap['description'],
-                    distance: double.parse(snap['distance']),
-                    rating: double.parse(snap['rating']),
-                    star: double.parse(snap['star']),
-                    uId: FirebaseAuth.instance.currentUser!.uid,
-                    productId: id,
-                  );
-                  await FirebaseMethods().addToFav(product);
-                  log('favoriteeeeeeee');
-                }
-              },
-              child: Container(
-                padding: EdgeInsets.only(
-                  top: Dimensions.height10,
-                  bottom: Dimensions.height10,
-                  right: Dimensions.width20 / 2,
-                  left: Dimensions.width20 / 2,
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.radius15),
-                    color: Colors.grey[200]),
-                child: Icon( Icons.favorite_border_outlined,
-                    color: AppColors.mainColor,
-                    size: Dimensions.iconSize24,
-                  ),
-                
-              ),
-            ),
+            
+           
           ],
         ),
         SizedBox(height: Dimensions.height10),

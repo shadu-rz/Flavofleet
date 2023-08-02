@@ -32,8 +32,6 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
   final CartController countController = Get.find();
 
   @override
-
-
   @override
   void dispose() {
     countController.count = RxInt(1);
@@ -53,34 +51,22 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
               top: Dimensions.height10,
               bottom: Dimensions.height10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () {
-                  countController.decrement();
-                },
-                child: const AppIcon(
-                  icon: Icons.remove,
-                  backgroundColor: AppColors.mainColor,
-                  iconColor: Colors.white,
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.width10,
+                  vertical: Dimensions.width10 / 2,
                 ),
-              ),
-              Obx(
-                () => BigText(
-                  text:
-                      "₹${widget.snap['price']}  X  ${countController.count.value.toString()}",
-                  color: AppColors.mainBlackColor,
-                  size: Dimensions.font26,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  countController.increment();
-                },
-                child: const AppIcon(
-                  icon: Icons.add,
-                  backgroundColor: AppColors.mainColor,
-                  iconColor: Colors.white,
+                
+                child: CircleAvatar(
+                  backgroundColor: Color.fromARGB(86, 116, 185, 181),
+                  radius: 40,
+                  child: BigText(
+                    text: "₹ ${widget.snap['price']}",
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                    size: Dimensions.font26,
+                  ),
                 ),
               ),
             ],
@@ -108,8 +94,8 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                   if (await FirebaseMethods().alreadyExistInFavorite(
                       FirebaseAuth.instance.currentUser!.uid,
                       widget.snap['title'])) {
-                        
-                   showCustomSnackBar('FAVORITE',title: 'Already exist in',color: Colors.red);
+                    showCustomSnackBar('FAVORITE',
+                        title: 'Already exist in', color: Colors.red);
                   } else {
                     String id = const Uuid().v1();
                     FavoriteModel product = FavoriteModel(
@@ -138,11 +124,11 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                       borderRadius: BorderRadius.circular(Dimensions.radius15),
                       color: const Color.fromRGBO(255, 255, 255, 1)),
                   child: AppIcon(
-                      icon: Icons.favorite_border ,// fav icon
-                      iconColor: AppColors.mainColor,
-                      iconSize: Dimensions.iconSize24,
-                      size: Dimensions.iconSize24,
-                    ),
+                    icon: Icons.favorite_border, // fav icon
+                    iconColor: AppColors.mainColor,
+                    iconSize: Dimensions.iconSize24,
+                    size: Dimensions.iconSize24,
+                  ),
                 ),
               ),
               GestureDetector(
@@ -171,8 +157,10 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                   }
                 },
                 child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.width10,
+                  ),
                   height: Dimensions.height45,
-                  width: Dimensions.height10 * 10,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius15),
                     color: AppColors.mainColor,
@@ -217,6 +205,4 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
       ],
     );
   }
-
-
 }

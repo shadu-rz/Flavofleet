@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/accounts/logout_page.dart';
+import 'package:flavour_fleet_main/Pages/settings/settings_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/account_widget.dart';
@@ -38,27 +39,42 @@ class _AccountPageState extends State<AccountPage> {
             onPressed: () {
               navigator!.pop();
             },
-            icon:const Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             )),
         title: Center(
-            child: BigText(
-          text: 'Account',
-          size: 24,
-          color: Colors.black,
-        )),
+          child: BigText(
+            text: 'Account',
+            size: 24,
+            color: Colors.black,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              navigator!.push(
+                MaterialPageRoute(
+                  builder: (context) => const SettingsPage(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.settings,
+            ),
+          )
+        ],
         backgroundColor: Colors.white,
       ),
       body: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
-              // image: DecorationImage(
-              //   image: AssetImage('assets/image/food8.jpg'),
-              //   fit: BoxFit.cover,
-              // ),
-            ),
+                // image: DecorationImage(
+                //   image: AssetImage('assets/image/food8.jpg'),
+                //   fit: BoxFit.cover,
+                // ),
+                ),
             // color: Colors.amber,
           ),
           FutureBuilder(
@@ -122,9 +138,9 @@ class _AccountPageState extends State<AccountPage> {
                         ),
                       ),
                       SizedBox(
-                        height: Dimensions.height10*5,
+                        height: Dimensions.height10 * 5,
                       ),
-                      
+
                       // GestureDetector(
                       //   onTap: () =>
                       //       Navigator.of(context).push(MaterialPageRoute(
@@ -227,28 +243,10 @@ class _AccountPageState extends State<AccountPage> {
                             ),
 
                             //messages
-                            GestureDetector(
-                              onTap: () {
-                                _showMyDialog();
-                              },
-                              child: AccountWidget(
-                                containColor: Colors.white60,
-                                appIcon: AppIcon(
-                                  icon: Icons.logout,
-                                  backgroundColor: Colors.deepOrangeAccent,
-                                  iconColor: Colors.white,
-                                  size: Dimensions.height10 * 5,
-                                  iconSize: Dimensions.height10 * 5 / 2,
-                                ),
-                                bigText: BigText(
-                                  text: 'Logout',
-                                  size: Dimensions.screenWidth / 20,
-                                ),
-                              ),
-                            ),
+                           
                             const Spacer(),
                             SmallText(text: 'FlavorFleet   v1.0'),
-                             SizedBox(height: Dimensions.height20)
+                            SizedBox(height: Dimensions.height20)
                           ],
                         ),
                       )
@@ -269,36 +267,5 @@ class _AccountPageState extends State<AccountPage> {
     return snap;
   }
 
-  Future<void> _showMyDialog() async {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(
-              'Are you sure want to log out?',
-              style: TextStyle(
-                fontSize: Dimensions.font20 - 3,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            actions: [
-              TextButton(
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: const Text('Confirm'),
-                onPressed: () {
-                  navigator!.pushReplacement(MaterialPageRoute(
-                    builder: (context) => const LogoutPage(),
-                  ));
-                  return signUserOut();
-                },
-              ),
-            ],
-          );
-        });
-  }
+
 }

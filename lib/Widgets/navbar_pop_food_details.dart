@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
@@ -7,6 +9,7 @@ import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
+import 'package:flavour_fleet_main/model/favorite_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
@@ -52,40 +55,49 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            height: Dimensions.height45,
-            width: Dimensions.height10 * 8,
-            decoration: BoxDecoration(
+          GestureDetector(
+            onTap: () async {
+              if (await FirebaseMethods().alreadyExistInFavorite(
+                  FirebaseAuth.instance.currentUser!.uid,
+                  widget.snap['title'])) {
+                showCustomSnackBar(
+                  'Already exist in the favorites',
+                  title: 'Existing',
+                  color: Colors.red,
+                );
+              } else {
+                String id = const Uuid().v1();
+                FavoriteModel product = FavoriteModel(
+                  title: widget.snap['title'],
+                  price: double.parse(widget.snap['price']),
+                  image: widget.snap['image'],
+                  description: widget.snap['description'],
+                  distance: double.parse(widget.snap['distance']),
+                  rating: double.parse(widget.snap['rating']),
+                  star: double.parse(widget.snap['star']),
+                  uId: FirebaseAuth.instance.currentUser!.uid,
+                  productId: id,
+                );
+                await FirebaseMethods().addToFav(product);
+                log('favoriteeeeeeee');
+              }
+            },
+            child: Container(
+              padding: EdgeInsets.only(
+                top: Dimensions.height10,
+                bottom: Dimensions.height10,
+                right: Dimensions.width20 / 2,
+                left: Dimensions.width20 / 2,
+              ),
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius15),
-                color: Colors.white),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    countController.decrement();
-                  },
-                  child: const Icon(
-                    Icons.remove,
-                    color: Colors.grey,
-                  ),
-                ),
-                Obx(
-                  () => BigText(
-                    text: countController.count.value.toString(),
-                    size: Dimensions.font20,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    countController.increment();
-                  },
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.grey,
-                  ),
-                )
-              ],
+                color: Colors.white,
+              ),
+              child: Icon(
+                Icons.favorite_border_outlined,
+                color: AppColors.mainColor,
+                size: Dimensions.iconSize24,
+              ),
             ),
           ),
           GestureDetector(
@@ -137,14 +149,14 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
             ),
           ),
           GestureDetector(
-            onTap: ()  {
-                  navigator!.push(MaterialPageRoute(
-                    builder: (context) => SelectAddress( 
-                      isCart: false,
-                      productSnap: widget.snap,
-                     ),
-                  ));
-                },
+            onTap: () {
+              navigator!.push(MaterialPageRoute(
+                builder: (context) => SelectAddress(
+                  isCart: false,
+                  productSnap: widget.snap,
+                ),
+              ));
+            },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
               decoration: BoxDecoration(
