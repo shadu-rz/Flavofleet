@@ -51,6 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Center(
                 child: BigText(
                   text: 'Privacy and policy',
+                  size: 18,
                   color: const Color.fromARGB(255, 59, 105, 102),
                 ),
               ),
@@ -78,6 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
               child: Center(
                 child: BigText(
                   text: 'Terms and conditions',
+                  size: 18,
                   color: const Color.fromARGB(255, 59, 105, 102),
                 ),
               ),
@@ -101,6 +103,7 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Center(
               child: BigText(
                 text: 'About us',
+                size: 18,
                 color: const Color.fromARGB(255, 59, 105, 102),
               ),
             ),
