@@ -57,7 +57,7 @@ class OrderStatusPage extends StatelessWidget {
                     children: [
                       
                       BigText(
-                        text: "₹ ${amount}",
+                        text: "₹ $amount",
                         size: 20,
                         color: Colors.green,
                       ),

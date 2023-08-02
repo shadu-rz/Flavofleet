@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/accounts/logout_page.dart';
+
 import 'package:flavour_fleet_main/Pages/settings/settings_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';

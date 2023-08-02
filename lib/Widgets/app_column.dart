@@ -1,11 +1,6 @@
-import 'dart:developer';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
+
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
-import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
-import 'package:flavour_fleet_main/model/favorite_model.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 import 'Utils/colors.dart';
 import 'Utils/diamensions.dart';
 import 'big_text.dart';
