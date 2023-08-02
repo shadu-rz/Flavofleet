@@ -58,7 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           GestureDetector(
             onTap: () {
-                    // navigator!.push(MaterialPageRoute(builder: (context) => const TermsAndConditionsPage(),));
+                    navigator!.push(MaterialPageRoute(builder: (context) => const TermsAndConditionsPage(),));
             },
             child: Container(
               width: double.maxFinite,
