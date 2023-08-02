@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/accounts/logout_page.dart';
+import 'package:flavour_fleet_main/Pages/settings/privacy%20policy/privacy_policy.dart';
+import 'package:flavour_fleet_main/Pages/settings/terms%20and%20conditions/terms_and_conditions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/big_text.dart';
@@ -27,47 +29,57 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       body: Column(
         children: [
-          Container(
-            width: double.maxFinite,
-            margin: EdgeInsets.only(
-              left: Dimensions.height20,
-              right: Dimensions.height20,
-              top: Dimensions.height20,
-            ),
-            padding: EdgeInsets.symmetric(vertical: Dimensions.height10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius15),
-              border: Border.all(
-                width: 1,
-                color: AppColors.mainColor,
+          GestureDetector(
+            onTap: () {
+              navigator!.push(MaterialPageRoute(builder: (context) => const PrivacyPolicyPage(),));
+            },
+            child: Container(
+              width: double.maxFinite,
+              margin: EdgeInsets.only(
+                left: Dimensions.height20,
+                right: Dimensions.height20,
+                top: Dimensions.height20,
               ),
-            ),
-            child: Center(
-              child: BigText(
-                text: 'Privacy and policy',
-                color: const Color.fromARGB(255, 59, 105, 102),
+              padding: EdgeInsets.symmetric(vertical: Dimensions.height10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius15),
+                border: Border.all(
+                  width: 1,
+                  color: AppColors.mainColor,
+                ),
+              ),
+              child: Center(
+                child: BigText(
+                  text: 'Privacy and policy',
+                  color: const Color.fromARGB(255, 59, 105, 102),
+                ),
               ),
             ),
           ),
-          Container(
-            width: double.maxFinite,
-            margin: EdgeInsets.only(
-              left: Dimensions.height20,
-              right: Dimensions.height20,
-              top: Dimensions.height20,
-            ),
-            padding: EdgeInsets.symmetric(vertical: Dimensions.height10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius15),
-              border: Border.all(
-                width: 1,
-                color: AppColors.mainColor,
+          GestureDetector(
+            onTap: () {
+                    // navigator!.push(MaterialPageRoute(builder: (context) => const TermsAndConditionsPage(),));
+            },
+            child: Container(
+              width: double.maxFinite,
+              margin: EdgeInsets.only(
+                left: Dimensions.height20,
+                right: Dimensions.height20,
+                top: Dimensions.height20,
               ),
-            ),
-            child: Center(
-              child: BigText(
-                text: 'Terms and conditions',
-                color: const Color.fromARGB(255, 59, 105, 102),
+              padding: EdgeInsets.symmetric(vertical: Dimensions.height10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius15),
+                border: Border.all(
+                  width: 1,
+                  color: AppColors.mainColor,
+                ),
+              ),
+              child: Center(
+                child: BigText(
+                  text: 'Terms and conditions',
+                  color: const Color.fromARGB(255, 59, 105, 102),
+                ),
               ),
             ),
           ),
