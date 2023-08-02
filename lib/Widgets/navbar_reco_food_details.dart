@@ -59,14 +59,10 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                   vertical: Dimensions.width10 / 2,
                 ),
                 
-                child: CircleAvatar(
-                  backgroundColor: Color.fromARGB(86, 116, 185, 181),
-                  radius: 40,
-                  child: BigText(
-                    text: "₹ ${widget.snap['price']}",
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    size: Dimensions.font26,
-                  ),
+                child: BigText(
+                  text: "₹ ${widget.snap['price']}",
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  size: Dimensions.font26,
                 ),
               ),
             ],
