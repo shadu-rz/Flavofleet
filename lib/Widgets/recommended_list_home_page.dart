@@ -37,7 +37,8 @@ class RecommendedProductListWidget extends StatelessWidget {
               }
 
               return ListView.separated(
-                  physics: const BouncingScrollPhysics(),
+                  // physics: const AlwaysScrollableScrollPhysics(),
+                  
                   separatorBuilder: (context, index) {
                     return Container(
                       height: Dimensions.height10,
@@ -48,6 +49,7 @@ class RecommendedProductListWidget extends StatelessWidget {
                     var snap = snapshot.data!.docs[index].data();
 
                     return Container(
+                      
                       margin: EdgeInsets.only(
                         left: Dimensions.width20,
                         right: Dimensions.width10,

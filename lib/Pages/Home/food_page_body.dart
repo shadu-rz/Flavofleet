@@ -38,14 +38,14 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         children: [
           //Slider Section
           HomePageHorSlideWidget(pageController: pageController),
-
+      
           SizedBox(height: Dimensions.height10),
-
+      
           //Recommended title widget
           const RecommedeTitleWidget(),
-
+      
           SizedBox(height: Dimensions.height10),
-
+      
           //recomended food list of food and images
           const RecommendedProductListWidget()
         ],

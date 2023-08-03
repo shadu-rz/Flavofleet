@@ -35,7 +35,7 @@ class HomePageHorSlideWidget extends StatelessWidget {
 
             return PageView.builder(
               scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               controller: pageController,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {

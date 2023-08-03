@@ -1,4 +1,3 @@
-
 import 'package:flavour_fleet_main/Widgets/home_screen_appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -17,17 +16,19 @@ class _MainFoodPageState extends State<MainFoodPage> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/image/food8.jpg"),
-                fit: BoxFit.cover)),
+          image: DecorationImage(
+            image: AssetImage("assets/image/food8.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: const Column(
           children: [
-            SafeArea( 
+            SafeArea(
               //showing the header
               child: HomeScreenAppBar(),
             ),
             //showing the body
-             Expanded(
+            Expanded(
                 child: SingleChildScrollView(
               child: FoodPageBody(),
             ))
@@ -37,4 +38,3 @@ class _MainFoodPageState extends State<MainFoodPage> {
     );
   }
 }
-
