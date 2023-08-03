@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:flavour_fleet_main/Pages/place%20order/place_order.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
@@ -20,8 +21,8 @@ class PaymentMethodSelect extends StatefulWidget {
   PaymentMethodSelect({
     super.key,
     required this.snap,
-     this.productSnap,
-     required this.isCart,
+    this.productSnap,
+    required this.isCart,
   });
 
   @override
@@ -32,8 +33,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
   Map<String, dynamic>? paymentIntentData;
 
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
-
-  late RxNum total = firebase.totalPrice;
+  
 
   RxBool codChecked = false.obs;
   RxBool upiChecked = false.obs;
@@ -130,7 +130,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SmallText(
-                text: 'total amount : ₹ $total',
+                text: 'total amount : ₹ ${ firebase.totalPrice}',
                 color: Colors.red,
                 size: 15,
               ),
@@ -142,7 +142,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
           const Spacer(),
           GestureDetector(
             onTap: () async {
-              String amount = total.floor().toString();
+              String amount =  firebase.totalPrice.floor().toString();
               if (upiChecked.value) {
                 await makePayment(amount: amount, currency: "INR");
                 log('card Payment called');
@@ -197,8 +197,6 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
           customerEphemeralKeySecret: paymentIntentData!['ephemeralKey'],
         ));
         await displayPaymentSheet();
-        
-      
       }
     } catch (e, s) {
       log('exception:$e$s');
@@ -208,16 +206,17 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
   displayPaymentSheet() async {
     try {
       await Stripe.instance.presentPaymentSheet();
-        navigator!.push(MaterialPageRoute(
-        builder: (context) => PlaceOrder(
-          isCart: widget.isCart,
-          productSnap: widget.productSnap!,
-          snap: widget.snap,
+      navigator!.push(
+        MaterialPageRoute(
+          builder: (context) => PlaceOrder(
+            isCart: widget.isCart,
+            productSnap: widget.productSnap!,
+            snap: widget.snap,
+          ),
         ),
-      ));
+      );
       log('success');
     } on Exception catch (e) {
-
       if (e is StripeException) {
         log("Error from Stripe: ${e.error.localizedMessage}");
       } else {
