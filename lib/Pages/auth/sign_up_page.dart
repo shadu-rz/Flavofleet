@@ -2,8 +2,8 @@
 import 'package:flavour_fleet_main/Pages/auth/auth_page.dart';
 import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/app_text_field.dart';
-import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/Utils/app_text_field.dart';
+import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
 import 'package:flavour_fleet_main/firebase/auth/sign_in_with_google.dart';
 import 'package:flavour_fleet_main/firebase/auth/sign_up.dart';
 import 'package:flutter/gestures.dart';

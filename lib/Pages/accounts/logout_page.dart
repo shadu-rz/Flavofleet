@@ -1,7 +1,7 @@
 import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

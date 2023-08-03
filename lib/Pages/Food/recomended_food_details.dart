@@ -1,8 +1,8 @@
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/appbar_and_image_reco_food_details.dart';
+import 'package:flavour_fleet_main/Widgets/recommended%20food%20widgets/appbar_and_image_reco_food_details.dart';
 
 import 'package:flavour_fleet_main/Widgets/expandable_text_widget.dart';
-import 'package:flavour_fleet_main/Widgets/navbar_reco_food_details.dart';
+import 'package:flavour_fleet_main/Widgets/recommended%20food%20widgets/navbar_reco_food_details.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,14 +1,14 @@
 
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
-import 'Utils/colors.dart';
-import 'Utils/diamensions.dart';
-import 'big_text.dart';
-import 'icon_and_text.dart';
+import '../Utils/colors.dart';
+import '../Utils/diamensions.dart';
+import '../Utils/big_text.dart';
+import '../icon_and_text.dart';
 
-class AppColumn extends StatelessWidget {
+class PopularFoodPageWidget extends StatelessWidget {
   final String text;
-  const AppColumn({
+  const PopularFoodPageWidget({
     super.key,
     required this.text,
     required this.snap,

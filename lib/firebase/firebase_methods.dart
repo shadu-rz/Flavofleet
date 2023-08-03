@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Widgets/show_custom_snackbar.dart';
+import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/model/address_model.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
 import 'package:flavour_fleet_main/model/favorite_model.dart';

@@ -1,7 +1,7 @@
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/home_page_hor_slide_widget.dart';
-import 'package:flavour_fleet_main/Widgets/recommended_list_home_page.dart';
-import 'package:flavour_fleet_main/Widgets/recommended_title_widget.dart';
+import 'package:flavour_fleet_main/Widgets/home%20page%20widgets/home_page_hor_slide_widget.dart';
+import 'package:flavour_fleet_main/Widgets/recommended%20food%20widgets/recommended_list_home_page.dart';
+import 'package:flavour_fleet_main/Widgets/recommended%20food%20widgets/recommended_title_widget.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

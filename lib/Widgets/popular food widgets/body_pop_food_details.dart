@@ -1,6 +1,6 @@
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/app_column.dart';
-import 'package:flavour_fleet_main/Widgets/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/popular%20food%20widgets/popular_food_page_widget.dart';
+import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/expandable_text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +32,7 @@ class BodyPopFoodDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppColumn(
+            PopularFoodPageWidget(
               text: snap['title'],
               snap: snap,
             ),
@@ -54,4 +54,3 @@ class BodyPopFoodDetails extends StatelessWidget {
     );
   }
 }
-
