@@ -24,13 +24,9 @@ class SelectAddress extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          TextButton(
-              onPressed: () {
-                navigator!.pop();
-              },
-              child: BigText(text: 'cancel'))
-        ],
+        centerTitle: true,
+        title: BigText(text: 'Delivery address'),
+        
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance

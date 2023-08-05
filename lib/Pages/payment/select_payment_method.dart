@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flavour_fleet_main/Pages/place%20order/place_order.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+
 import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
@@ -41,13 +41,8 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          TextButton(
-              onPressed: () {
-                navigator!.pop();
-              },
-              child: BigText(text: 'cancel'))
-        ],
+    
+    
       ),
       body: Column(
         children: [

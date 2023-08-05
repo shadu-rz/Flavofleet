@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
+
 import 'package:flavour_fleet_main/Pages/order/ordered_successfully.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
@@ -36,19 +36,6 @@ class PlaceOrder extends StatelessWidget {
           color: AppColors.mainBlackColor,
           size: 18,
         ),
-        actions: [
-          TextButton(
-              onPressed: () {
-                navigator!.push(MaterialPageRoute(
-                  builder: (context) => const  HomePage(),
-                ));
-              },
-              child: SmallText(
-                text: 'Go to home',
-                color: AppColors.mainBlackColor,
-                size: 13,
-              ))
-        ],
       ),
       body: Column(
         children: [
@@ -146,7 +133,7 @@ class PlaceOrder extends StatelessWidget {
                 await FirebaseMethods().cartToOrder(snap['id']);
                 await FirebaseMethods().clearCart();
                 await FirebaseMethods().getCartDetails();
-                
+
                 navigator!.push(MaterialPageRoute(
                   builder: (context) => const OrderdSuccessfully(),
                 ));
@@ -176,15 +163,17 @@ class PlaceOrder extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all()),
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               height: 40,
               width: double.maxFinite,
               child: Center(
-                  child: SmallText(
-                text: 'Place your order',
-                color: AppColors.mainBlackColor,
-              )),
+                child: BigText(
+                  text: 'Place your order',
+                  size: 18,
+                  color: AppColors.mainBlackColor,
+                ),
+              ),
             ),
           ),
         ],
