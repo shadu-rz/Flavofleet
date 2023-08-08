@@ -47,8 +47,13 @@ class FirebaseMethods extends GetxController {
           .collection('cart')
           .doc(cartModel.productId)
           .set(cartModel.toJson());
-      showCustomSnackBar('Added to Cart successfull',
-          title: 'cart', color: Colors.green, position: SnackPosition.BOTTOM);
+      showCustomSnackBar(
+        'You can see it in cart page',
+        title: 'Added to cart',
+        color: Colors.green,
+        position: SnackPosition.BOTTOM,
+        duration: 2500,
+      );
     } catch (e) {
       log(e.toString());
     }
@@ -93,14 +98,12 @@ class FirebaseMethods extends GetxController {
     return false;
   }
 
-
-
   // Get cart details
 
   RxInt cartLength = RxInt(1);
   RxNum totalPrice = RxNum(0);
-  
-    Future<void> getSelectedProduct(String collection, String productId) async {
+
+  Future<void> getSelectedProduct(String collection, String productId) async {
     totalPrice.value = 0;
     try {
       DocumentSnapshot<Map<String, dynamic>> snap =
@@ -112,7 +115,6 @@ class FirebaseMethods extends GetxController {
   }
 
   Future<void> getCartDetails() async {
-
     totalPrice.value = 0;
     try {
       QuerySnapshot<Map<String, dynamic>> snap = await firestore
@@ -170,7 +172,6 @@ class FirebaseMethods extends GetxController {
   //ADD ADDRESS
 
   Future<void> addAddress(AddressModel address) async {
-    
     try {
       await firestore
           .collection('users')
@@ -182,16 +183,17 @@ class FirebaseMethods extends GetxController {
       log(e.toString());
     }
   }
+
   // delete address
-   Future<void> deleteAddress(String id) async {
+  Future<void> deleteAddress(String id) async {
     try {
       DocumentReference addressRef = firestore
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('delivery_address')
-        .doc(id);
-    await addressRef.delete();
-    navigator!.pop();
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('delivery_address')
+          .doc(id);
+      await addressRef.delete();
+      navigator!.pop();
     } catch (e) {
       log(e.toString());
     }
@@ -214,7 +216,6 @@ class FirebaseMethods extends GetxController {
       log(snap.docs.length.toString());
 
       for (var element in snap.docs) {
-
         String id = const Uuid().v1();
 
         OrderModel order = OrderModel(
@@ -256,7 +257,7 @@ class FirebaseMethods extends GetxController {
     }
   }
 
-    // add to favorite
+  // add to favorite
 
   Future<void> addToFav(FavoriteModel favModel) async {
     try {
@@ -266,15 +267,20 @@ class FirebaseMethods extends GetxController {
           .collection('favorite')
           .doc(favModel.productId)
           .set(favModel.toJson());
-          
-      showCustomSnackBar('Added to favorite successfull',
-          title: 'Favorite', color: Colors.green, position: SnackPosition.BOTTOM);
+
+      showCustomSnackBar(
+        'You can see it in favorite page',
+        title: 'Added to favorite',
+        color: Colors.green,
+        position: SnackPosition.BOTTOM,
+        duration: 2000,
+      );
     } catch (e) {
       log(e.toString());
     }
   }
 
-    // to check is it already existing in the favorite
+  // to check is it already existing in the favorite
 
   Future<bool> alreadyExistInFavorite(String uId, String title) async {
     try {
@@ -291,12 +297,12 @@ class FirebaseMethods extends GetxController {
       }
       return false;
     } catch (e) {
-      log( "error in checking fav ${e.toString()}");
+      log("error in checking fav ${e.toString()}");
     }
     return false;
   }
 
-    // delete 1 item from favorite
+  // delete 1 item from favorite
 
   Future<void> removeItemFromFavorite(String productId) async {
     try {

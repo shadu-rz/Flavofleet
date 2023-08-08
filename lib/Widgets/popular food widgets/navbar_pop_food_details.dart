@@ -60,11 +60,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
               if (await FirebaseMethods().alreadyExistInFavorite(
                   FirebaseAuth.instance.currentUser!.uid,
                   widget.snap['title'])) {
-                showCustomSnackBar(
-                  'Already exist in the favorites',
-                  title: 'Existing',
-                  color: Colors.red,
-                );
+               
               } else {
                 String id = const Uuid().v1();
                 FavoriteModel product = FavoriteModel(
@@ -105,11 +101,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
               if (await FirebaseMethods().alreadyExistInCart(
                   FirebaseAuth.instance.currentUser!.uid,
                   widget.snap['title'])) {
-                showCustomSnackBar(
-                  'Already exist in the cart',
-                  title: 'Existing',
-                  color: Colors.red,
-                );
+                
               } else {
                 String id = const Uuid().v1();
                 CartModel product = CartModel(

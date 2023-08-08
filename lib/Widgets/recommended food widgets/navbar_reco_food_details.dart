@@ -90,8 +90,7 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                   if (await FirebaseMethods().alreadyExistInFavorite(
                       FirebaseAuth.instance.currentUser!.uid,
                       widget.snap['title'])) {
-                    showCustomSnackBar('FAVORITE',
-                        title: 'Already exist in', color: Colors.red);
+                    
                   } else {
                     String id = const Uuid().v1();
                     FavoriteModel product = FavoriteModel(
@@ -133,8 +132,8 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                     FirebaseAuth.instance.currentUser!.uid,
                     widget.snap['title'],
                   )) {
-                    showCustomSnackBar('Already exist in the cart',
-                        title: 'Existing', color: Colors.red);
+                    // showCustomSnackBar('Already exist in the cart',
+                    //     title: 'Existing', color: Colors.red);
                   } else {
                     String id = const Uuid().v1();
                     CartModel product = CartModel(

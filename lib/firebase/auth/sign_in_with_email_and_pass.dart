@@ -40,7 +40,6 @@ void signUserIn(context, String email, String password) async {
     );
   } on FirebaseAuthException catch (e) {
     Navigator.pop(context);
-    print(e.code);
     if (e.code == 'user-not-found') {
       wrongMessage(context,'User not found');
     } else if (e.code == 'wrong-password') {

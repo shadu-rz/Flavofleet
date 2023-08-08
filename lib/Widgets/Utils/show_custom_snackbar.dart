@@ -9,9 +9,10 @@ void showCustomSnackBar(
   String title = 'Error,',
   Color color = const Color.fromARGB(255, 116, 185, 181),
   SnackPosition position = SnackPosition.BOTTOM,
+  int duration =  1250,
 }) {
   Get.snackbar(
-    duration: const Duration(milliseconds: 1250),
+    duration:  Duration(milliseconds: duration),
     margin: EdgeInsets.only(
       bottom: Dimensions.height20,
       right: Dimensions.height10,
