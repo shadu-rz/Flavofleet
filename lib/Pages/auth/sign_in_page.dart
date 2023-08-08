@@ -1,4 +1,3 @@
-
 import 'package:flavour_fleet_main/Pages/auth/auth_page.dart';
 import 'package:flavour_fleet_main/Pages/auth/sign_up_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
@@ -140,7 +139,10 @@ class _SignInPageState extends State<SignInPage> {
             GestureDetector(
               onTap: () async {
                 signUserIn(
-                    context, emailController.text, passwordControllerr.text);
+                  context,
+                  emailController.text,
+                  passwordControllerr.text,
+                );
               },
               child: Container(
                 margin: EdgeInsets.only(
@@ -207,7 +209,9 @@ class _SignInPageState extends State<SignInPage> {
               onTap: () async {
                 final user = await signInWithGoogle();
                 if (user != null) {
-                  navigator!.pushReplacement(MaterialPageRoute(builder: (context) => const AuthPage(),));
+                  navigator!.pushReplacement(MaterialPageRoute(
+                    builder: (context) => const AuthPage(),
+                  ));
                 }
               },
               child: Container(

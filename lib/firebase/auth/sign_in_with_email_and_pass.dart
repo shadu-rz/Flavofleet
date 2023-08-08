@@ -3,19 +3,23 @@ import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
 import 'package:flavour_fleet_main/Pages/accounts/account_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 void signUserIn(context, String email, String password) async {
   if (email.isEmpty) {
-    showCustomSnackBar('Type in your emai address', title: 'Email address',color: Colors.red);
-  }
-  else if (password.isEmpty) {
-    showCustomSnackBar('Type in your password', title: 'Password',color: Colors.red);
+    showCustomSnackBar('Type in your emai address',
+        title: 'Email address', color: Colors.red);
+  } else if (password.isEmpty) {
+    showCustomSnackBar('Type in your password',
+        title: 'Password', color: Colors.red);
   } else if (password.length < 6) {
     showCustomSnackBar('Password cannot be less than six character',
-        title: 'Password',color: Colors.red);
+        title: 'Password', color: Colors.red);
   } else {
-    showCustomSnackBar('All went well', title: 'perfect',color: Colors.green);
+    showCustomSnackBar(
+      'All went well',
+      title: 'perfect',
+      color: Colors.green,
+    );
   }
 
   showDialog(
@@ -39,9 +43,9 @@ void signUserIn(context, String email, String password) async {
       'phoneNumber': '',
       'username': '',
       'image': '',
-      'uId':cred.user!.uid,
+      'uId': cred.user!.uid,
     });
-    navigator!.pushReplacement(
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const HomePage(),
       ),
@@ -50,7 +54,7 @@ void signUserIn(context, String email, String password) async {
     Navigator.pop(context);
     if (e.code == 'user-not-found') {
       wrongEmailMessage(context);
-    } else if (e.code == 'wrong-password') {
+    } else if (e.code == 'wrong password') {
       wrongPasswordMessage(context);
     }
   }
