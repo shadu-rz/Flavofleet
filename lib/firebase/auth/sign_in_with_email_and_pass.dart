@@ -1,7 +1,7 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
-import 'package:flavour_fleet_main/Pages/accounts/account_page.dart';
 import 'package:flutter/material.dart';
 
 void signUserIn(context, String email, String password) async {
@@ -11,16 +11,7 @@ void signUserIn(context, String email, String password) async {
   } else if (password.isEmpty) {
     showCustomSnackBar('Type in your password',
         title: 'Password', color: Colors.red);
-  } else if (password.length < 6) {
-    showCustomSnackBar('Password cannot be less than six character',
-        title: 'Password', color: Colors.red);
-  } else {
-    showCustomSnackBar(
-      'All went well',
-      title: 'perfect',
-      color: Colors.green,
-    );
-  }
+  } 
 
   showDialog(
     context: context,
@@ -32,19 +23,16 @@ void signUserIn(context, String email, String password) async {
   );
 
   try {
-    final UserCredential cred =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+   
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
-    // add user to database
-    await firestore.collection('users').doc(cred.user!.uid).set({
-      'email': email,
-      'phoneNumber': '',
-      'username': '',
-      'image': '',
-      'uId': cred.user!.uid,
-    });
+     showCustomSnackBar(
+      'All went well',
+      title: 'perfect',
+      color: Colors.green,
+    );
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (context) => const HomePage(),
@@ -52,10 +40,13 @@ void signUserIn(context, String email, String password) async {
     );
   } on FirebaseAuthException catch (e) {
     Navigator.pop(context);
+    print(e.code);
     if (e.code == 'user-not-found') {
-      wrongEmailMessage(context);
-    } else if (e.code == 'wrong password') {
-      wrongPasswordMessage(context);
+      wrongMessage(context,'User not found');
+    } else if (e.code == 'wrong-password') {
+      wrongMessage(context,'wrong password');
+    }if (e.code == 'invalid-email') {
+      wrongMessage(context,'enter email properly');
     }
   }
   // catch (e) {
@@ -68,24 +59,14 @@ void signUserIn(context, String email, String password) async {
   // }
 }
 
-void wrongEmailMessage(context) {
+void wrongMessage(context,String title) {
   showDialog(
     context: context,
     builder: (context) {
-      return const AlertDialog(
-        title: Text('Incorrect email'),
+      return  AlertDialog(
+        title: Text(title),
       );
     },
   );
 }
 
-void wrongPasswordMessage(context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return const AlertDialog(
-        title: Text('Incorrect email'),
-      );
-    },
-  );
-}

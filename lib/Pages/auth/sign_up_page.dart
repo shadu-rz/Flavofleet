@@ -1,4 +1,3 @@
-
 import 'package:flavour_fleet_main/Pages/auth/auth_page.dart';
 import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
@@ -20,20 +19,18 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  var confirmPasswordController = TextEditingController();
+  var nameController = TextEditingController();
   bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
-   
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(height: Dimensions.screenHeight * 0.1),
+            SizedBox(height: Dimensions.screenHeight * 0.02),
             //App logo
             SizedBox(
               height: Dimensions.screenHeight * 0.2,
@@ -68,13 +65,13 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
             //Your Name
-            // AppTextField(
-            //   textController: nameController,
-            //   hintText: 'Name',
-            //   textColor: Colors.black87,
-            //   icon: Icons.person,
-            // ),
-            // SizedBox(height: Dimensions.height20),
+            AppTextField(
+              textController: nameController,
+              hintText: 'Name',
+              textColor: Colors.black87,
+              icon: Icons.person,
+            ),
+            SizedBox(height: Dimensions.height20),
             // Your Email
             AppTextField(
               textController: emailController,
@@ -139,7 +136,11 @@ class _SignUpPageState extends State<SignUpPage> {
             GestureDetector(
               onTap: () async {
                 await signUp(
-                    context, emailController.text, passwordController.text);
+                  context,
+                  emailController.text,
+                  passwordController.text,
+                  nameController.text,
+                );
                 // navigator!.pushReplacement(MaterialPageRoute(builder: (context) =>const HomePage(),));
               },
               child: Container(
@@ -160,7 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: Dimensions.height30),
+            SizedBox(height: Dimensions.height20),
 
             RichText(
               text: TextSpan(
@@ -186,7 +187,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   )),
             ),
             SizedBox(
-              height: Dimensions.screenWidth * 0.05,
+              height: Dimensions.screenWidth * 0.01,
             ),
             GestureDetector(
               onTap: () async {
