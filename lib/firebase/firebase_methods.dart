@@ -172,6 +172,7 @@ class FirebaseMethods extends GetxController {
   //ADD ADDRESS
 
   Future<void> addAddress(AddressModel address) async {
+    
     try {
       await firestore
           .collection('users')

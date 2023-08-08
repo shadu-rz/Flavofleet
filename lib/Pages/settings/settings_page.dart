@@ -30,6 +30,29 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       body: Column(
         children: [
+          Container(
+            width: double.maxFinite,
+            margin: EdgeInsets.only(
+              left: Dimensions.height20,
+              right: Dimensions.height20,
+              top: Dimensions.height20,
+            ),
+            padding: EdgeInsets.symmetric(vertical: Dimensions.height10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimensions.radius15),
+              border: Border.all(
+                width: 1,
+                color: AppColors.mainColor,
+              ),
+            ),
+            child: Center(
+              child: BigText(
+                text: 'Edit profile',
+                size: 18,
+                color: const Color.fromARGB(255, 59, 105, 102),
+              ),
+            ),
+          ),
           GestureDetector(
             onTap: () {
               navigator!.push(MaterialPageRoute(
@@ -92,7 +115,9 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           GestureDetector(
             onTap: () {
-                    navigator!.push(MaterialPageRoute(builder: (context) => const AboutUsPage(),));
+              navigator!.push(MaterialPageRoute(
+                builder: (context) => const AboutUsPage(),
+              ));
             },
             child: Container(
               width: double.maxFinite,

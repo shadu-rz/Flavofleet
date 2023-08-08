@@ -6,7 +6,6 @@ import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';

@@ -1,5 +1,3 @@
-
-
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
@@ -75,6 +73,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
           Container(
             margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
             child: TextField(
+              
               decoration: const InputDecoration(
                 hintText: '10 digit mobile number',
               ),
