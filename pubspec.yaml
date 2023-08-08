@@ -25,10 +25,14 @@ dependencies:
   uuid: ^3.0.7
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.0
-
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+ android: true
+ image_path: "assets/image/playstore.png"
 
 flutter:
 
@@ -51,6 +55,7 @@ flutter:
     - assets/image/login_image.jpg
     - assets/image/splashImage.jpg
     - assets/image/location.png
+    - assets/image/playstore.png
 
   fonts:
     - family: Roboto

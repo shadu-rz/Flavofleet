@@ -128,8 +128,9 @@ Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () async {
+               
                 await FirebaseMethods().deleteAddress(snap['id']);
-                navigator!.pop();
+                
               },
             ),
           ],

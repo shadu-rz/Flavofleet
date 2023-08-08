@@ -191,6 +191,7 @@ class FirebaseMethods extends GetxController {
         .collection('delivery_address')
         .doc(id);
     await addressRef.delete();
+    navigator!.pop();
     } catch (e) {
       log(e.toString());
     }

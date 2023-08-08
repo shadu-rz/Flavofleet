@@ -2,7 +2,7 @@
     package="com.example.flavour_fleet_main">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="flavour_fleet_main"
+        android:label="FlavorFleet"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

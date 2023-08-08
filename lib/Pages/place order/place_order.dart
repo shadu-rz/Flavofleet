@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flavour_fleet_main/Pages/order/ordered_successfully.dart';
@@ -152,12 +153,14 @@ class PlaceOrder extends StatelessWidget {
                   productId: id,
                   uId: FirebaseAuth.instance.currentUser!.uid,
                 );
-                await FirebaseMethods().addToOrder(order);
-
-                navigator!.push(MaterialPageRoute(
+                
+                Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const OrderdSuccessfully(),
                 ));
+                 await FirebaseMethods().addToOrder(order);
+                
               }
+              
             },
             child: Container(
               decoration: BoxDecoration(
