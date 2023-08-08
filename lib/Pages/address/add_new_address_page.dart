@@ -152,7 +152,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   color: AppColors.mainColor),
               child: Center(
                 child: BigText(
-                  text: 'Continoue',
+                  text: 'Continue',
                   size: 18,
                   color: Colors.white,
                 ),
