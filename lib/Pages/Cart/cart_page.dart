@@ -26,40 +26,47 @@ class CartPage extends StatelessWidget {
         title: BigText(text: 'Cart', color: Colors.white),
         actions: [
           IconButton(
+            tooltip: 'Clear all',
               onPressed: () async {
-                await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text(
-                          'Are you sure want to delete ?',
-                          style: TextStyle(
-                            fontSize: Dimensions.font20 - 3,
-                            fontWeight: FontWeight.bold,
+                if (firebase.cartLength <= 0) {
+                 return;
+                } else {
+                  await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                            'Are you sure want to delete ?',
+                            style: TextStyle(
+                              fontSize: Dimensions.font20 - 3,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        actions: [
-                          TextButton(
-                            child: const Text('Cancel'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          TextButton(
-                            child: const Text('Confirm'),
-                            onPressed: () async {
-                              await firebase.clearCart();
-                              await firebase.getCartDetails();
-                              showCustomSnackBar('All items cleared',
+                          actions: [
+                            TextButton(
+                              child: const Text('Cancel'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: const Text('Confirm'),
+                              onPressed: () async {
+                                await firebase.clearCart();
+                                await firebase.getCartDetails();
+                                showCustomSnackBar(
+                                  'All items cleared',
                                   title: 'success',
                                   color: Colors.green,
-                                  position: SnackPosition.TOP);
-                              navigator!.pop();
-                            },
-                          ),
-                        ],
-                      );
-                    });
+                                  position: SnackPosition.TOP,
+                                );
+                                navigator!.pop();
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                }
               },
               icon: const Icon(Icons.clear_all_rounded))
         ],

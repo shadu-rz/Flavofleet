@@ -23,40 +23,27 @@ class UserAddressWidget extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), border: Border.all()),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              // borderRadius: BorderRadius.circular(10),
+              border: Border.all(),
+             borderRadius:
+                          BorderRadius.circular(Dimensions.radius20 / 2),
+            ),
+            padding:  EdgeInsets.symmetric(
+              horizontal: Dimensions.height10,
+              vertical: Dimensions.height15,
+            ),
+            margin: EdgeInsets.symmetric(
+              horizontal: Dimensions.height20 + 5,
+              vertical: 10,
+            ),
             width: double.maxFinite,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SmallText(
-                          text: snap['name'].toString().toUpperCase(),
-                          color: Colors.black,
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          "${snap['address'].toString().toUpperCase()}, ${snap['pincode']}",
-                          style:const TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        SmallText(
-                          text: "phone number : ${snap['phone']}",
-                          color: Colors.black,
-                        ),
-                        const SizedBox(height: 10),
-                      ],
-                    ),
+                    BigText(text: 'Delivery Address'),
                     IconButton(
                       onPressed: () async {
                         await _showMyDialog(context, snap);
@@ -69,6 +56,27 @@ class UserAddressWidget extends StatelessWidget {
                     )
                   ],
                 ),
+                SizedBox(
+                  height: Dimensions.height10,
+                ),
+                SmallText(
+                  // text: snap['name'].toString().toUpperCase(),
+                  text: snap['name'].toString().toUpperCase(),
+                  color: Colors.black,
+                ),
+                const SizedBox(height: 10),
+                SmallText(
+                  text: "${snap['address']}   ${snap['pincode']}",
+                  // "${snap['address'].toString().toUpperCase()}, ${snap['pincode']}",
+                  color: Colors.black,
+                ),
+                const SizedBox(height: 10),
+                SmallText(
+                  // text: "phone number : ${snap['phone']}",
+                  text: snap['phone'],
+                  color: Colors.black,
+                ),
+                const SizedBox(height: 10),
                 GestureDetector(
                   onTap: () {
                     navigator!.push(MaterialPageRoute(
@@ -83,9 +91,10 @@ class UserAddressWidget extends StatelessWidget {
                     width: Dimensions.screenWidth,
                     height: 50,
                     decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20 / 2),
-                        color: AppColors.mainColor),
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.radius20 / 2),
+                      color: AppColors.mainColor,
+                    ),
                     child: Center(
                       child: BigText(
                         text: 'Use this address',
@@ -128,9 +137,7 @@ Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () async {
-               
                 await FirebaseMethods().deleteAddress(snap['id']);
-                
               },
             ),
           ],

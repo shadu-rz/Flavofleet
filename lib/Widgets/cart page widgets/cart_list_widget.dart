@@ -1,4 +1,3 @@
-
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
@@ -90,18 +89,18 @@ class CartListWidget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: Dimensions.width20),
-                CircleAvatar(
-                  backgroundColor: AppColors.mainColor,
-                  radius: 12,
-                  child: GestureDetector(
-                    onTap: () async {
-                      int count =
-                          CartController().decrementInCart(snap['itemCount']);
-                      await FirebaseMethods()
-                          .updateItemCount(snap['productId'], count);
-                      firebase.getCartDetails();
-                    },
-                    child: const Icon(
+                GestureDetector(
+                  onTap: () async {
+                    int count = CartController()
+                        .decrementInCart(snap['itemCount'], snap['productId']);
+                    await FirebaseMethods()
+                        .updateItemCount(snap['productId'], count);
+                    firebase.getCartDetails();
+                  },
+                  child: const CircleAvatar(
+                    backgroundColor: AppColors.mainColor,
+                    radius: 12,
+                    child: Icon(
                       Icons.remove,
                       color: Colors.white,
                       size: 16,
@@ -121,18 +120,18 @@ class CartListWidget extends StatelessWidget {
                 SizedBox(
                   width: Dimensions.width10,
                 ),
-                CircleAvatar(
-                  backgroundColor: AppColors.mainColor,
-                  radius: 12,
-                  child: GestureDetector(
-                    onTap: () async {
-                      int count =
-                          CartController().incrementInCart(snap['itemCount']);
-                      await FirebaseMethods()
-                          .updateItemCount(snap['productId'], count);
-                      firebase.getCartDetails();
-                    },
-                    child: const Icon(
+                GestureDetector(
+                  onTap: () async {
+                    int count =
+                        CartController().incrementInCart(snap['itemCount']);
+                    await FirebaseMethods()
+                        .updateItemCount(snap['productId'], count);
+                    firebase.getCartDetails();
+                  },
+                  child: const CircleAvatar(
+                    backgroundColor: AppColors.mainColor,
+                    radius: 12,
+                    child: Icon(
                       Icons.add,
                       size: 16,
                       color: Colors.white,
@@ -177,7 +176,6 @@ class CartListWidget extends StatelessWidget {
                     color: Colors.red,
                   );
                   await firebase.getCartDetails();
-                 
                 },
               ),
             ],

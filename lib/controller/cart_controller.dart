@@ -1,4 +1,5 @@
 
+import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
@@ -15,11 +16,11 @@ class CartController extends GetxController {
     return countInCart;
   }
 
-  int decrementInCart(int countInCart) {
+  int decrementInCart(int countInCart,String productId) {
     if (countInCart > 1) {
       countInCart--;
     } else {
-      return 1;
+     FirebaseMethods().removeItemFromCart(productId);
     }
     return countInCart;
   }

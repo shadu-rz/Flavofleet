@@ -54,7 +54,7 @@ class BottomNavCart extends StatelessWidget {
                 child: Center(
                   child: Obx(
                     () => BigText(
-                      text: '₹ ${firebase.totalPrice}',
+                      text: firebase.cartLength <= 0 ? "₹ 0" : "₹ ${firebase.totalPrice}",
                     ),
                   ),
                 ),
