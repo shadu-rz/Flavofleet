@@ -26,28 +26,35 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     pageController.dispose();
   }
 
-  @override
+ @override
   Widget build(BuildContext context) {
     final FirebaseMethods firebase = Get.put(FirebaseMethods());
-     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-     firebase.getCartDetails();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      firebase.getCartDetails();
     });
-    return SizedBox(
-      width: double.maxFinite,
+
+    return SingleChildScrollView(
       child: Column(
         children: [
           //Slider Section
           HomePageHorSlideWidget(pageController: pageController),
-      
+
           SizedBox(height: Dimensions.height10),
-      
+
           //Recommended title widget
           const RecommedeTitleWidget(),
-      
+
           SizedBox(height: Dimensions.height10),
-      
-          //recomended food list of food and images
-          const RecommendedProductListWidget()
+
+          // Wrap the RecommendedProductListWidget with a Container and a SingleChildScrollView
+          const SizedBox(
+             height: 500,
+             child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: RecommendedProductListWidget(),
+            )// Set your desired height here,
+           
+          ),
         ],
       ),
     );

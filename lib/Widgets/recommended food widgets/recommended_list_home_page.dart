@@ -17,7 +17,7 @@ class RecommendedProductListWidget extends StatelessWidget {
       // color: Colors.amber,
       padding: EdgeInsets.only(bottom: Dimensions.height10),
       margin: EdgeInsets.only(bottom: Dimensions.height10),
-      height: Dimensions.screenHeight / 2.5,
+      // height: Dimensions.screenHeight /1.2,
       child: MediaQuery.removePadding(
         context: context,
         removeTop: true,
@@ -37,7 +37,8 @@ class RecommendedProductListWidget extends StatelessWidget {
               }
 
               return ListView.separated(
-                  // physics: const AlwaysScrollableScrollPhysics(),
+                 shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   
                   separatorBuilder: (context, index) {
                     return Container(

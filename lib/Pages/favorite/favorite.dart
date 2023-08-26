@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavour_fleet_main/Pages/Food/popular_food_details.dart';
+import 'package:flavour_fleet_main/Pages/Food/recomended_food_details.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
@@ -58,7 +60,7 @@ class FavoritePage extends StatelessWidget {
                 var snap = snapshot.data!.docs[index].data();
                 return GestureDetector(
                   // onTap: () {
-                  //   navigator!.push(MaterialPageRoute(builder: (context) => PopularFoodDetails(snap: snap),));
+                  //   navigator!.push(MaterialPageRoute(builder: (context) => RecomendedFoodDetails(snap: snap),));
                   // },
                   child: Container(
                     margin: EdgeInsets.only(top: Dimensions.height10),

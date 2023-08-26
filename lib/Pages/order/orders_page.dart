@@ -80,7 +80,8 @@ class CartHistory extends StatelessWidget {
                               builder: (context) =>  OrderStatusPage(productId: snap['productId'],),
                             ));
                           },
-                          child: SizedBox(
+                          child: Container(
+                            color: Colors.white,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

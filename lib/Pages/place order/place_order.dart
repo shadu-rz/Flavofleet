@@ -31,7 +31,7 @@ class PlaceOrder extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        // automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         title: SmallText(
           text: 'Order Now',
           color: AppColors.mainBlackColor,
@@ -154,7 +154,7 @@ class PlaceOrder extends StatelessWidget {
                   uId: FirebaseAuth.instance.currentUser!.uid,
                 );
                 
-                Navigator.of(context).push(MaterialPageRoute(
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => const OrderdSuccessfully(),
                 ));
                  await FirebaseMethods().addToOrder(order);

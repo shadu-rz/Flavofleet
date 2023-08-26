@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flavour_fleet_main/Pages/place%20order/place_order.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-
 import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
@@ -141,7 +140,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
                 await makePayment(amount: amount, currency: "INR");
                 log('card Payment called');
               } else if (codChecked.value) {
-                Navigator.of(context).push(
+                Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => PlaceOrder(
                       isCart: widget.isCart,
@@ -200,7 +199,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
   displayPaymentSheet() async {
     try {
       await Stripe.instance.presentPaymentSheet();
-      navigator!.push(
+      navigator!.pushReplacement(
         MaterialPageRoute(
           builder: (context) => PlaceOrder(
             isCart: widget.isCart,
