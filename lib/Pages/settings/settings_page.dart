@@ -1,5 +1,6 @@
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/accounts/logout_page.dart';
+import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
 import 'package:flavour_fleet_main/Pages/settings/about%20us/about_us.dart';
 import 'package:flavour_fleet_main/Pages/settings/privacy%20policy/privacy_policy.dart';
 import 'package:flavour_fleet_main/Pages/settings/terms%20and%20conditions/terms_and_conditions.dart';
@@ -14,10 +15,6 @@ class SettingsPage extends StatefulWidget {
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
-}
-
-void signUserOut() {
-  FirebaseAuth.instance.signOut();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
@@ -200,13 +197,23 @@ Future<void> _showMyDialog(context) async {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () {
-                navigator!.pushReplacement(MaterialPageRoute(
-                  builder: (context) => const LogoutPage(),
-                ));
                 return signUserOut();
               },
             ),
           ],
         );
       });
+}
+
+void signUserOut() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    navigator!.pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const SignInPage(),
+      ),
+    );
+  } catch (e) {
+    log("Sign out error occured: $e");
+  }
 }

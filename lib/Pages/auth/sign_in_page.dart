@@ -45,26 +45,32 @@ class _SignInPageState extends State<SignInPage> {
             ),
             //welcome
             Container(
+              // color: Colors.amber,
               width: double.maxFinite,
               margin: EdgeInsets.only(
-                  left: Dimensions.width20 + Dimensions.width10),
+                left: Dimensions.width20+Dimensions.width10, 
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hello',
+                    'Welcome Back',
                     style: TextStyle(
-                        fontSize:
-                            Dimensions.font20 * 3 + Dimensions.font20 / 1.5,
+                        fontSize: Dimensions.font20 * 2.5,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87),
                   ),
-                  Text(
-                    'Sign into your account',
-                    style: TextStyle(
-                        fontSize: Dimensions.font20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[500]),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sign into your account',
+                        style: TextStyle(
+                            fontSize: Dimensions.font20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[500]),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: Dimensions.screenHeight * 0.02,

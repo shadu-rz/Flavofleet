@@ -14,10 +14,8 @@ class RecommendedProductListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.amber,
       padding: EdgeInsets.only(bottom: Dimensions.height10),
       margin: EdgeInsets.only(bottom: Dimensions.height10),
-      // height: Dimensions.screenHeight /1.2,
       child: MediaQuery.removePadding(
         context: context,
         removeTop: true,

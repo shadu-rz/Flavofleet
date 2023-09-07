@@ -30,7 +30,7 @@ class _SignUpPageState extends State<SignUpPage> {
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(height: Dimensions.screenHeight * 0.02),
+            SizedBox(height: Dimensions.screenHeight * 0.03),
             //App logo
             SizedBox(
               height: Dimensions.screenHeight * 0.2,
@@ -48,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 Text(
                   'Hello',
                   style: TextStyle(
-                      fontSize: Dimensions.font20 * 3 + Dimensions.font20 / 1.5,
+                      fontSize: Dimensions.font20 * 3,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87),
                 ),
