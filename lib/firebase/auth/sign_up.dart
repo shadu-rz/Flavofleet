@@ -44,10 +44,13 @@ Future signUp(context, String email, String password,String name) async {
       'image': '',
       'uId':cred.user!.uid
     });
-    navigator!.pushReplacement(
+    Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (context) => const HomePage(isGuest: false,),
+        builder: (context) => const HomePage(
+          isGuest: false,
+        ),
       ),
+      (router) => false,
     );
   } on FirebaseAuthException catch (e) {
     Navigator.pop(context);

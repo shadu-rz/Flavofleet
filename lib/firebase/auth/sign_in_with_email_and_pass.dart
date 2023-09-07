@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
@@ -11,7 +10,7 @@ void signUserIn(context, String email, String password) async {
   } else if (password.isEmpty) {
     showCustomSnackBar('Type in your password',
         title: 'Password', color: Colors.red);
-  } 
+  }
 
   showDialog(
     context: context,
@@ -23,29 +22,32 @@ void signUserIn(context, String email, String password) async {
   );
 
   try {
-   
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
-     showCustomSnackBar(
+    showCustomSnackBar(
       'All went well',
       title: 'perfect',
       color: Colors.green,
     );
-    Navigator.of(context).pushReplacement(
+    Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (context) => const HomePage(isGuest: false,),
+        builder: (context) => const HomePage(
+          isGuest: false,
+        ),
       ),
+      (router) => false,
     );
   } on FirebaseAuthException catch (e) {
     Navigator.pop(context);
     if (e.code == 'user-not-found') {
-      wrongMessage(context,'User not found');
+      wrongMessage(context, 'User not found');
     } else if (e.code == 'wrong-password') {
-      wrongMessage(context,'wrong password');
-    }if (e.code == 'invalid-email') {
-      wrongMessage(context,'enter email properly');
+      wrongMessage(context, 'wrong password');
+    }
+    if (e.code == 'invalid-email') {
+      wrongMessage(context, 'enter email properly');
     }
   }
   // catch (e) {
@@ -58,14 +60,13 @@ void signUserIn(context, String email, String password) async {
   // }
 }
 
-void wrongMessage(context,String title) {
+void wrongMessage(context, String title) {
   showDialog(
     context: context,
     builder: (context) {
-      return  AlertDialog(
+      return AlertDialog(
         title: Text(title),
       );
     },
   );
 }
-
