@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HorizontalScrollWidget extends StatelessWidget {
+  final bool isGuest;
   const HorizontalScrollWidget({
     super.key,
     required this.snap,
+    required this.isGuest
   });
   final Map<String, dynamic> snap;
   @override
@@ -27,7 +29,7 @@ class HorizontalScrollWidget extends StatelessWidget {
               
               builder: (context) => PopularFoodDetails(
                 snap: snap,
-                
+                isGuest: isGuest,
               ),
             ),
           );

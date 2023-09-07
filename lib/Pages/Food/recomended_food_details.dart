@@ -8,24 +8,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RecomendedFoodDetails extends StatelessWidget {
-  const RecomendedFoodDetails({
-    super.key,
-    required this.snap,
-  });
+  final bool isGuest;
+  const RecomendedFoodDetails(
+      {super.key, required this.snap, required this.isGuest});
   final Map<String, dynamic> snap;
 
   @override
   Widget build(BuildContext context) {
     final FirebaseMethods firebase = Get.put(FirebaseMethods());
-     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      firebase.getSelectedProduct('recommendedProducts',snap['productId']);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      firebase.getSelectedProduct('recommendedProducts', snap['productId']);
     });
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           // appbar and image
-          AppbarAndImageRecoFoodDetails(snap: snap),
+          AppbarAndImageRecoFoodDetails(snap: snap, isGuest: isGuest),
 
           SliverToBoxAdapter(
               child: Column(
@@ -44,7 +43,10 @@ class RecomendedFoodDetails extends StatelessWidget {
         ],
       ),
       // bottomNavigation Bar
-      bottomNavigationBar: NavbarRecoFoodDetails(snap: snap),
+      bottomNavigationBar: NavbarRecoFoodDetails(
+        snap: snap,
+        isGuest: isGuest,
+      ),
     );
   }
 }

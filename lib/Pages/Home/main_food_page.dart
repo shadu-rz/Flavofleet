@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'food_page_body.dart';
 
 class MainFoodPage extends StatefulWidget {
-  const MainFoodPage({super.key});
+  final bool isGuest;
+
+  const MainFoodPage({super.key, required this.isGuest});
 
   @override
   State<MainFoodPage> createState() => _MainFoodPageState();
@@ -21,16 +23,16 @@ class _MainFoodPageState extends State<MainFoodPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: const Column(
+        child:  Column(
           children: [
             SafeArea(
               //showing the header
-              child: HomeScreenAppBar(),
+              child: HomeScreenAppBar(isGuest: widget.isGuest,),
             ),
             //showing the body
             Expanded(
                 child: SingleChildScrollView(
-              child: FoodPageBody(),
+              child: FoodPageBody(isGuest: widget.isGuest,),
             ))
           ],
         ),

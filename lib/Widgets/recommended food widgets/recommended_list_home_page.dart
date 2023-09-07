@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RecommendedProductListWidget extends StatelessWidget {
-  const RecommendedProductListWidget({super.key});
+  final bool isGuest;
+  const RecommendedProductListWidget({super.key, required this.isGuest});
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +36,8 @@ class RecommendedProductListWidget extends StatelessWidget {
               }
 
               return ListView.separated(
-                 shrinkWrap: true,
+                  shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  
                   separatorBuilder: (context, index) {
                     return Container(
                       height: Dimensions.height10,
@@ -48,7 +48,6 @@ class RecommendedProductListWidget extends StatelessWidget {
                     var snap = snapshot.data!.docs[index].data();
 
                     return Container(
-                      
                       margin: EdgeInsets.only(
                         left: Dimensions.width20,
                         right: Dimensions.width10,
@@ -57,6 +56,7 @@ class RecommendedProductListWidget extends StatelessWidget {
                         onTap: () => navigator!.push(
                           MaterialPageRoute(
                             builder: (context) => RecomendedFoodDetails(
+                              isGuest: isGuest,
                               snap: snap,
                             ),
                           ),
@@ -122,7 +122,7 @@ class RecommendedProductListWidget extends StatelessWidget {
                                         text: 'Normal',
                                         iconColor: Colors.orangeAccent,
                                       ),
-                                        SizedBox(width: Dimensions.width20),
+                                      SizedBox(width: Dimensions.width20),
                                       IconAndTextWidget(
                                         icon: Icons.location_on,
                                         text: '${snap['distance']} Km',

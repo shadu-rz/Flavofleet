@@ -5,9 +5,11 @@ import 'package:flavour_fleet_main/Widgets/home%20page%20widgets/horizontal_scro
 import 'package:flutter/material.dart';
 
 class HomePageHorSlideWidget extends StatelessWidget {
+  final bool isGuest;
   const HomePageHorSlideWidget({
     super.key,
     required this.pageController,
+    required this.isGuest
   });
 
   final PageController pageController;
@@ -40,7 +42,7 @@ class HomePageHorSlideWidget extends StatelessWidget {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 var snap = snapshot.data!.docs[index].data();
-                return HorizontalScrollWidget(snap: snap);
+                return HorizontalScrollWidget(snap: snap,isGuest: isGuest);
               },
             );
           }),

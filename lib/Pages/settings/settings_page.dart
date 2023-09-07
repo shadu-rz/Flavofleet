@@ -197,6 +197,12 @@ Future<void> _showMyDialog(context) async {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => const SignInPage(),
+                  ),
+                  ModalRoute.withName('/'),
+                );
                 return signUserOut();
               },
             ),
@@ -208,11 +214,6 @@ Future<void> _showMyDialog(context) async {
 void signUserOut() async {
   try {
     await FirebaseAuth.instance.signOut();
-    navigator!.pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const SignInPage(),
-      ),
-    );
   } catch (e) {
     log("Sign out error occured: $e");
   }

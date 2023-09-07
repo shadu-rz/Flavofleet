@@ -1,3 +1,4 @@
+import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
 import 'package:flavour_fleet_main/Pages/auth/auth_page.dart';
 import 'package:flavour_fleet_main/Pages/auth/sign_up_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
@@ -48,7 +49,7 @@ class _SignInPageState extends State<SignInPage> {
               // color: Colors.amber,
               width: double.maxFinite,
               margin: EdgeInsets.only(
-                left: Dimensions.width20+Dimensions.width10, 
+                left: Dimensions.width20 + Dimensions.width10,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,6 +227,20 @@ class _SignInPageState extends State<SignInPage> {
                 decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('assets/image/google-logo.png'))),
+              ),
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+             InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>const HomePage(isGuest: true,),));
+              },
+              child: const Text(
+                'GUEST',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],

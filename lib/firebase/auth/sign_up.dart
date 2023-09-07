@@ -46,7 +46,7 @@ Future signUp(context, String email, String password,String name) async {
     });
     navigator!.pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const HomePage(),
+        builder: (context) => const HomePage(isGuest: false,),
       ),
     );
   } on FirebaseAuthException catch (e) {

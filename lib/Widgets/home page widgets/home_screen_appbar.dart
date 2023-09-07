@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreenAppBar extends StatelessWidget {
+  final bool isGuest;
   const HomeScreenAppBar({
+    required this.isGuest,
     super.key,
   });
 
@@ -26,7 +28,9 @@ class HomeScreenAppBar extends StatelessWidget {
           GestureDetector(
             onTap: () => navigator!.push(
               MaterialPageRoute(
-                builder: (context) => const FavoritePage(),
+                builder: (context) => FavoritePage(
+                  isGuest: isGuest,
+                ),
               ),
             ),
             child: Container(
@@ -50,46 +54,55 @@ class HomeScreenAppBar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               navigator!.push(MaterialPageRoute(
-                builder: (context) => const AccountPage(),
+                builder: (context) => AccountPage(isGuest: isGuest),
               ));
             },
             child: Center(
-              child: FutureBuilder(
-                  future: FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .get(),
-                  builder: (context,
-                      AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
-                          snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-
-                    if (!snapshot.hasData) {
-                      return const CircleAvatar(
-                        radius: 25,
-                        backgroundImage: NetworkImage(
-                          'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png',
-                        ),
-                      );
-                    }
-
-                    return CircleAvatar(
-                      radius: 24,
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.mainColor,
-                        radius: 22,
-                        backgroundImage: NetworkImage(
-                          snapshot.data!['image'].isEmpty
-                              ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
-                              : snapshot.data!['image'],
-                        ),
+              child: FirebaseAuth.instance.currentUser == null
+                  ? const CircleAvatar(
+                      backgroundColor: AppColors.mainColor,
+                      radius: 20,
+                      backgroundImage: NetworkImage(
+                        'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png',
                       ),
-                    );
-                  }),
+                    )
+                  : FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .get(),
+                      builder: (context,
+                          AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>>
+                              snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        if (!snapshot.hasData) {
+                          return const CircleAvatar(
+                            radius: 25,
+                            backgroundImage: NetworkImage(
+                              'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png',
+                            ),
+                          );
+                        }
+
+                        return CircleAvatar(
+                          radius: 24,
+                          child: CircleAvatar(
+                            backgroundColor: AppColors.mainColor,
+                            radius: 22,
+                            backgroundImage: NetworkImage(
+                              snapshot.data!['image'].isEmpty
+                                  ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
+                                  : snapshot.data!['image'],
+                            ),
+                          ),
+                        );
+                      }),
             ),
           )
         ],

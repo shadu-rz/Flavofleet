@@ -9,32 +9,31 @@ import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
-    super.key,
-     
-  });
+  final bool isGuest;
+  const HomePage({super.key, required this.isGuest});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-   final FirebaseMethods firebase = Get.put(FirebaseMethods());
+  final FirebaseMethods firebase = Get.put(FirebaseMethods());
   late PersistentTabController _controller;
 
   @override
   void initState() {
     _controller = PersistentTabController(initialIndex: 0);
     super.initState();
-    firebase.getCartDetails();
+    if (!widget.isGuest) {
+      firebase.getCartDetails();
+    }
   }
 
   List<Widget> _buildScreens() {
     return [
-      const MainFoodPage(),
-      CartPage(
-      ),
-      const CartHistory(),
+      MainFoodPage(isGuest: widget.isGuest),
+      CartPage(isGuest: widget.isGuest),
+      CartHistory(isGuest: widget.isGuest),
     ];
   }
 

@@ -5,12 +5,14 @@ import 'package:flavour_fleet_main/Pages/order/order_status_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/is_guest_mode.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CartHistory extends StatelessWidget {
-  const CartHistory({super.key});
+  final bool isGuest;
+  const CartHistory({super.key,required this.isGuest});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CartHistory extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      body: Column(
+      body:isGuest? const IsGuestMode(): Column(
         children: [
           Expanded(
             child: Container(

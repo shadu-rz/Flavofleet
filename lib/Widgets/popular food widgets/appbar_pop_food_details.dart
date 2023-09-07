@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppbarPopFoodDetails extends StatelessWidget {
+  final bool isGuest;
   const AppbarPopFoodDetails({
     super.key,
-     
+     required this.isGuest
   });
 
   @override
@@ -32,7 +33,7 @@ class AppbarPopFoodDetails extends StatelessWidget {
           GestureDetector(
             onTap: () => navigator!.push(
               MaterialPageRoute(
-                builder: (context) =>  CartPage( ),
+                builder: (context) =>  CartPage( isGuest: isGuest,),
               ),
             ),
             child: AppIcon(

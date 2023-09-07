@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppbarAndImageRecoFoodDetails extends StatelessWidget {
+  final bool isGuest;
   const AppbarAndImageRecoFoodDetails({
     super.key,
     required this.snap,
+    required this.isGuest
   });
 
   final Map<String, dynamic> snap;
@@ -34,7 +36,7 @@ class AppbarAndImageRecoFoodDetails extends StatelessWidget {
           GestureDetector(
             onTap: () => navigator!.push(
               MaterialPageRoute(
-                builder: (context) =>  CartPage( ),
+                builder: (context) =>  CartPage(isGuest: isGuest),
               ),
             ),
             child: const AppIcon(

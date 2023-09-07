@@ -35,7 +35,7 @@ void signUserIn(context, String email, String password) async {
     );
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => const HomePage(),
+        builder: (context) => const HomePage(isGuest: false,),
       ),
     );
   } on FirebaseAuthException catch (e) {

@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FoodPageBody extends StatefulWidget {
-  const FoodPageBody({super.key});
+  final bool isGuest;
+  const FoodPageBody({super.key,required this.isGuest});
 
   @override
   State<FoodPageBody> createState() => _FoodPageBodyState();
@@ -37,7 +38,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       child: Column(
         children: [
           //Slider Section
-          HomePageHorSlideWidget(pageController: pageController),
+          HomePageHorSlideWidget(pageController: pageController,isGuest: widget.isGuest),
 
           SizedBox(height: Dimensions.height10),
 
@@ -47,11 +48,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           SizedBox(height: Dimensions.height10),
 
           // Wrap the RecommendedProductListWidget with a Container and a SingleChildScrollView
-          const SizedBox(
+           SizedBox(
              height: 500,
              child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: RecommendedProductListWidget(),
+              child: RecommendedProductListWidget(isGuest: widget.isGuest,),
             )// Set your desired height here,
            
           ),

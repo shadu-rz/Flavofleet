@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
@@ -15,9 +14,11 @@ import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 class NavbarRecoFoodDetails extends StatefulWidget {
+  final bool isGuest;
   const NavbarRecoFoodDetails({
     super.key,
     required this.snap,
+    required this.isGuest
   });
   final Map<String, dynamic> snap;
 
@@ -172,6 +173,7 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                 onTap: () {
                   navigator!.push(MaterialPageRoute(
                     builder: (context) => SelectAddress(
+                      isGuest: widget.isGuest,
                       isCart: false,
                       productSnap: widget.snap,
                     ),

@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BottomNavCart extends StatelessWidget {
+  final bool isGuest;
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
   BottomNavCart({
     super.key,
+    required this.isGuest
   });
 
   @override
@@ -68,6 +70,7 @@ class BottomNavCart extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => SelectAddress(
+                          isGuest: isGuest,
                           isCart: true,
                         ),
                       ),

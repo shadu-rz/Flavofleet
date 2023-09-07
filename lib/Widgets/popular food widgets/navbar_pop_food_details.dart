@@ -14,9 +14,11 @@ import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
 class NavBarPopFoodDetails extends StatefulWidget {
+  final bool isGuest;
   const NavBarPopFoodDetails({
     super.key,
     required this.snap,
+    required this.isGuest
   });
 
   final Map<String, dynamic> snap;
@@ -143,6 +145,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
             onTap: () {
               navigator!.push(MaterialPageRoute(
                 builder: (context) => SelectAddress(
+                  isGuest: widget.isGuest,
                   isCart: false,
                   productSnap: widget.snap,
                 ),

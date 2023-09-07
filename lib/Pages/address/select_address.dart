@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Pages/address/add_new_address_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/is_guest_mode.dart';
 import 'package:flavour_fleet_main/Widgets/user_delivery_address_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,12 +12,13 @@ import 'package:get/get.dart';
 class SelectAddress extends StatelessWidget {
   final bool isCart;
   final Map<String, dynamic>? productSnap;
+  final bool isGuest;
 
-  SelectAddress({
-    super.key,
-    this.productSnap,
-    required this.isCart,
-  });
+  SelectAddress(
+      {super.key,
+      this.productSnap,
+      required this.isCart,
+      required this.isGuest});
   TextEditingController addressController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -26,79 +28,80 @@ class SelectAddress extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: BigText(text: 'Delivery address'),
-        
       ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .collection('delivery_address')
-            .snapshots(),
-        builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (!snapshot.hasData) {
-            return Center(
-              child: BigText(text: 'No Adress found'),
-            );
-          }
-          if (snapshot.hasError) {
-            return Center(
-              child: BigText(text: 'Check your internet'),
-            );
-          }
+      body: isGuest
+          ? const IsGuestMode()
+          : StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .collection('delivery_address')
+                  .snapshots(),
+              builder: (context,
+                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: BigText(text: 'No Adress found'),
+                  );
+                }
+                if (snapshot.hasError) {
+                  return Center(
+                    child: BigText(text: 'Check your internet'),
+                  );
+                }
 
-          return Column(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  navigator!.push(MaterialPageRoute(
-                    builder: (context) => AddAddressPage(
-                      productSnap: productSnap,
+                return Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        navigator!.push(MaterialPageRoute(
+                          builder: (context) => AddAddressPage(
+                            productSnap: productSnap,
+                          ),
+                        ));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: Dimensions.width20,
+                            right: Dimensions.width20,
+                            bottom: Dimensions.height20),
+                        width: Dimensions.screenWidth,
+                        height: Dimensions.screenHeight / 14,
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius20 / 2),
+                            color: Colors.blueGrey),
+                        child: Center(
+                          child: BigText(
+                            text: 'Add new address',
+                            size: 18,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ),
-                  ));
-                },
-                child: Container(
-                  margin: EdgeInsets.only(
-                      left: Dimensions.width20,
-                      right: Dimensions.width20,
-                      bottom: Dimensions.height20),
-                  width: Dimensions.screenWidth,
-                  height: Dimensions.screenHeight / 14,
-                  decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.radius20 / 2),
-                      color: Colors.blueGrey),
-                  child: Center(
-                    child: BigText(
-                      text: 'Add new address',
-                      size: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    var snap = snapshot.data!.docs[index].data();
-                    return UserAddressWidget(
-                      isCart: isCart,
-                      productSnap: snapp,
-                      snap: snap,
-                    );
-                  },
-                ),
-              )
-            ],
-          );
-        },
-      ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          var snap = snapshot.data!.docs[index].data();
+                          return UserAddressWidget(
+                            isCart: isCart,
+                            productSnap: snapp,
+                            snap: snap,
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                );
+              },
+            ),
     );
   }
 }
