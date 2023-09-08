@@ -4,6 +4,7 @@ import 'package:flavour_fleet_main/Pages/auth/sign_up_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/app_text_field.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/firebase/auth/sign_in_with_email_and_pass.dart';
 import 'package:flavour_fleet_main/firebase/auth/sign_in_with_google.dart';
 import 'package:flutter/gestures.dart';
@@ -27,7 +28,7 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
             SizedBox(
@@ -54,12 +55,17 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Welcome Back',
-                    style: TextStyle(
-                        fontSize: Dimensions.font20 * 2.5,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87),
+                  Row(
+                    children: [
+                      const SizedBox(width: 10),
+                      Text(
+                        'Welcome Back',
+                        style: TextStyle(
+                            fontSize: Dimensions.font20 * 2.3,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87),
+                      ),
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +73,7 @@ class _SignInPageState extends State<SignInPage> {
                       Text(
                         'Sign into your account',
                         style: TextStyle(
-                            fontSize: Dimensions.font20,
+                            fontSize: Dimensions.font15,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey[500]),
                       ),
@@ -145,17 +151,23 @@ class _SignInPageState extends State<SignInPage> {
             // Sign In Button
             GestureDetector(
               onTap: () async {
-                signUserIn(
-                  context,
-                  emailController.text,
-                  passwordControllerr.text,
-                );
+                bool isConnected =
+                    await NoInternetWidget.checkInternetConnectivity();
+                if (isConnected) {
+                  signUserIn(
+                    context,
+                    emailController.text,
+                    passwordControllerr.text,
+                  );
+                } else {
+                  NoInternetWidget.noInternetConnection(context);
+                }
               },
               child: Container(
                 margin: EdgeInsets.only(
                     left: Dimensions.width20, right: Dimensions.width20),
                 width: Dimensions.screenWidth,
-                height: Dimensions.screenHeight / 14,
+                height: Dimensions.screenHeight / 15,
                 decoration: BoxDecoration(
                     borderRadius:
                         BorderRadius.circular(Dimensions.radius20 / 2),
@@ -171,33 +183,18 @@ class _SignInPageState extends State<SignInPage> {
             ),
             SizedBox(height: Dimensions.height30),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    text: "Don't Have an account? ",
-                    style: TextStyle(
-                        color: Colors.grey[500],
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                    children: [
-                      TextSpan(
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () =>
-                              navigator!.pushReplacement(MaterialPageRoute(
-                                builder: (context) => const SignUpPage(),
-                              )),
-                        text: "Create",
-                        style: const TextStyle(
-                            color: Colors.black87,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+           RichText(
+              text: TextSpan(
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => navigator!.pushReplacement(MaterialPageRoute(
+                        builder: (context) => const SignUpPage(),
+                      )),
+                text: "Don't Have an account CREATE",
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 0, 48, 87),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
             SizedBox(height: Dimensions.screenWidth * 0.05),
             //Sign up options
@@ -232,9 +229,15 @@ class _SignInPageState extends State<SignInPage> {
             SizedBox(
               height: Dimensions.height10,
             ),
-             InkWell(
+            InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>const HomePage(isGuest: true,),));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(
+                        isGuest: true,
+                      ),
+                    ));
               },
               child: const Text(
                 'GUEST',

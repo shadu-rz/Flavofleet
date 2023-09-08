@@ -2,6 +2,7 @@ import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,13 @@ class CartListWidget extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    await _showMyDialog(context, snap);
+                    bool isConnected =
+                        await NoInternetWidget.checkInternetConnectivity();
+                    if (isConnected) {
+                      await _showMyDialog(context, snap);
+                    } else {
+                      NoInternetWidget.noInternetConnection(context);
+                    }
                   },
                   child: const Icon(
                     Icons.delete_outline,
@@ -91,11 +98,19 @@ class CartListWidget extends StatelessWidget {
                 SizedBox(width: Dimensions.width20),
                 GestureDetector(
                   onTap: () async {
-                    int count = CartController()
-                        .decrementInCart(snap['itemCount'], snap['productId']);
-                    await FirebaseMethods()
-                        .updateItemCount(snap['productId'], count);
-                    firebase.getCartDetails();
+                    bool isConnected =
+                        await NoInternetWidget.checkInternetConnectivity();
+                    if (isConnected) {
+                      int count = CartController().decrementInCart(
+                        snap['itemCount'],
+                        snap['productId'],
+                      );
+                      await FirebaseMethods()
+                          .updateItemCount(snap['productId'], count);
+                      firebase.getCartDetails();
+                    } else {
+                      NoInternetWidget.noInternetConnection(context);
+                    }
                   },
                   child: const CircleAvatar(
                     backgroundColor: AppColors.mainColor,

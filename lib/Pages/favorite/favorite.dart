@@ -7,7 +7,6 @@ import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Widgets/is_guest_mode.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class FavoritePage extends StatelessWidget {
   final bool isGuest;
@@ -62,9 +61,6 @@ class FavoritePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     var snap = snapshot.data!.docs[index].data();
                     return GestureDetector(
-                      // onTap: () {
-                      //   navigator!.push(MaterialPageRoute(builder: (context) => RecomendedFoodDetails(snap: snap),));
-                      // },
                       child: Container(
                         margin: EdgeInsets.only(top: Dimensions.height10),
                         // color: Colors.amber,
@@ -171,6 +167,7 @@ Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () async {
+                Navigator.of(context).pop();
                 await FirebaseMethods()
                     .removeItemFromFavorite(snap['productId']);
                 showCustomSnackBar(
@@ -178,8 +175,6 @@ Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
                   title: 'removed',
                   color: Colors.red,
                 );
-                // await firebase.getCartDetails();
-                navigator!.pop();
               },
             ),
           ],

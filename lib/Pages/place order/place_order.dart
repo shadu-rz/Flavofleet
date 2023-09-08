@@ -1,9 +1,9 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flavour_fleet_main/Pages/order/ordered_successfully.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/order_model.dart';
@@ -130,37 +130,41 @@ class PlaceOrder extends StatelessWidget {
           const Spacer(),
           GestureDetector(
             onTap: () async {
-              if (isCart) {
-                await FirebaseMethods().cartToOrder(snap['id']);
-                await FirebaseMethods().clearCart();
-                await FirebaseMethods().getCartDetails();
+              bool isConnected =
+                  await NoInternetWidget.checkInternetConnectivity();
+              if (isConnected) {
+                if (isCart) {
+                  await FirebaseMethods().cartToOrder(snap['id']);
+                  await FirebaseMethods().clearCart();
+                  await FirebaseMethods().getCartDetails();
 
-                navigator!.push(MaterialPageRoute(
-                  builder: (context) => const OrderdSuccessfully(),
-                ));
+                  navigator!.push(MaterialPageRoute(
+                    builder: (context) => const OrderdSuccessfully(),
+                  ));
+                } else {
+                  String id = const Uuid().v1();
+                  OrderModel order = OrderModel(
+                    selectedAddress: snap['id'],
+                    delivered: false,
+                    orderRecived: true,
+                    outOfDelivery: false,
+                    preparing: false,
+                    title: productSnap!['title'],
+                    price: double.parse(productSnap!['price']),
+                    date: DateTime.now(),
+                    image: productSnap!['image'],
+                    productId: id,
+                    uId: FirebaseAuth.instance.currentUser!.uid,
+                  );
+
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const OrderdSuccessfully(),
+                  ));
+                  await FirebaseMethods().addToOrder(order);
+                }
               } else {
-                String id = const Uuid().v1();
-                OrderModel order = OrderModel(
-                  selectedAddress: snap['id'],
-                  delivered: false,
-                  orderRecived: true,
-                  outOfDelivery: false,
-                  preparing: false,
-                  title: productSnap!['title'],
-                  price: double.parse(productSnap!['price']),
-                  date: DateTime.now(),
-                  image: productSnap!['image'],
-                  productId: id,
-                  uId: FirebaseAuth.instance.currentUser!.uid,
-                );
-                
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const OrderdSuccessfully(),
-                ));
-                 await FirebaseMethods().addToOrder(order);
-                
+                NoInternetWidget.noInternetConnection(context);
               }
-              
             },
             child: Container(
               decoration: BoxDecoration(

@@ -7,6 +7,7 @@ import 'package:flavour_fleet_main/Pages/settings/terms%20and%20conditions/terms
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -196,14 +197,20 @@ Future<void> _showMyDialog(context) async {
             ),
             TextButton(
               child: const Text('Confirm'),
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => const SignInPage(),
-                  ),
-                  ModalRoute.withName('/'),
-                );
-                return signUserOut();
+              onPressed: () async {
+                bool isConnected =
+                    await NoInternetWidget.checkInternetConnectivity();
+                if (isConnected) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const SignInPage(),
+                    ),
+                    ModalRoute.withName('/'),
+                  );
+                  return signUserOut();
+                } else {
+                  NoInternetWidget.noInternetConnection(context);
+                }
               },
             ),
           ],

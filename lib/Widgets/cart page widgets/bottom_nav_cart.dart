@@ -3,6 +3,7 @@ import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,10 +11,7 @@ import 'package:get/get.dart';
 class BottomNavCart extends StatelessWidget {
   final bool isGuest;
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
-  BottomNavCart({
-    super.key,
-    required this.isGuest
-  });
+  BottomNavCart({super.key, required this.isGuest});
 
   @override
   Widget build(BuildContext context) {
@@ -56,25 +54,32 @@ class BottomNavCart extends StatelessWidget {
                 child: Center(
                   child: Obx(
                     () => BigText(
-                      text: firebase.cartLength <= 0 ? "₹ 0" : "₹ ${firebase.totalPrice}",
+                      text: firebase.cartLength <= 0
+                          ? "₹ 0"
+                          : "₹ ${firebase.totalPrice}",
                     ),
                   ),
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  if (firebase.cartLength <= 0) {
-                    showCustomSnackBar('No items in cart',
-                        title: 'cart', color: Colors.red);
-                  } else {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => SelectAddress(
-                          isGuest: isGuest,
-                          isCart: true,
+                onTap: () async {
+                  bool isConnected = await NoInternetWidget.checkInternetConnectivity();
+                  if (isConnected) {
+                    if (firebase.cartLength <= 0) {
+                      showCustomSnackBar('No items in cart',
+                          title: 'cart', color: Colors.red);
+                    } else {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => SelectAddress(
+                            isGuest: isGuest,
+                            isCart: true,
+                          ),
                         ),
-                      ),
-                    );
+                      );
+                    }
+                  } else {
+                   NoInternetWidget.noInternetConnection(context);
                   }
                 },
                 child: Container(
@@ -97,6 +102,8 @@ class BottomNavCart extends StatelessWidget {
         ));
   }
 
+
+
   bool toCheckOneOrMore() {
     if (firebase.cartLength > 1) {
       return true;
@@ -104,3 +111,6 @@ class BottomNavCart extends StatelessWidget {
     return false;
   }
 }
+
+
+

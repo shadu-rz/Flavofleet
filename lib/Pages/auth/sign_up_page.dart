@@ -3,6 +3,7 @@ import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/app_text_field.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/firebase/auth/sign_in_with_google.dart';
 import 'package:flavour_fleet_main/firebase/auth/sign_up.dart';
 import 'package:flutter/gestures.dart';
@@ -27,7 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
             SizedBox(height: Dimensions.screenHeight * 0.03),
@@ -135,19 +136,25 @@ class _SignUpPageState extends State<SignUpPage> {
             // Sign up Button
             GestureDetector(
               onTap: () async {
-                await signUp(
-                  context,
-                  emailController.text,
-                  passwordController.text,
-                  nameController.text,
-                );
+                bool isConnected =
+                    await NoInternetWidget.checkInternetConnectivity();
+                if (isConnected) {
+                  await signUp(
+                    context,
+                    emailController.text,
+                    passwordController.text,
+                    nameController.text,
+                  );
+                } else {
+                  NoInternetWidget.noInternetConnection(context);
+                }
                 // navigator!.pushReplacement(MaterialPageRoute(builder: (context) =>const HomePage(),));
               },
               child: Container(
                 margin: EdgeInsets.only(
                     left: Dimensions.width20, right: Dimensions.width20),
                 width: Dimensions.screenWidth,
-                height: Dimensions.screenHeight / 14,
+                height: Dimensions.screenHeight / 15,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.radius20 / 2),
                   color: Colors.black87,

@@ -4,6 +4,7 @@ import 'package:flavour_fleet_main/Pages/place%20order/place_order.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,6 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
   Map<String, dynamic>? paymentIntentData;
 
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
-  
 
   RxBool codChecked = false.obs;
   RxBool upiChecked = false.obs;
@@ -39,10 +39,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-    
-    
-      ),
+      appBar: AppBar(),
       body: Column(
         children: [
           SmallText(
@@ -123,7 +120,7 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               SmallText(
-                text: 'total amount : ₹ ${ firebase.totalPrice}',
+                text: 'total amount : ₹ ${firebase.totalPrice}',
                 color: Colors.red,
                 size: 15,
               ),
@@ -135,24 +132,30 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
           const Spacer(),
           GestureDetector(
             onTap: () async {
-              String amount =  firebase.totalPrice.floor().toString();
-              if (upiChecked.value) {
-                await makePayment(amount: amount, currency: "INR");
-                log('card Payment called');
-              } else if (codChecked.value) {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => PlaceOrder(
-                      isCart: widget.isCart,
-                      productSnap: widget.productSnap!,
-                      snap: widget.snap,
+              bool isConnected =
+                  await NoInternetWidget.checkInternetConnectivity();
+              if (isConnected) {
+                String amount = firebase.totalPrice.floor().toString();
+                if (upiChecked.value) {
+                  await makePayment(amount: amount, currency: "INR");
+                  log('card Payment called');
+                } else if (codChecked.value) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => PlaceOrder(
+                        isCart: widget.isCart,
+                        productSnap: widget.productSnap!,
+                        snap: widget.snap,
+                      ),
                     ),
-                  ),
-                );
-                log('cash on delivery called');
+                  );
+                  log('cash on delivery called');
+                } else {
+                  showCustomSnackBar('Select any Payment method',
+                      color: Colors.red);
+                }
               } else {
-                showCustomSnackBar('Select any Payment method',
-                    color: Colors.red);
+                NoInternetWidget.noInternetConnection(context);
               }
             },
             child: Container(

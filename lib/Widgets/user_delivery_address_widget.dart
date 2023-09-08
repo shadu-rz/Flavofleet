@@ -2,6 +2,7 @@ import 'package:flavour_fleet_main/Pages/payment/select_payment_method.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,9 @@ class UserAddressWidget extends StatelessWidget {
             decoration: BoxDecoration(
               // borderRadius: BorderRadius.circular(10),
               border: Border.all(),
-             borderRadius:
-                          BorderRadius.circular(Dimensions.radius20 / 2),
+              borderRadius: BorderRadius.circular(Dimensions.radius20 / 2),
             ),
-            padding:  EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: Dimensions.height10,
               vertical: Dimensions.height15,
             ),
@@ -78,14 +78,20 @@ class UserAddressWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 GestureDetector(
-                  onTap: () {
-                    navigator!.push(MaterialPageRoute(
-                      builder: (context) => PaymentMethodSelect(
-                        isCart: isCart,
-                        snap: snap,
-                        productSnap: productSnap!,
-                      ),
-                    ));
+                  onTap: () async {
+                    bool isConnected =
+                        await NoInternetWidget.checkInternetConnectivity();
+                    if (isConnected) {
+                      navigator!.push(MaterialPageRoute(
+                        builder: (context) => PaymentMethodSelect(
+                          isCart: isCart,
+                          snap: snap,
+                          productSnap: productSnap!,
+                        ),
+                      ));
+                    } else {
+                      NoInternetWidget.noInternetConnection(context);
+                    }
                   },
                   child: Container(
                     width: Dimensions.screenWidth,
@@ -137,7 +143,13 @@ Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () async {
-                await FirebaseMethods().deleteAddress(snap['id']);
+                bool isConnected =
+                    await NoInternetWidget.checkInternetConnectivity();
+                if (isConnected) {
+                  await FirebaseMethods().deleteAddress(snap['id']);
+                } else {
+                  NoInternetWidget.noInternetConnection(context);
+                }
               },
             ),
           ],

@@ -4,6 +4,7 @@ import 'package:flavour_fleet_main/Pages/address/add_new_address_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
 import 'package:flavour_fleet_main/Widgets/is_guest_mode.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/Widgets/user_delivery_address_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,12 +59,18 @@ class SelectAddress extends StatelessWidget {
                 return Column(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        navigator!.push(MaterialPageRoute(
-                          builder: (context) => AddAddressPage(
-                            productSnap: productSnap,
-                          ),
-                        ));
+                      onTap: () async {
+                        bool isConnected =
+                            await NoInternetWidget.checkInternetConnectivity();
+                        if (isConnected) {
+                          navigator!.push(MaterialPageRoute(
+                            builder: (context) => AddAddressPage(
+                              productSnap: productSnap,
+                            ),
+                          ));
+                        } else {
+                          NoInternetWidget.noInternetConnection(context);
+                        }
                       },
                       child: Container(
                         margin: EdgeInsets.only(

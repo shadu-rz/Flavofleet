@@ -319,4 +319,6 @@ class FirebaseMethods extends GetxController {
       log(e.toString());
     }
   }
+
+  
 }

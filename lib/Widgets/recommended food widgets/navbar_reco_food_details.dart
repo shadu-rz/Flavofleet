@@ -5,6 +5,7 @@ import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/app_icon.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
@@ -15,11 +16,8 @@ import 'package:uuid/uuid.dart';
 
 class NavbarRecoFoodDetails extends StatefulWidget {
   final bool isGuest;
-  const NavbarRecoFoodDetails({
-    super.key,
-    required this.snap,
-    required this.isGuest
-  });
+  const NavbarRecoFoodDetails(
+      {super.key, required this.snap, required this.isGuest});
   final Map<String, dynamic> snap;
 
   @override
@@ -58,7 +56,6 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                   horizontal: Dimensions.width10,
                   vertical: Dimensions.width10 / 2,
                 ),
-                
                 child: BigText(
                   text: "₹ ${widget.snap['price']}",
                   color: const Color.fromARGB(255, 0, 0, 0),
@@ -87,25 +84,30 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
             children: [
               GestureDetector(
                 onTap: () async {
-                  if (await FirebaseMethods().alreadyExistInFavorite(
-                      FirebaseAuth.instance.currentUser!.uid,
-                      widget.snap['title'])) {
-                    
+                  bool isConnected =
+                      await NoInternetWidget.checkInternetConnectivity();
+                  if (isConnected) {
+                    if (await FirebaseMethods().alreadyExistInFavorite(
+                        FirebaseAuth.instance.currentUser!.uid,
+                        widget.snap['title'])) {
+                    } else {
+                      String id = const Uuid().v1();
+                      FavoriteModel product = FavoriteModel(
+                        title: widget.snap['title'],
+                        price: double.parse(widget.snap['price']),
+                        image: widget.snap['image'],
+                        description: widget.snap['description'],
+                        distance: double.parse(widget.snap['distance']),
+                        rating: double.parse(widget.snap['rating']),
+                        star: double.parse(widget.snap['star']),
+                        uId: FirebaseAuth.instance.currentUser!.uid,
+                        productId: id,
+                      );
+                      await FirebaseMethods().addToFav(product);
+                      log('favoriteeeeeeee');
+                    }
                   } else {
-                    String id = const Uuid().v1();
-                    FavoriteModel product = FavoriteModel(
-                      title: widget.snap['title'],
-                      price: double.parse(widget.snap['price']),
-                      image: widget.snap['image'],
-                      description: widget.snap['description'],
-                      distance: double.parse(widget.snap['distance']),
-                      rating: double.parse(widget.snap['rating']),
-                      star: double.parse(widget.snap['star']),
-                      uId: FirebaseAuth.instance.currentUser!.uid,
-                      productId: id,
-                    );
-                    await FirebaseMethods().addToFav(product);
-                    log('favoriteeeeeeee');
+                    NoInternetWidget.noInternetConnection(context);
                   }
                 },
                 child: Container(
@@ -128,27 +130,33 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
               ),
               GestureDetector(
                 onTap: () async {
-                  if (await FirebaseMethods().alreadyExistInCart(
-                    FirebaseAuth.instance.currentUser!.uid,
-                    widget.snap['title'],
-                  )) {
-                    // showCustomSnackBar('Already exist in the cart',
-                    //     title: 'Existing', color: Colors.red);
+                  bool isConnected =
+                      await NoInternetWidget.checkInternetConnectivity();
+                  if (isConnected) {
+                    if (await FirebaseMethods().alreadyExistInCart(
+                      FirebaseAuth.instance.currentUser!.uid,
+                      widget.snap['title'],
+                    )) {
+                      // showCustomSnackBar('Already exist in the cart',
+                      //     title: 'Existing', color: Colors.red);
+                    } else {
+                      String id = const Uuid().v1();
+                      CartModel product = CartModel(
+                          title: widget.snap['title'],
+                          price: double.parse(widget.snap['price']),
+                          image: widget.snap['image'],
+                          description: widget.snap['description'],
+                          distance: double.parse(widget.snap['distance']),
+                          rating: double.parse(widget.snap['rating']),
+                          star: double.parse(widget.snap['star']),
+                          uId: FirebaseAuth.instance.currentUser!.uid,
+                          productId: id,
+                          itemCount: countController.count.value);
+                      await FirebaseMethods().addToCart(product);
+                      firebase.getCartDetails();
+                    }
                   } else {
-                    String id = const Uuid().v1();
-                    CartModel product = CartModel(
-                        title: widget.snap['title'],
-                        price: double.parse(widget.snap['price']),
-                        image: widget.snap['image'],
-                        description: widget.snap['description'],
-                        distance: double.parse(widget.snap['distance']),
-                        rating: double.parse(widget.snap['rating']),
-                        star: double.parse(widget.snap['star']),
-                        uId: FirebaseAuth.instance.currentUser!.uid,
-                        productId: id,
-                        itemCount: countController.count.value);
-                    await FirebaseMethods().addToCart(product);
-                    firebase.getCartDetails();
+                    NoInternetWidget.noInternetConnection(context);
                   }
                 },
                 child: Container(
@@ -170,14 +178,20 @@ class _NavbarRecoFoodDetailsState extends State<NavbarRecoFoodDetails> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  navigator!.push(MaterialPageRoute(
-                    builder: (context) => SelectAddress(
-                      isGuest: widget.isGuest,
-                      isCart: false,
-                      productSnap: widget.snap,
-                    ),
-                  ));
+                onTap: () async {
+                  bool isConnected =
+                      await NoInternetWidget.checkInternetConnectivity();
+                  if (isConnected) {
+                    navigator!.push(MaterialPageRoute(
+                      builder: (context) => SelectAddress(
+                        isGuest: widget.isGuest,
+                        isCart: false,
+                        productSnap: widget.snap,
+                      ),
+                    ));
+                  } else {
+                    NoInternetWidget.noInternetConnection(context);
+                  }
                 },
                 child: Container(
                   height: Dimensions.height45,

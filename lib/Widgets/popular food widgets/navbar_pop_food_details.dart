@@ -5,6 +5,7 @@ import 'package:flavour_fleet_main/Pages/address/select_address.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/controller/cart_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flavour_fleet_main/model/cart_model.dart';
@@ -15,11 +16,8 @@ import 'package:uuid/uuid.dart';
 
 class NavBarPopFoodDetails extends StatefulWidget {
   final bool isGuest;
-  const NavBarPopFoodDetails({
-    super.key,
-    required this.snap,
-    required this.isGuest
-  });
+  const NavBarPopFoodDetails(
+      {super.key, required this.snap, required this.isGuest});
 
   final Map<String, dynamic> snap;
 
@@ -58,25 +56,30 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
         children: [
           GestureDetector(
             onTap: () async {
-              if (await FirebaseMethods().alreadyExistInFavorite(
-                  FirebaseAuth.instance.currentUser!.uid,
-                  widget.snap['title'])) {
-               
+              bool isConnected =
+                  await NoInternetWidget.checkInternetConnectivity();
+              if (isConnected) {
+                if (await FirebaseMethods().alreadyExistInFavorite(
+                    FirebaseAuth.instance.currentUser!.uid,
+                    widget.snap['title'])) {
+                } else {
+                  String id = const Uuid().v1();
+                  FavoriteModel product = FavoriteModel(
+                    title: widget.snap['title'],
+                    price: double.parse(widget.snap['price']),
+                    image: widget.snap['image'],
+                    description: widget.snap['description'],
+                    distance: double.parse(widget.snap['distance']),
+                    rating: double.parse(widget.snap['rating']),
+                    star: double.parse(widget.snap['star']),
+                    uId: FirebaseAuth.instance.currentUser!.uid,
+                    productId: id,
+                  );
+                  await FirebaseMethods().addToFav(product);
+                  log('favoriteeeeeeee');
+                }
               } else {
-                String id = const Uuid().v1();
-                FavoriteModel product = FavoriteModel(
-                  title: widget.snap['title'],
-                  price: double.parse(widget.snap['price']),
-                  image: widget.snap['image'],
-                  description: widget.snap['description'],
-                  distance: double.parse(widget.snap['distance']),
-                  rating: double.parse(widget.snap['rating']),
-                  star: double.parse(widget.snap['star']),
-                  uId: FirebaseAuth.instance.currentUser!.uid,
-                  productId: id,
-                );
-                await FirebaseMethods().addToFav(product);
-                log('favoriteeeeeeee');
+                NoInternetWidget.noInternetConnection(context);
               }
             },
             child: Container(
@@ -99,25 +102,31 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
           ),
           GestureDetector(
             onTap: () async {
-              if (await FirebaseMethods().alreadyExistInCart(
+              bool isConnected =
+                  await NoInternetWidget.checkInternetConnectivity();
+              if (isConnected) {
+                if (await FirebaseMethods().alreadyExistInCart(
                   FirebaseAuth.instance.currentUser!.uid,
-                  widget.snap['title'])) {
-                
+                  widget.snap['title'],
+                )) {
+                } else {
+                  String id = const Uuid().v1();
+                  CartModel product = CartModel(
+                      title: widget.snap['title'],
+                      price: double.parse(widget.snap['price']),
+                      image: widget.snap['image'],
+                      description: widget.snap['description'],
+                      distance: double.parse(widget.snap['distance']),
+                      rating: double.parse(widget.snap['rating']),
+                      star: double.parse(widget.snap['star']),
+                      uId: FirebaseAuth.instance.currentUser!.uid,
+                      productId: id,
+                      itemCount: countController.count.value);
+                  await FirebaseMethods().addToCart(product);
+                  firebase.getCartDetails();
+                }
               } else {
-                String id = const Uuid().v1();
-                CartModel product = CartModel(
-                    title: widget.snap['title'],
-                    price: double.parse(widget.snap['price']),
-                    image: widget.snap['image'],
-                    description: widget.snap['description'],
-                    distance: double.parse(widget.snap['distance']),
-                    rating: double.parse(widget.snap['rating']),
-                    star: double.parse(widget.snap['star']),
-                    uId: FirebaseAuth.instance.currentUser!.uid,
-                    productId: id,
-                    itemCount: countController.count.value);
-                await FirebaseMethods().addToCart(product);
-                firebase.getCartDetails();
+                NoInternetWidget.noInternetConnection(context);
               }
             },
             child: Container(
@@ -142,14 +151,22 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              navigator!.push(MaterialPageRoute(
-                builder: (context) => SelectAddress(
-                  isGuest: widget.isGuest,
-                  isCart: false,
-                  productSnap: widget.snap,
-                ),
-              ));
+            onTap: () async {
+              bool isConnected =
+                  await NoInternetWidget.checkInternetConnectivity();
+              if (isConnected) {
+                navigator!.push(
+                  MaterialPageRoute(
+                    builder: (context) => SelectAddress(
+                      isGuest: widget.isGuest,
+                      isCart: false,
+                      productSnap: widget.snap,
+                    ),
+                  ),
+                );
+              } else {
+                NoInternetWidget.noInternetConnection(context);
+              }
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
