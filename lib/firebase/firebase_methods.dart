@@ -52,7 +52,7 @@ class FirebaseMethods extends GetxController {
         title: 'Added to cart',
         color: Colors.green,
         position: SnackPosition.BOTTOM,
-        duration: 2500,
+        duration: 1500,
       );
     } catch (e) {
       log(e.toString());
@@ -172,7 +172,6 @@ class FirebaseMethods extends GetxController {
   //ADD ADDRESS
 
   Future<void> addAddress(AddressModel address) async {
-    
     try {
       await firestore
           .collection('users')
@@ -319,6 +318,4 @@ class FirebaseMethods extends GetxController {
       log(e.toString());
     }
   }
-
-  
 }

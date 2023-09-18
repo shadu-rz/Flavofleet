@@ -123,6 +123,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
                       productId: id,
                       itemCount: countController.count.value);
                   await FirebaseMethods().addToCart(product);
+                  
                   firebase.getCartDetails();
                 }
               } else {
