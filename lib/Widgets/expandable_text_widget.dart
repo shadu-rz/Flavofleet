@@ -45,13 +45,13 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
           : Column(
               children: [
                 SmallText(
-                  text: hiddenText
-                      ? ("$firstHalf...")
-                      : (firstHalf + secondHalf),
-                  size: 15,
+                  
+                  text:
+                      hiddenText ? ("$firstHalf...") : (firstHalf + secondHalf),
+                  size: 14,
                 ),
                 SizedBox(height: Dimensions.height10),
-                InkWell(
+                GestureDetector(
                   onTap: () {
                     setState(() {
                       hiddenText = !hiddenText;
@@ -62,12 +62,13 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                       SmallText(
                         text: hiddenText ? 'show more' : 'show less',
                         color: AppColors.mainColor,
-                        size: 16,
+                        size: 14,
                       ),
+                      SizedBox(width: Dimensions.width10 / 2),
                       Icon(
                         hiddenText ? Icons.arrow_downward : Icons.arrow_upward,
                         color: AppColors.mainColor,
-                        size: 17,
+                        size: 16,
                       )
                     ],
                   ),

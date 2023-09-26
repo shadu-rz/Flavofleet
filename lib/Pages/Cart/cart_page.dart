@@ -79,12 +79,12 @@ class CartPage extends StatelessWidget {
           : Stack(
               children: [
                 Positioned(
-                  left: Dimensions.width20,
-                  right: Dimensions.width20,
+                  left: Dimensions.width10+2,
+                  right: Dimensions.width10+2,
                   top: Dimensions.height10,
                   bottom: 0,
                   child: Container(
-                    padding: EdgeInsets.only(bottom: Dimensions.height30 * 2),
+                    color: Colors.white,
                     child: MediaQuery.removePadding(
                       context: context,
                       removeTop: true,

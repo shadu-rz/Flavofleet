@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavour_fleet_main/Pages/Cart/cart_page.dart';
 import 'package:flavour_fleet_main/Pages/accounts/account_page.dart';
 import 'package:flavour_fleet_main/Pages/favorite/favorite.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
@@ -23,8 +24,9 @@ class HomeScreenAppBar extends StatelessWidget {
       padding:
           EdgeInsets.only(left: Dimensions.width15, right: Dimensions.width15),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          SizedBox(width: Dimensions.width10),
           GestureDetector(
             onTap: () => navigator!.push(
               MaterialPageRoute(
@@ -34,23 +36,48 @@ class HomeScreenAppBar extends StatelessWidget {
               ),
             ),
             child: Container(
-              height: Dimensions.screenWidth / 10,
-              width: Dimensions.screenWidth / 10,
+              height: Dimensions.screenWidth / 12,
+              width: Dimensions.screenWidth / 12,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.mainColor), //change color to main color
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.mainWithLowOpacity,
+              ), //change color to main color
               child: const Icon(
                 Icons.favorite,
-                color: Colors.white, //change color to white color
+                color: Colors.white,
+                size: 20,
               ),
             ),
           ),
+          SizedBox(width: Dimensions.width10 + 2),
+          GestureDetector(
+            onTap: () => navigator!.push(
+              MaterialPageRoute(
+                builder: (context) => CartPage(isGuest: isGuest),
+              ),
+            ),
+            child: Container(
+              height: Dimensions.screenWidth / 12,
+              width: Dimensions.screenWidth / 12,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.mainWithLowOpacity,
+              ),
+              child: const Icon(
+                Icons.shopping_cart,
+                size: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          SizedBox(width: Dimensions.width20 + 15),
           BigText(
             text: 'Flavour Fleet',
             color: Colors.white,
-            size: 25,
+            size: 22,
             fontWeight: FontWeight.w800,
           ),
+          SizedBox(width: Dimensions.width20 * 2),
           GestureDetector(
             onTap: () {
               navigator!.push(MaterialPageRoute(
@@ -91,10 +118,11 @@ class HomeScreenAppBar extends StatelessWidget {
                         }
 
                         return CircleAvatar(
-                          radius: 24,
+                          backgroundColor: AppColors.mainColor,
+                          radius: 20,
                           child: CircleAvatar(
                             backgroundColor: AppColors.mainColor,
-                            radius: 22,
+                            radius: 18,
                             backgroundImage: NetworkImage(
                               snapshot.data!['image'].isEmpty
                                   ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'

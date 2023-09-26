@@ -1,5 +1,4 @@
 import 'package:flavour_fleet_main/Pages/order/orders_page.dart';
-import 'package:flavour_fleet_main/Pages/Cart/cart_page.dart';
 import 'package:flavour_fleet_main/Pages/Home/main_food_page.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
@@ -32,8 +31,8 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       MainFoodPage(isGuest: widget.isGuest),
-      CartPage(isGuest: widget.isGuest),
-      CartHistory(isGuest: widget.isGuest),
+      // CartPage(isGuest: widget.isGuest),
+      OrderPage(isGuest: widget.isGuest),
     ];
   }
 
@@ -43,17 +42,13 @@ class _HomePageState extends State<HomePage> {
         icon: const Icon(CupertinoIcons.home),
         title: ("Home"),
         activeColorPrimary: AppColors.mainColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.shopping_cart),
-        title: ("cart"),
-        activeColorPrimary: AppColors.mainColor,
+        activeColorSecondary: Colors.white,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.archivebox),
         title: ("orders"),
+        activeColorSecondary: Colors.white,
         activeColorPrimary: AppColors.mainColor,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
@@ -92,7 +87,7 @@ class _HomePageState extends State<HomePage> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style6,
+      navBarStyle: NavBarStyle.style10,
     );
   }
 }

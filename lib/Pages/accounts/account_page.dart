@@ -146,24 +146,6 @@ class _AccountPageState extends State<AccountPage> {
                             SizedBox(
                               height: Dimensions.height10 * 5,
                             ),
-
-                            // GestureDetector(
-                            //   onTap: () =>
-                            //       Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => const EditProfile(),
-                            //   )),
-                            //   child: Container(
-                            //     margin: EdgeInsets.symmetric(
-                            //         horizontal: Dimensions.height15 + 3),
-                            //     decoration: BoxDecoration(
-                            //         color: Colors.black12,
-                            //         borderRadius:
-                            //             BorderRadius.circular(Dimensions.radius15)),
-                            //     height: Dimensions.height45 - 5,
-                            //     width: double.maxFinite,
-                            //     child: Center(child: BigText(text: 'update profile')),
-                            //   ),
-                            // ),
                             SizedBox(
                               height: Dimensions.height10,
                             ),
@@ -251,7 +233,7 @@ class _AccountPageState extends State<AccountPage> {
                                   //messages
 
                                   const Spacer(),
-                                  SmallText(text: 'FlavorFleet   v1.0'),
+                                  SmallText(text: 'FlavorFleet   v1.2'),
                                   SizedBox(height: Dimensions.height20)
                                 ],
                               ),

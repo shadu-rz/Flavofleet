@@ -21,10 +21,8 @@ class CartListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: Dimensions.height10),
-      // color: Colors.amber,
+      color: Colors.white,
       height: 100,
-      width: double.maxFinite,
       child: Row(
         children: [
           Container(
@@ -50,7 +48,7 @@ class CartListWidget extends StatelessWidget {
                 children: [
                   BigText(
                     text: snap['title'],
-                    size: Dimensions.font20 - 2,
+                    size: Dimensions.font15 - 5,
                     color: Colors.black54,
                   ),
                   Row(
@@ -90,12 +88,19 @@ class CartListWidget extends StatelessWidget {
                       NoInternetWidget.noInternetConnection(context);
                     }
                   },
-                  child: const Icon(
-                    Icons.delete_outline,
-                    color: Colors.grey,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColors.mainWithLowOpacity,
+                        borderRadius: BorderRadius.circular(10)),
+                    width: 40,
+                    height: double.infinity,
+                    child: const Icon(
+                      Icons.delete_outline,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                SizedBox(width: Dimensions.width20),
+                const SizedBox(width: 2),
                 GestureDetector(
                   onTap: () async {
                     bool isConnected =
@@ -112,29 +117,35 @@ class CartListWidget extends StatelessWidget {
                       NoInternetWidget.noInternetConnection(context);
                     }
                   },
-                  child: const CircleAvatar(
-                    backgroundColor: AppColors.mainColor,
-                    radius: 12,
-                    child: Icon(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColors.mainWithLowOpacity,
+                        borderRadius: BorderRadius.circular(10)),
+                    height: double.infinity,
+                    width: 40,
+                    child: const Icon(
                       Icons.remove,
                       color: Colors.white,
                       size: 16,
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: Dimensions.width10,
-                ),
-                CircleAvatar(
-                  backgroundColor: const Color.fromARGB(255, 63, 198, 191),
-                  child: BigText(
-                    text: "${snap['itemCount']}",
-                    color: Colors.white,
+                const SizedBox(width: 2),
+                Container(
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.mainWithLowOpacity,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    child: BigText(
+                      text: "${snap['itemCount']}",
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                SizedBox(
-                  width: Dimensions.width10,
-                ),
+                const SizedBox(width: 2),
                 GestureDetector(
                   onTap: () async {
                     int count =
@@ -143,13 +154,17 @@ class CartListWidget extends StatelessWidget {
                         .updateItemCount(snap['productId'], count);
                     firebase.getCartDetails();
                   },
-                  child: const CircleAvatar(
-                    backgroundColor: AppColors.mainColor,
-                    radius: 12,
-                    child: Icon(
+                  child: Container(
+                   decoration: BoxDecoration(
+                    color: AppColors.mainWithLowOpacity,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                    height: double.infinity,
+                    width: 40,
+                    child: const Icon(
                       Icons.add,
-                      size: 16,
                       color: Colors.white,
+                      size: 16,
                     ),
                   ),
                 )
