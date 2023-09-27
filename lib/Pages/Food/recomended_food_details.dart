@@ -9,8 +9,11 @@ import 'package:get/get.dart';
 
 class RecomendedFoodDetails extends StatelessWidget {
   final bool isGuest;
-  const RecomendedFoodDetails(
-      {super.key, required this.snap, required this.isGuest});
+  const RecomendedFoodDetails({
+    super.key,
+    required this.snap,
+    required this.isGuest,
+  });
   final Map<String, dynamic> snap;
 
   @override

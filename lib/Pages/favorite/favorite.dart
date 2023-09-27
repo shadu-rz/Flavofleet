@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Widgets/is_guest_mode.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
@@ -60,82 +60,82 @@ class FavoritePage extends StatelessWidget {
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     var snap = snapshot.data!.docs[index].data();
-                    return GestureDetector(
-                      child: Container(
-                        margin: EdgeInsets.only(top: Dimensions.height10),
-                        // color: Colors.amber,
-                        height: 100,
-                        width: double.maxFinite,
-                        child: Row(
-                          children: [
-                            SizedBox(width: Dimensions.width20),
-                            Container(
-                              width: Dimensions.height20 * 4,
-                              height: Dimensions.height20 * 4,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(snap['image']),
+                    return Container(
+                      margin: EdgeInsets.only(top: Dimensions.height10),
+                      color: Colors.white,
+                      height: Dimensions.height45 * 2,
+                      width: double.maxFinite,
+                      child: Row(
+                        children: [
+                          SizedBox(width: Dimensions.width20),
+                          Container(
+                            width: Dimensions.height20 * 4,
+                            height: Dimensions.height20 * 4,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(snap['image']),
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                    Dimensions.radius15),
+                                color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: Dimensions.width20,
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              height: Dimensions.height20 * 5,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  BigText(
+                                    text: snap['title'],
+                                    size: Dimensions.font20 - 2,
+                                    color: Colors.black54,
                                   ),
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius15),
-                                  color: Colors.white),
-                            ),
-                            SizedBox(
-                              width: Dimensions.width20,
-                            ),
-                            Expanded(
-                              child: SizedBox(
-                                height: Dimensions.height20 * 5,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    BigText(
-                                      text: snap['title'],
-                                      size: Dimensions.font20 - 2,
-                                      color: Colors.black54,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        BigText(
-                                          text: "₹ ${snap['price']}",
-                                          size: Dimensions.font20 - 2,
-                                          color: Colors.redAccent,
-                                        ),
-                                        //containerrr
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      BigText(
+                                        text: "₹ ${snap['price']}",
+                                        size: Dimensions.font20 - 2,
+                                        color: Colors.redAccent,
+                                      ),
+                                      //containerrr
+                                    ],
+                                  )
+                                ],
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.only(
-                                top: Dimensions.height10,
-                                bottom: Dimensions.height10,
-                                right: Dimensions.width20 / 2,
-                                left: Dimensions.width20 / 2,
-                              ),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius15),
-                                  color: Colors.white),
-                              child: GestureDetector(
-                                onTap: () async {
-                                  await _showMyDialog(context, snap);
-                                },
-                                child: const Icon(
-                                  Icons.delete_outline,
-                                  color: Colors.grey,
-                                ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(
+                              top: Dimensions.height10,
+                              bottom: Dimensions.height10,
+                              right: Dimensions.width20 / 2,
+                              left: Dimensions.width20 / 2,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius15),
+                              color: AppColors.mainWithLowOpacity,
+                            ),
+                            child: GestureDetector(
+                              onTap: () async {
+                                await _showMyDialog(context, snap);
+                              },
+                              child: const Icon(
+                                Icons.delete_outline,
+                                color: Colors.white,
+                                size: 20,
                               ),
                             ),
-                            SizedBox(width: Dimensions.height20)
-                          ],
-                        ),
+                          ),
+                          SizedBox(width: Dimensions.height20)
+                        ],
                       ),
                     );
                   },
@@ -170,11 +170,6 @@ Future<void> _showMyDialog(context, Map<String, dynamic> snap) async {
                 Navigator.of(context).pop();
                 await FirebaseMethods()
                     .removeItemFromFavorite(snap['productId']);
-                showCustomSnackBar(
-                  '${snap['title']} ',
-                  title: 'removed',
-                  color: Colors.red,
-                );
               },
             ),
           ],

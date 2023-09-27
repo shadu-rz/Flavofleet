@@ -17,4 +17,5 @@ class CheckboxController extends GetxController {
       codChecked.value = false;
     }
   }
+  
 }

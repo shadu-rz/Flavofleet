@@ -76,7 +76,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
                     productId: id,
                   );
                   await FirebaseMethods().addToFav(product);
-                  log('favoriteeeeeeee');
+                  log('added to favoriteeeeeeeeeeeeeee');
                 }
               } else {
                 NoInternetWidget.noInternetConnection(context);
@@ -123,14 +123,14 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
                       productId: id,
                       itemCount: countController.count.value);
                   await FirebaseMethods().addToCart(product);
-                  
+
                   firebase.getCartDetails();
                 }
               } else {
                 NoInternetWidget.noInternetConnection(context);
               }
             },
-            child: Container(
+            child:  Container(
               height: Dimensions.height45,
               width: Dimensions.height45 * 3,
               decoration: BoxDecoration(

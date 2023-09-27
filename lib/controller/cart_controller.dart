@@ -21,4 +21,6 @@ class CartController extends GetxController {
     }
     return countInCart;
   }
+
+ 
 }

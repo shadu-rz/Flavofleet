@@ -22,7 +22,7 @@ class CartListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      height: 100,
+      height: Dimensions.height45*2,
       child: Row(
         children: [
           Container(
@@ -48,7 +48,7 @@ class CartListWidget extends StatelessWidget {
                 children: [
                   BigText(
                     text: snap['title'],
-                    size: Dimensions.font15 - 5,
+                    size: Dimensions.font15 - 3,
                     color: Colors.black54,
                   ),
                   Row(

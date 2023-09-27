@@ -60,7 +60,7 @@ class CartPage extends StatelessWidget {
                                     'All items cleared',
                                     title: 'success',
                                     color: Colors.green,
-                                    position: SnackPosition.TOP,
+                                    position: SnackPosition.BOTTOM,
                                   );
                                   navigator!.pop();
                                 },
@@ -142,47 +142,3 @@ class CartPage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-// return showDialog(
-//                     context: context,
-//                     builder: (BuildContext context) {
-//                       return AlertDialog(
-//                         title: Text(
-//                           'Do you want to clear all items in cart?',
-//                           style: TextStyle(
-//                             fontSize: Dimensions.font20 - 3,
-//                             fontWeight: FontWeight.bold,
-//                           ),
-//                         ),
-//                         actions: [
-//                           TextButton(
-//                             child: const Text('Cancel'),
-//                             onPressed: ()async{
-//                               Navigator.of(context).pop();
-//                               await FirebaseMethods().getCartDetails();
-//                             },
-//                           ),
-//                           TextButton(
-//                             child: const Text('Confirm'),
-//                             onPressed: () async {
-//                              await FirebaseMethods().clearCart();
-//                              await FirebaseMethods().getCartDetails();
-//                               showCustomSnackBar('All items cleared',
-//                                   title: 'success',
-//                                   color: Colors.green,
-//                                   position: SnackPosition.TOP);
-//                               navigator!.pop();
-//                             },
-//                           ),
-//                         ],
-//                       );
-//                     });

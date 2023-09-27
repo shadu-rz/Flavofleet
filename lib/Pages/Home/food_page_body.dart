@@ -49,7 +49,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
           // Wrap the RecommendedProductListWidget with a Container and a SingleChildScrollView
            SizedBox(
-             height: 500,
+             height: Dimensions.screenWidth,
              child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: RecommendedProductListWidget(isGuest: widget.isGuest,),
