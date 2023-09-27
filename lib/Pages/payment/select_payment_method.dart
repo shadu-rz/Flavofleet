@@ -6,6 +6,7 @@ import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
 import 'package:flavour_fleet_main/Widgets/no_internet.dart';
 import 'package:flavour_fleet_main/Widgets/small_text.dart';
+import 'package:flavour_fleet_main/controller/check_box_controller.dart';
 import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -14,6 +15,8 @@ import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class PaymentMethodSelect extends StatefulWidget {
+  final CheckboxController controller = Get.put(CheckboxController());
+
   Map<String, dynamic> snap;
   Map<String, dynamic>? productSnap;
   final bool isCart;
@@ -33,9 +36,6 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
 
   final FirebaseMethods firebase = Get.put(FirebaseMethods());
 
-  RxBool codChecked = false.obs;
-  RxBool upiChecked = false.obs;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,67 +50,73 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
           const SizedBox(
             height: 20,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            height: 70,
-            width: Dimensions.screenWidth,
-            child: Row(
-              children: [
-                Obx(
-                  () => Checkbox(
-                    value: codChecked.value,
-                    onChanged: (value) {
-                      codChecked.value = !codChecked.value;
-                      if (codChecked.value) {
-                        upiChecked.value = false;
-                      }
-                    },
+          GestureDetector(
+            onTap: () {
+              widget.controller.toggleCodCheckbox();
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: 70,
+              width: Dimensions.screenWidth,
+              child: Row(
+                children: [
+                  Obx(
+                    () => Checkbox(
+                      value: widget.controller.codChecked.value,
+                      onChanged: (value) {
+                        widget.controller.codChecked.value = value ?? false;
+                       
+                      },
+                    ),
                   ),
-                ),
-                SmallText(
-                  text: 'Cash on delivery / Pay on delivery',
-                  color: AppColors.mainBlackColor,
-                  size: 14,
-                )
-              ],
+                  SmallText(
+                    text: 'Cash on delivery / Pay on delivery',
+                    color: AppColors.mainBlackColor,
+                    size: 14,
+                  )
+                ],
+              ),
             ),
           ),
           const SizedBox(
             height: 20,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            height: 70,
-            width: Dimensions.screenWidth,
-            child: Row(
-              children: [
-                Obx(
-                  () => Checkbox(
-                    value: upiChecked.value,
-                    onChanged: (value) {
-                      upiChecked.value = !upiChecked.value;
-                      if (upiChecked.value) {
-                        codChecked.value = false;
-                      }
-                    },
+          GestureDetector(
+            onTap: () {
+              widget.controller.toggleUpiCheckbox();
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: 70,
+              width: Dimensions.screenWidth,
+              child: Row(
+                children: [
+                  Obx(
+                    () => Checkbox(
+                      value: widget.controller.upiChecked.value,
+                      onChanged: (value) {
+                        widget.controller.upiChecked.value = value ?? false;
+                        
+                      },
+                    ),
                   ),
-                ),
-                SmallText(
-                  text: 'Card payment',
-                  color: AppColors.mainBlackColor,
-                  size: 14,
-                )
-              ],
+                  SmallText(
+                    text: 'Card payment',
+                    color: AppColors.mainBlackColor,
+                    size: 14,
+                  )
+                ],
+              ),
             ),
           ),
           const SizedBox(
@@ -136,10 +142,10 @@ class _PaymentMethodSelectState extends State<PaymentMethodSelect> {
                   await NoInternetWidget.checkInternetConnectivity();
               if (isConnected) {
                 String amount = firebase.totalPrice.floor().toString();
-                if (upiChecked.value) {
+                if (widget.controller.upiChecked.value) {
                   await makePayment(amount: amount, currency: "INR");
                   log('card Payment called');
-                } else if (codChecked.value) {
+                } else if (widget.controller.codChecked.value) {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => PlaceOrder(

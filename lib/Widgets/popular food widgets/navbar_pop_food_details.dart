@@ -52,7 +52,7 @@ class _NavBarPopFoodDetailsState extends State<NavBarPopFoodDetails> {
               topLeft: Radius.circular(Dimensions.radius20 * 2),
               topRight: Radius.circular(Dimensions.radius20 * 2))),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           GestureDetector(
             onTap: () async {

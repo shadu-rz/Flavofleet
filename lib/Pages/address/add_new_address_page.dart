@@ -39,126 +39,113 @@ class _AddAddressPageState extends State<AddAddressPage> {
       appBar: AppBar(
         centerTitle: true,
         title: BigText(text: 'Address new address'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: Dimensions.height20),
-          Padding(
-            padding: EdgeInsets.only(left: Dimensions.width20),
-            child: SmallText(
-              text: 'Name',
-              size: 15,
-              color: AppColors.mainBlackColor,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                hintText: 'Your full name',
-              ),
-              controller: nameController,
-            ),
-          ),
-          SizedBox(height: Dimensions.height20),
-          Padding(
-            padding: EdgeInsets.only(left: Dimensions.width20),
-            child: SmallText(
-              text: 'contact number',
-              size: 15,
-              color: AppColors.mainBlackColor,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-            child: TextField(
-              
-              decoration: const InputDecoration(
-                hintText: '10 digit mobile number',
-              ),
-              controller: phoneController,
-              keyboardType: TextInputType.number,
-            ),
-          ),
-          SizedBox(
-            height: Dimensions.height20,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: Dimensions.width20),
-            child: SmallText(
-              text: 'Address',
-              size: 15,
-              color: AppColors.mainBlackColor,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-            child: TextField(
-              decoration: const InputDecoration(
-                hintText: 'Provide complete address to the destination',
-              ),
-              controller: addressController,
-            ),
-          ),
-          SizedBox(height: Dimensions.height10),
-          SizedBox(
-            height: Dimensions.height10,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: Dimensions.width20),
-            child: SmallText(
-              text: 'pincode',
-              size: 15,
-              color: AppColors.mainBlackColor,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
-            child: TextField(
-              decoration: const InputDecoration(
-                hintText: '6 digit picode',
-              ),
-              controller: pincodeController,
-              keyboardType: TextInputType.number,
-            ),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () async {
-              String id = const Uuid().v1();
-              AddressModel addressModel = AddressModel(
-                name: nameController.text,
-                address: addressController.text,
-                phone: phoneController.text,
-                pincode: pincodeController.text,
-                id: id,
-              );
+        actions: [
+          IconButton(
+              onPressed: () async {
+                String id = const Uuid().v1();
+                AddressModel addressModel = AddressModel(
+                  name: nameController.text,
+                  address: addressController.text,
+                  phone: phoneController.text,
+                  pincode: pincodeController.text,
+                  id: id,
+                );
 
-              await FirebaseMethods().addAddress(addressModel);
+                await FirebaseMethods().addAddress(addressModel);
 
-              navigator!.pop();
-            },
-            child: Container(
-              margin: EdgeInsets.only(
-                  left: Dimensions.width20,
-                  right: Dimensions.width20,
-                  bottom: Dimensions.height20),
-              width: Dimensions.screenWidth,
-              height: Dimensions.screenHeight / 14,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius20 / 2),
-                  color: AppColors.mainColor),
-              child: Center(
-                child: BigText(
-                  text: 'Continue',
-                  size: 18,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
+                navigator!.pop();
+              },
+              icon: const Icon(Icons.check))
         ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: Dimensions.height20),
+            Padding(
+              padding: EdgeInsets.only(left: Dimensions.width20),
+              child: SmallText(
+                text: 'Name',
+                size: 15,
+                color: AppColors.mainBlackColor,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Your full name',
+                ),
+                controller: nameController,
+              ),
+            ),
+            SizedBox(height: Dimensions.height20),
+            Padding(
+              padding: EdgeInsets.only(left: Dimensions.width20),
+              child: SmallText(
+                text: 'contact number',
+                size: 15,
+                color: AppColors.mainBlackColor,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: '10 digit mobile number',
+                ),
+                controller: phoneController,
+                keyboardType: TextInputType.number,
+              ),
+            ),
+            SizedBox(
+              height: Dimensions.height20,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: Dimensions.width20),
+              child: SmallText(
+                text: 'Address',
+                size: 15,
+                color: AppColors.mainBlackColor,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Provide complete address to the destination',
+                ),
+                controller: addressController,
+              ),
+            ),
+            SizedBox(height: Dimensions.height10),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: Dimensions.width20),
+              child: SmallText(
+                text: 'pincode',
+                size: 15,
+                color: AppColors.mainBlackColor,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: '6 digit picode',
+                ),
+                controller: pincodeController,
+                keyboardType: TextInputType.number,
+              ),
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+          ],
+        ),
       ),
     );
   }
