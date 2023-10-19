@@ -1,19 +1,17 @@
-import 'package:flavour_fleet_main/Pages/Food/popular_food_details.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/icon_and_text.dart';
-import 'package:flavour_fleet_main/Widgets/small_text.dart';
+
+import 'package:flavofleet_main/Pages/Food/popular_food_details.dart';
+import 'package:flavofleet_main/Widgets/Utils/colors.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/icon_and_text.dart';
+import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HorizontalScrollWidget extends StatelessWidget {
   final bool isGuest;
-  const HorizontalScrollWidget({
-    super.key,
-    required this.snap,
-    required this.isGuest
-  });
+  const HorizontalScrollWidget(
+      {super.key, required this.snap, required this.isGuest});
   final Map<String, dynamic> snap;
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,6 @@ class HorizontalScrollWidget extends StatelessWidget {
         onTap: () {
           navigator!.push(
             MaterialPageRoute(
-              
               builder: (context) => PopularFoodDetails(
                 snap: snap,
                 isGuest: isGuest,
@@ -43,6 +40,7 @@ class HorizontalScrollWidget extends StatelessWidget {
                   left: Dimensions.width10,
                   right: Dimensions.width10,
                   top: Dimensions.height10),
+             
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
                 image: DecorationImage(

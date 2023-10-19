@@ -1,15 +1,15 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/settings/settings_page.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/account%20page%20widgets/account_widget.dart';
-import 'package:flavour_fleet_main/Widgets/app_icon.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/is_guest_mode.dart';
-import 'package:flavour_fleet_main/Widgets/small_text.dart';
-import 'package:flavour_fleet_main/firebase/auth/usercontroller.dart';
+import 'package:flavofleet_main/Pages/settings/settings_page.dart';
+import 'package:flavofleet_main/Widgets/Utils/colors.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/account%20page%20widgets/account_widget.dart';
+import 'package:flavofleet_main/Widgets/app_icon.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/is_guest_mode.dart';
+import 'package:flavofleet_main/Widgets/small_text.dart';
+import 'package:flavofleet_main/firebase/auth/usercontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -234,7 +234,7 @@ class _AccountPageState extends State<AccountPage> {
                                   //messages
 
                                   const Spacer(),
-                                  SmallText(text: 'FlavorFleet   v1.2'),
+                                  SmallText(text: 'FlavoFleet   v1.0'),
                                   SizedBox(height: Dimensions.height20)
                                 ],
                               ),

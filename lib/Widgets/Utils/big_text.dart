@@ -1,4 +1,4 @@
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

@@ -1,8 +1,8 @@
-name: flavour_fleet_main
+name: flavofleet_main
 description: A new Flutter project.
 
 publish_to: 'none'
-version: 1.0.0+5
+version: 1.0.0+1
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
@@ -11,8 +11,8 @@ dependencies:
   cloud_firestore: ^4.7.0
   connectivity_plus: ^4.0.2
   cupertino_icons: ^1.0.2
-  firebase_auth: null
-  firebase_core: null
+  firebase_auth: ^4.10.1
+  firebase_core: ^2.17.0
   firebase_storage: ^11.2.0
   flutter:
     sdk: flutter
@@ -21,6 +21,7 @@ dependencies:
   google_sign_in: ^6.1.4
   http: null
   intl: ^0.18.1
+  path_provider: ^2.1.1
   persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: null
   uuid: ^3.0.7
@@ -32,29 +33,23 @@ dev_dependencies:
     sdk: flutter
 
 flutter_icons:
- android: true
- image_path: "assets/image/playstore.png"
+  android: true
+  image_path: "assets/image/playstore.png"
 
 flutter:
 
   uses-material-design: true
 
   assets:
-    - assets/image/food1.jpg
-    - assets/image/food2.jpg
-    - assets/image/food3.jpg
-    - assets/image/food4.jpg
-    - assets/image/food5.jpg
-    - assets/image/food6.jpg
-    - assets/image/food7.jpg
     - assets/image/food8.jpg
+    - assets/image/food6.jpg
     - assets/image/google.png
     - assets/image/fb.jpg
     - assets/image/mainlogo.png
     - assets/image/foodLoading.jpg
     - assets/image/google-logo.png
     - assets/image/login_image.jpg
-    - assets/image/splashImage.jpg
+    - assets/image/splashImage.png
     - assets/image/location.png
     - assets/image/playstore.png
 

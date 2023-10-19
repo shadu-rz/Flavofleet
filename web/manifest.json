@@ -1,6 +1,6 @@
 {
-    "name": "flavour_fleet_main",
-    "short_name": "flavour_fleet_main",
+    "name": "flavofleet_main",
+    "short_name": "flavofleet_main",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

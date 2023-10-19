@@ -1,5 +1,5 @@
 
-import 'package:flavour_fleet_main/Widgets/small_text.dart';
+import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import '../Utils/colors.dart';
 import '../Utils/diamensions.dart';

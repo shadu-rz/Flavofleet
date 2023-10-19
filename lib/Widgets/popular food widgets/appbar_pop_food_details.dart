@@ -1,6 +1,6 @@
-import 'package:flavour_fleet_main/Pages/Cart/cart_page.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/app_icon.dart';
+import 'package:flavofleet_main/Pages/Cart/cart_page.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/app_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

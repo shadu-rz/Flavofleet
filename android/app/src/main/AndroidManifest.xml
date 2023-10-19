@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flavour_fleet_main">
+    package="com.shadu.flavofleet_main">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="FlavorFleet"
+        android:label="FlavoFleet"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

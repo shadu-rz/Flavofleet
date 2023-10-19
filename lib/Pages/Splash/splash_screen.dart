@@ -1,4 +1,4 @@
-import 'package:flavour_fleet_main/Pages/auth/auth_page.dart';
+import 'package:flavofleet_main/Pages/auth/auth_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +22,7 @@ class _SpalshScreenState extends State<SpalshScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/image/splashImage.jpg'),
+            image: AssetImage('assets/image/splashImage.png'),
             fit: BoxFit.cover,
           ),
         ),

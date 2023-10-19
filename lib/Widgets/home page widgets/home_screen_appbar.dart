@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/Cart/cart_page.dart';
-import 'package:flavour_fleet_main/Pages/accounts/account_page.dart';
-import 'package:flavour_fleet_main/Pages/favorite/favorite.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Pages/Cart/cart_page.dart';
+import 'package:flavofleet_main/Pages/accounts/account_page.dart';
+import 'package:flavofleet_main/Pages/favorite/favorite.dart';
+import 'package:flavofleet_main/Widgets/Utils/colors.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +20,9 @@ class HomeScreenAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-          top: Dimensions.height15, bottom: Dimensions.height15),
+        top: Dimensions.height15,
+        bottom: Dimensions.height15,
+      ),
       padding:
           EdgeInsets.only(left: Dimensions.width15, right: Dimensions.width15),
       child: Row(
@@ -70,14 +72,14 @@ class HomeScreenAppBar extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: Dimensions.width20 + 15),
+          SizedBox(width: Dimensions.width20 *2.5),
           BigText(
-            text: 'Flavour Fleet',
+            text: 'Flavofleet',
             color: Colors.white,
             size: 22,
             fontWeight: FontWeight.w800,
           ),
-          SizedBox(width: Dimensions.width20 * 2),
+          SizedBox(width: Dimensions.width20 * 3),
           GestureDetector(
             onTap: () {
               navigator!.push(MaterialPageRoute(

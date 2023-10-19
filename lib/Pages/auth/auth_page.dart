@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
-import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
+import 'package:flavofleet_main/Pages/Home/home_page.dart';
+import 'package:flavofleet_main/Pages/auth/sign_in_page.dart';
 import 'package:flutter/material.dart';
 
 //this widget is to decide wheather it is logged in or not

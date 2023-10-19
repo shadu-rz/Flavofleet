@@ -13,18 +13,18 @@ class TermsAndConditionsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Welcome to Flavor fleet!',
+              'Welcome to Flavofleet!',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
             const Text(
-              'These terms and conditions outline the rules and regulations for the use of Flavor fleet\'s Website, located at www.flavorfleet.com.',
+              'These terms and conditions outline the rules and regulations for the use of Flavofleet\'s Website, located at www.flavofleet.com.',
             ),
             const SizedBox(height: 16),
             RichText(
               text: const TextSpan(
                 text:
-                    'By accessing this website we assume you accept these terms and conditions. Do not continue to use Flavor fleet if you do not agree to take all of the terms and conditions stated on this page.',
+                    'By accessing this website we assume you accept these terms and conditions. Do not continue to use Flavofleet if you do not agree to take all of the terms and conditions stated on this page.',
                 style: TextStyle(color: Colors.black),
               ),
             ),
@@ -35,7 +35,7 @@ class TermsAndConditionsPage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Unless otherwise stated, Flavor fleet and/or its licensors own the intellectual property rights for all material on Flavor fleet. All intellectual property rights are reserved. You may access this from Flavor fleet for your own personal use subjected to restrictions set in these terms and conditions.',
+              'Unless otherwise stated, Flavofleet and/or its licensors own the intellectual property rights for all material on Flavofleet. All intellectual property rights are reserved. You may access this from Flavofleet for your own personal use subjected to restrictions set in these terms and conditions.',
             ),
             const SizedBox(height: 16),
             const Text(
@@ -46,20 +46,20 @@ class TermsAndConditionsPage extends StatelessWidget {
             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('• Republish material from Flavor fleet'),
-                Text('• Sell, rent or sub-license material from Flavor fleet'),
+                Text('• Republish material from Flavofleet'),
+                Text('• Sell, rent or sub-license material from Flavofleet'),
                 Text(
-                    '• Reproduce, duplicate or copy material from Flavor fleet'),
-                Text('• Redistribute content from Flavor fleet'),
+                    '• Reproduce, duplicate or copy material from Flavofleet'),
+                Text('• Redistribute content from Flavofleet'),
               ],
             ),
             const SizedBox(height: 16),
             const Text(
-              'Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Flavor fleet does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Flavor fleet,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, Flavor fleet shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.',
+              'Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website. Flavofleet does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Flavofleet,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws, Flavofleet shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.',
             ),
             const SizedBox(height: 16),
             const Text(
-              'Flavor fleet reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.',
+              'Flavofleet reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.',
             ),
             const SizedBox(height: 16),
             const Text(
@@ -82,7 +82,7 @@ class TermsAndConditionsPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'You hereby grant Flavor fleet a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.',
+              'You hereby grant Flavofleet a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.',
             ),
             const SizedBox(height: 16),
             const Text(
@@ -130,7 +130,7 @@ class TermsAndConditionsPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of Flavor fleet; and (d) the link is in the context of general resource information.',
+              'We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of Flavofleet; and (d) the link is in the context of general resource information.',
             ),
             const SizedBox(height: 16),
             const Text(
@@ -138,7 +138,7 @@ class TermsAndConditionsPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to Flavor fleet. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.',
+              'If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to Flavofleet. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.',
             ),
             const SizedBox(height: 16),
             const Text(
@@ -157,7 +157,7 @@ class TermsAndConditionsPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const Text(
-              'No use of Flavor fleet\'s logo or other artwork will be allowed for linking absent a trademark license agreement.',
+              'No use of Flavofleet\'s logo or other artwork will be allowed for linking absent a trademark license agreement.',
             ),
             const SizedBox(height: 16),
             const Text(

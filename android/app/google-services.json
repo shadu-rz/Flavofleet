@@ -7,14 +7,51 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:165082463166:android:3dbdd00cb9c6417d8b57ef",
+        "mobilesdk_app_id": "1:165082463166:android:cbf01a0de832e94f8b57ef",
         "android_client_info": {
-          "package_name": "com.shadu.flavour_fleet_main"
+          "package_name": "com.shadu.flavofleet_main"
         }
       },
       "oauth_client": [
         {
-          "client_id": "165082463166-730lp5numcqnlo6u7h238cudc2diualh.apps.googleusercontent.com",
+          "client_id": "165082463166-eups5pn9h3s9j3hjeaemhd6re60cbc2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadu.flavofleet_main",
+            "certificate_hash": "6cbc61aa1dc92b8016943fdd6c3740529b647255"
+          }
+        },
+        {
+          "client_id": "165082463166-8u5ap31ofnkosabvvnuksivn91v94l77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCplMpIgLOQBGChxMIBvxOkCUmO0w0rlUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165082463166-730lp5numcqnlo6u7h238cudc2diualh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165082463166:android:304a8b5bc5a8c1138b57ef",
+        "android_client_info": {
+          "package_name": "com.shadu.flavor_fleet_admin_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165082463166-8u5ap31ofnkosabvvnuksivn91v94l77.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

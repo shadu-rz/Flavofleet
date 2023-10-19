@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/is_guest_mode.dart';
-import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
+import 'package:flavofleet_main/Widgets/Utils/colors.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/is_guest_mode.dart';
+import 'package:flavofleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -16,6 +16,15 @@ class FavoritePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
         title: BigText(text: 'Favorites', color: Colors.white),
@@ -76,8 +85,8 @@ class FavoritePage extends StatelessWidget {
                                   fit: BoxFit.cover,
                                   image: NetworkImage(snap['image']),
                                 ),
-                                borderRadius: BorderRadius.circular(
-                                    Dimensions.radius15),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius15),
                                 color: Colors.white),
                           ),
                           SizedBox(

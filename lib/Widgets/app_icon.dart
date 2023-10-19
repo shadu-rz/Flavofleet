@@ -2,18 +2,18 @@ import 'package:flutter/widgets.dart';
 
 class AppIcon extends StatelessWidget {
   final IconData icon;
-  final Color backgroundColor;
-  final Color iconColor;
-  final double size;
   final double iconSize;
-  const AppIcon({
-    super.key,
-    required this.icon,
-    this.backgroundColor = const Color(0x0ffcf4e4),
-    this.iconColor = const Color(0xFF765d54),
-    this.size = 40,
-    this.iconSize=16
-  });
+  final Color backgroundColor;
+  final double size;
+  final Color iconColor;
+
+  const AppIcon(
+      {super.key,
+      required this.icon,
+      this.backgroundColor = const Color(0x0ffcf4e4),
+      this.iconColor = const Color(0xFF765d54),
+      this.size = 40,
+      this.iconSize = 16});
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flavour_fleet_main/controller/cart_controller.dart';
-import 'package:flavour_fleet_main/firebase/auth/usercontroller.dart';
-import 'package:flavour_fleet_main/Pages/Splash/splash_screen.dart';
+import 'package:flavofleet_main/controller/cart_controller.dart';
+import 'package:flavofleet_main/firebase/auth/usercontroller.dart';
+import 'package:flavofleet_main/Pages/Splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
-import 'package:flavour_fleet_main/.env';
+import 'package:flavofleet_main/.env';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true
       ),
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       home:  const SpalshScreen(),
     );
   }

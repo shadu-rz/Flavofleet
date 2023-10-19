@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
-import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
-import 'package:flavour_fleet_main/Pages/accounts/account_page.dart';
+import 'package:flavofleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavofleet_main/Pages/Home/home_page.dart';
+import 'package:flavofleet_main/Pages/accounts/account_page.dart';
 import 'package:flutter/material.dart';
 
 Future signUp(context, String email, String password,String name) async {

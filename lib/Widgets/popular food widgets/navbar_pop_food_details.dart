@@ -1,15 +1,15 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/address/select_address.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/no_internet.dart';
-import 'package:flavour_fleet_main/controller/cart_controller.dart';
-import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
-import 'package:flavour_fleet_main/model/cart_model.dart';
-import 'package:flavour_fleet_main/model/favorite_model.dart';
+import 'package:flavofleet_main/Pages/address/select_address.dart';
+import 'package:flavofleet_main/Widgets/Utils/colors.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/no_internet.dart';
+import 'package:flavofleet_main/controller/cart_controller.dart';
+import 'package:flavofleet_main/firebase/firebase_methods.dart';
+import 'package:flavofleet_main/model/cart_model.dart';
+import 'package:flavofleet_main/model/favorite_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';

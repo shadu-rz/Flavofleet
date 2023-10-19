@@ -1,12 +1,12 @@
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/small_text.dart';
-import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
-import 'package:flavour_fleet_main/model/address_model.dart';
+import 'package:flavofleet_main/Widgets/Utils/colors.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/small_text.dart';
+import 'package:flavofleet_main/firebase/firebase_methods.dart';
+import 'package:flavofleet_main/model/address_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
 import 'package:uuid/uuid.dart';
 
 class AddAddressPage extends StatefulWidget {

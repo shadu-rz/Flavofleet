@@ -1,8 +1,8 @@
-import 'package:flavour_fleet_main/Widgets/popular%20food%20widgets/appbar_pop_food_details.dart';
-import 'package:flavour_fleet_main/Widgets/popular%20food%20widgets/body_pop_food_details.dart';
-import 'package:flavour_fleet_main/Widgets/popular%20food%20widgets/image_pop_food_details.dart';
-import 'package:flavour_fleet_main/Widgets/popular%20food%20widgets/navbar_pop_food_details.dart';
-import 'package:flavour_fleet_main/firebase/firebase_methods.dart';
+import 'package:flavofleet_main/Widgets/popular%20food%20widgets/appbar_pop_food_details.dart';
+import 'package:flavofleet_main/Widgets/popular%20food%20widgets/body_pop_food_details.dart';
+import 'package:flavofleet_main/Widgets/popular%20food%20widgets/image_pop_food_details.dart';
+import 'package:flavofleet_main/Widgets/popular%20food%20widgets/navbar_pop_food_details.dart';
+import 'package:flavofleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

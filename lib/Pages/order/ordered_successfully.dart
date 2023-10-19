@@ -1,6 +1,6 @@
-import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/small_text.dart';
+import 'package:flavofleet_main/Pages/Home/home_page.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

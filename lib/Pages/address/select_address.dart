@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/address/add_new_address_page.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/is_guest_mode.dart';
-import 'package:flavour_fleet_main/Widgets/no_internet.dart';
-import 'package:flavour_fleet_main/Widgets/user_delivery_address_widget.dart';
+import 'package:flavofleet_main/Pages/address/add_new_address_page.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/is_guest_mode.dart';
+import 'package:flavofleet_main/Widgets/no_internet.dart';
+import 'package:flavofleet_main/Widgets/user_delivery_address_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

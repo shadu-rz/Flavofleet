@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "flavour_fleet_main" "\0"
+            VALUE "CompanyName", "com.shadu" "\0"
+            VALUE "FileDescription", "flavofleet_main" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "flavour_fleet_main" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "flavour_fleet_main.exe" "\0"
-            VALUE "ProductName", "flavour_fleet_main" "\0"
+            VALUE "InternalName", "flavofleet_main" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.shadu. All rights reserved." "\0"
+            VALUE "OriginalFilename", "flavofleet_main.exe" "\0"
+            VALUE "ProductName", "flavofleet_main" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

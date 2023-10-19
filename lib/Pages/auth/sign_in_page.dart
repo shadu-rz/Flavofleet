@@ -1,12 +1,12 @@
-import 'package:flavour_fleet_main/Pages/Home/home_page.dart';
-import 'package:flavour_fleet_main/Pages/auth/auth_page.dart';
-import 'package:flavour_fleet_main/Pages/auth/sign_up_page.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/app_text_field.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/no_internet.dart';
-import 'package:flavour_fleet_main/firebase/auth/sign_in_with_email_and_pass.dart';
-import 'package:flavour_fleet_main/firebase/auth/sign_in_with_google.dart';
+import 'package:flavofleet_main/Pages/Home/home_page.dart';
+import 'package:flavofleet_main/Pages/auth/auth_page.dart';
+import 'package:flavofleet_main/Pages/auth/sign_up_page.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/app_text_field.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/no_internet.dart';
+import 'package:flavofleet_main/firebase/auth/sign_in_with_email_and_pass.dart';
+import 'package:flavofleet_main/firebase/auth/sign_in_with_google.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,23 +28,10 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: Dimensions.screenHeight * 0.05,
-            ),
-            //App logo
-            SizedBox(
-              height: Dimensions.screenHeight * 0.25,
-              child: const Center(
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 100,
-                  backgroundImage: AssetImage('assets/image/food6.jpg'),
-                ),
-              ),
-            ),
+            SizedBox(height: Dimensions.height45*4),
             //welcome
             Container(
               // color: Colors.amber,
@@ -80,12 +67,12 @@ class _SignInPageState extends State<SignInPage> {
                     ],
                   ),
                   SizedBox(
-                    height: Dimensions.screenHeight * 0.02,
+                    height: Dimensions.screenHeight * 0.03,
                   )
                 ],
               ),
             ),
-
+      
             // Your Email
             AppTextField(
               textController: emailController,
@@ -146,7 +133,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
             ),
-
+      
             SizedBox(height: Dimensions.height30),
             // Sign In Button
             GestureDetector(
@@ -169,8 +156,7 @@ class _SignInPageState extends State<SignInPage> {
                 width: Dimensions.screenWidth,
                 height: Dimensions.screenHeight / 15,
                 decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.radius20 / 2),
+                    borderRadius: BorderRadius.circular(Dimensions.radius20 / 2),
                     color: Colors.black87),
                 child: Center(
                   child: BigText(
@@ -182,8 +168,8 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             SizedBox(height: Dimensions.height30),
-
-           RichText(
+      
+            RichText(
               text: TextSpan(
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => navigator!.pushReplacement(MaterialPageRoute(
@@ -207,27 +193,7 @@ class _SignInPageState extends State<SignInPage> {
                   )),
             ),
             SizedBox(
-              height: Dimensions.screenWidth * 0.05,
-            ),
-            GestureDetector(
-              onTap: () async {
-                final user = await signInWithGoogle();
-                if (user != null) {
-                  navigator!.pushReplacement(MaterialPageRoute(
-                    builder: (context) => const AuthPage(),
-                  ));
-                }
-              },
-              child: Container(
-                height: 50,
-                width: 100,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/image/google-logo.png'))),
-              ),
-            ),
-            SizedBox(
-              height: Dimensions.height10,
+              height: Dimensions.height20,
             ),
             InkWell(
               onTap: () {
@@ -245,7 +211,26 @@ class _SignInPageState extends State<SignInPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            )
+            ),
+            GestureDetector(
+              onTap: () async {
+                final user = await signInWithGoogle();
+                if (user != null) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const AuthPage(),
+                    ),
+                  );
+                }
+              },
+              child: Container(
+                height: 50,
+                width: 100,
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/image/google-logo.png'))),
+              ),
+            ),
           ],
         ),
       ),

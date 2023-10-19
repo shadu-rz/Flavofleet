@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/show_custom_snackbar.dart';
-import 'package:flavour_fleet_main/model/address_model.dart';
-import 'package:flavour_fleet_main/model/cart_model.dart';
-import 'package:flavour_fleet_main/model/favorite_model.dart';
-import 'package:flavour_fleet_main/model/order_model.dart';
+import 'package:flavofleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavofleet_main/model/address_model.dart';
+import 'package:flavofleet_main/model/cart_model.dart';
+import 'package:flavofleet_main/model/favorite_model.dart';
+import 'package:flavofleet_main/model/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';

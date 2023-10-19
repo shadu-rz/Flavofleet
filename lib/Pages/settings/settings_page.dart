@@ -1,13 +1,13 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavour_fleet_main/Pages/auth/sign_in_page.dart';
-import 'package:flavour_fleet_main/Pages/settings/about%20us/about_us.dart';
-import 'package:flavour_fleet_main/Pages/settings/privacy%20policy/privacy_policy.dart';
-import 'package:flavour_fleet_main/Pages/settings/terms%20and%20conditions/terms_and_conditions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/colors.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavour_fleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavour_fleet_main/Widgets/no_internet.dart';
+import 'package:flavofleet_main/Pages/auth/sign_in_page.dart';
+import 'package:flavofleet_main/Pages/settings/about%20us/about_us.dart';
+import 'package:flavofleet_main/Pages/settings/privacy%20policy/privacy_policy.dart';
+import 'package:flavofleet_main/Pages/settings/terms%20and%20conditions/terms_and_conditions.dart';
+import 'package:flavofleet_main/Widgets/Utils/colors.dart';
+import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/no_internet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,4 +1,4 @@
-import 'package:flavour_fleet_main/Widgets/small_text.dart';
+import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
 class IconAndTextWidget extends StatelessWidget {
