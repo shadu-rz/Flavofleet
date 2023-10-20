@@ -31,7 +31,7 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: Dimensions.height45*4),
+            SizedBox(height: Dimensions.height45 * 2),
             //welcome
             Container(
               // color: Colors.amber,
@@ -46,21 +46,22 @@ class _SignInPageState extends State<SignInPage> {
                     children: [
                       const SizedBox(width: 10),
                       Text(
-                        'Welcome Back',
+                        'Welcome \nBack',
                         style: TextStyle(
-                            fontSize: Dimensions.font20 * 2.3,
+                            fontSize: Dimensions.font20 * 2.4,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87),
                       ),
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const SizedBox(width: 10),
                       Text(
                         'Sign into your account',
                         style: TextStyle(
-                            fontSize: Dimensions.font15,
+                            fontSize: Dimensions.font15 + 2,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey[500]),
                       ),
@@ -72,7 +73,7 @@ class _SignInPageState extends State<SignInPage> {
                 ],
               ),
             ),
-      
+
             // Your Email
             AppTextField(
               textController: emailController,
@@ -133,7 +134,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
             ),
-      
+
             SizedBox(height: Dimensions.height30),
             // Sign In Button
             GestureDetector(
@@ -156,7 +157,8 @@ class _SignInPageState extends State<SignInPage> {
                 width: Dimensions.screenWidth,
                 height: Dimensions.screenHeight / 15,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.radius20 / 2),
+                    borderRadius:
+                        BorderRadius.circular(Dimensions.radius20 / 2),
                     color: Colors.black87),
                 child: Center(
                   child: BigText(
@@ -168,7 +170,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             SizedBox(height: Dimensions.height30),
-      
+
             RichText(
               text: TextSpan(
                 recognizer: TapGestureRecognizer()

@@ -18,7 +18,7 @@ dependencies:
     sdk: flutter
   flutter_stripe: ^9.3.0
   get: ^4.6.5
-  google_sign_in: ^6.1.4
+  google_sign_in: ^6.1.5
   http: null
   intl: ^0.18.1
   path_provider: ^2.1.1

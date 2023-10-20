@@ -1,5 +1,5 @@
 import 'package:flavofleet_main/Pages/auth/auth_page.dart';
-import 'package:flavofleet_main/Pages/auth/sign_in_page.dart';
+import 'package:flavofleet_main/Pages/auth/login_page.dart';
 import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
 import 'package:flavofleet_main/Widgets/Utils/app_text_field.dart';
 import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
