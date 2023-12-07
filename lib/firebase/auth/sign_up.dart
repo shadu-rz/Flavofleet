@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavofleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavofleet_main/Utils/show_custom_snackbar.dart';
 import 'package:flavofleet_main/Pages/Home/home_page.dart';
 import 'package:flavofleet_main/Pages/accounts/account_page.dart';
 import 'package:flutter/material.dart';

@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:ffi';
 import 'package:flavofleet_main/Pages/place%20order/place_order.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/show_custom_snackbar.dart';
 import 'package:flavofleet_main/Widgets/no_internet.dart';
 import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flavofleet_main/controller/check_box_controller.dart';

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flavofleet_main/Pages/Food/recomended_food_details.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/icon_and_text.dart';
 import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
@@ -65,11 +65,12 @@ class RecommendedProductListWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
+                             
                               width: Dimensions.height45 * 2,
                               height: Dimensions.height45 * 2,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
+                                color: Colors.red[300],
                                 image: DecorationImage(
                                   image: NetworkImage("${snap['image']}"),
                                   fit: BoxFit.cover,
@@ -132,7 +133,7 @@ class RecommendedProductListWidget extends StatelessWidget {
                                   )
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

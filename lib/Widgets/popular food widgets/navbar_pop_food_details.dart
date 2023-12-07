@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavofleet_main/Pages/address/select_address.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/no_internet.dart';
 import 'package:flavofleet_main/controller/cart_controller.dart';
 import 'package:flavofleet_main/firebase/firebase_methods.dart';

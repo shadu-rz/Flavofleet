@@ -1,8 +1,8 @@
 import 'package:flavofleet_main/Pages/address/select_address.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavofleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/show_custom_snackbar.dart';
 import 'package:flavofleet_main/Widgets/no_internet.dart';
 import 'package:flavofleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/material.dart';

@@ -7,32 +7,33 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:flavofleet_main/.env';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Get.put(UserController()); 
+  Get.put(UserController());
   Get.put(CartController());
   Stripe.publishableKey = stripePublishableKey;
   await Stripe.instance.applySettings();
-  runApp(const MyApp());  
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
+    return GetMaterialApp(
       builder: (context, child) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: child!,
-          );
-        },
-      theme: ThemeData(
-        useMaterial3: true
-      ),
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        );
+      },
+      theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home:  const SpalshScreen(),
+      home: const SpalshScreen(),
     );
   }
 }

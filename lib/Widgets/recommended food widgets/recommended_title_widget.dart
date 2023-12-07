@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
 

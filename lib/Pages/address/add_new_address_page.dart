@@ -1,13 +1,12 @@
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
-import 'package:flavofleet_main/Widgets/small_text.dart';
-import 'package:flavofleet_main/firebase/firebase_methods.dart';
-import 'package:flavofleet_main/model/address_model.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flavofleet_main/firebase/firebase_methods.dart';
+import 'package:flavofleet_main/model/address_model.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
+import 'package:flavofleet_main/Widgets/small_text.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
 
 class AddAddressPage extends StatefulWidget {
   final Map<String, dynamic>? productSnap;
@@ -28,9 +27,20 @@ class _AddAddressPageState extends State<AddAddressPage> {
   TextEditingController pincodeController = TextEditingController();
   late bool isLogged;
 
-  @override
-  void initState() {
-    super.initState();
+  // Function to validate the mobile number
+  bool validateMobile(String value) {
+    if (value.length == 10) {
+      return true;
+    }
+    return false;
+  }
+
+  // Function to validate the pincode
+  bool validatePincode(String value) {
+    if (value.length == 6) {
+      return true;
+    }
+    return false;
   }
 
   @override
@@ -41,7 +51,23 @@ class _AddAddressPageState extends State<AddAddressPage> {
         title: BigText(text: 'Address new address'),
         actions: [
           IconButton(
-              onPressed: () async {
+            onPressed: () async {
+              // Validation checks
+              if (nameController.text.isEmpty ||
+                  addressController.text.isEmpty ||
+                  phoneController.text.isEmpty ||
+                  pincodeController.text.isEmpty ||
+                  !validateMobile(phoneController.text) ||
+                  !validatePincode(pincodeController.text)) {
+                // Show an error message
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please enter valid data in all fields.'),
+                    duration: Duration(seconds: 3),
+                  ),
+                );
+              } else {
+                // All fields are filled and valid, proceed with adding address
                 String id = const Uuid().v1();
                 AddressModel addressModel = AddressModel(
                   name: nameController.text,
@@ -54,8 +80,10 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 await FirebaseMethods().addAddress(addressModel);
 
                 navigator!.pop();
-              },
-              icon: const Icon(Icons.check))
+              }
+            },
+            icon: const Icon(Icons.check),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -84,7 +112,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
             Padding(
               padding: EdgeInsets.only(left: Dimensions.width20),
               child: SmallText(
-                text: 'contact number',
+                text: 'Contact number',
                 size: 15,
                 color: AppColors.mainBlackColor,
               ),
@@ -99,9 +127,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 keyboardType: TextInputType.number,
               ),
             ),
-            SizedBox(
-              height: Dimensions.height20,
-            ),
+            SizedBox(height: Dimensions.height20),
             Padding(
               padding: EdgeInsets.only(left: Dimensions.width20),
               child: SmallText(
@@ -114,19 +140,17 @@ class _AddAddressPageState extends State<AddAddressPage> {
               margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
               child: TextField(
                 decoration: const InputDecoration(
-                  hintText: 'Provide complete address to the destination',
+                  hintText: 'Enter complete address to your home',
                 ),
                 controller: addressController,
               ),
             ),
             SizedBox(height: Dimensions.height10),
-            SizedBox(
-              height: Dimensions.height10,
-            ),
+            SizedBox(height: Dimensions.height10),
             Padding(
               padding: EdgeInsets.only(left: Dimensions.width20),
               child: SmallText(
-                text: 'pincode',
+                text: 'Pincode',
                 size: 15,
                 color: AppColors.mainBlackColor,
               ),
@@ -135,15 +159,13 @@ class _AddAddressPageState extends State<AddAddressPage> {
               margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),
               child: TextField(
                 decoration: const InputDecoration(
-                  hintText: '6 digit picode',
+                  hintText: '6 digit pincode',
                 ),
                 controller: pincodeController,
                 keyboardType: TextInputType.number,
               ),
             ),
-            SizedBox(
-              height: Dimensions.height10,
-            ),
+            SizedBox(height: Dimensions.height10),
           ],
         ),
       ),

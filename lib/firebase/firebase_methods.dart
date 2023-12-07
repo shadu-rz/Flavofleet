@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flavofleet_main/Widgets/Utils/show_custom_snackbar.dart';
+import 'package:flavofleet_main/Utils/show_custom_snackbar.dart';
 import 'package:flavofleet_main/model/address_model.dart';
 import 'package:flavofleet_main/model/cart_model.dart';
 import 'package:flavofleet_main/model/favorite_model.dart';
@@ -18,20 +18,36 @@ class FirebaseMethods extends GetxController {
       {required String email,
       required String image,
       required String username,
-      required String uId,
       required String phoneNumber}) async {
     String res = "some error occured";
     try {
-      await firestore.collection('users').doc(uId).set({
+
+      if (email.isEmpty) {
+        showCustomSnackBar('Type in your emai address',
+            title: 'Email address', color: Colors.red);
+      }
+      if (image.isEmpty) {
+        showCustomSnackBar('Provide an image',
+            title: 'Image', color: Colors.red);
+      }
+      if (username.isEmpty) {
+        showCustomSnackBar('Enter your name',
+            title: 'Name', color: Colors.red);
+      }
+      if (phoneNumber.isEmpty) {
+        showCustomSnackBar('Enter your mobile number',
+            title: 'Mobile number', color: Colors.red);
+      }
+
+      await firestore.collection('users').doc(FirebaseAuth.instance.currentUser.toString()).set({
         "username": username,
         "email": email,
         "image": image,
         "phoneNumber": phoneNumber,
-        "uId": uId
       });
       res = "success";
     } catch (e) {
-      res = e.toString();
+      res =  e.toString();
     }
     log(res);
     return res;

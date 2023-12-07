@@ -1,6 +1,6 @@
 import 'package:flavofleet_main/Pages/order/orders_page.dart';
 import 'package:flavofleet_main/Pages/Home/main_food_page.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
 import 'package:flavofleet_main/firebase/firebase_methods.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

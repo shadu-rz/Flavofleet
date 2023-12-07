@@ -1,8 +1,8 @@
 
 import 'package:flavofleet_main/Pages/Food/popular_food_details.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/icon_and_text.dart';
 import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +42,7 @@ class HorizontalScrollWidget extends StatelessWidget {
                   top: Dimensions.height10),
              
               decoration: BoxDecoration(
+                color: Colors.red[300],
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
                 image: DecorationImage(
                   fit: BoxFit.cover,

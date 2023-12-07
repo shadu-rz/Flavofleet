@@ -1,9 +1,9 @@
 
 import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flutter/material.dart';
-import '../Utils/colors.dart';
-import '../Utils/diamensions.dart';
-import '../Utils/big_text.dart';
+import '../../Utils/colors.dart';
+import '../../Utils/diamensions.dart';
+import '../../Utils/big_text.dart';
 import '../icon_and_text.dart';
 
 class PopularFoodPageWidget extends StatelessWidget {

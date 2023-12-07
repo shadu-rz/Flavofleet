@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flavofleet_main/Pages/order/ordered_successfully.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/no_internet.dart';
 import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flavofleet_main/firebase/firebase_methods.dart';

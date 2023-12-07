@@ -1,8 +1,8 @@
 import 'package:flavofleet_main/Pages/auth/auth_page.dart';
 import 'package:flavofleet_main/Pages/auth/login_page.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/app_text_field.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/app_text_field.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/no_internet.dart';
 import 'package:flavofleet_main/firebase/auth/sign_in_with_google.dart';
 import 'package:flavofleet_main/firebase/auth/sign_up.dart';
@@ -21,6 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var nameController = TextEditingController();
+  var otpController = TextEditingController();
   bool passwordVisible = false;
 
   @override
@@ -31,20 +32,10 @@ class _SignUpPageState extends State<SignUpPage> {
         physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(height: Dimensions.screenHeight * 0.03),
-            //App logo
-            SizedBox(
-              height: Dimensions.screenHeight * 0.2,
-              child: const Center(
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 100,
-                  backgroundImage: AssetImage('assets/image/food6.jpg'),
-                ),
-              ),
-            ),
+            SizedBox(height: Dimensions.screenHeight * 0.15),
+
             Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Hello',
@@ -131,7 +122,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: Dimensions.height20),
+            SizedBox(
+              height: Dimensions.height20,
+            ),
 
             // Sign up Button
             GestureDetector(
@@ -172,22 +165,23 @@ class _SignUpPageState extends State<SignUpPage> {
 
             RichText(
               text: TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap =
-                        () => navigator!.pushReplacement(MaterialPageRoute(
-                              builder: (context) => const SignInPage(),
-                            )),
-                  text: 'Already have an account ?',
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 0, 48, 87),
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500)),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => navigator!.pushReplacement(MaterialPageRoute(
+                        builder: (context) => const SignInPage(),
+                      )),
+                text: 'Already have an account ?',
+                style: const TextStyle(
+                  color: Color.fromARGB(255, 0, 48, 87),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             SizedBox(height: Dimensions.screenWidth * 0.05),
             //Sign up options
             RichText(
               text: TextSpan(
-                  text: 'Sign up using one the following methods',
+                  text: 'Sign up using one the following method',
                   style: TextStyle(
                     color: Colors.grey[500],
                     fontSize: 15,

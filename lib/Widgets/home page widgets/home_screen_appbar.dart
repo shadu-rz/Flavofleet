@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavofleet_main/Pages/Cart/cart_page.dart';
 import 'package:flavofleet_main/Pages/accounts/account_page.dart';
 import 'package:flavofleet_main/Pages/favorite/favorite.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

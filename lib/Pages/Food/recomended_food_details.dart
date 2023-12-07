@@ -1,4 +1,4 @@
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
 import 'package:flavofleet_main/Widgets/recommended%20food%20widgets/appbar_and_image_reco_food_details.dart';
 
 import 'package:flavofleet_main/Widgets/expandable_text_widget.dart';

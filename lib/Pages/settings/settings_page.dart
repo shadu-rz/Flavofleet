@@ -4,9 +4,9 @@ import 'package:flavofleet_main/Pages/auth/login_page.dart';
 import 'package:flavofleet_main/Pages/settings/about%20us/about_us.dart';
 import 'package:flavofleet_main/Pages/settings/privacy%20policy/privacy_policy.dart';
 import 'package:flavofleet_main/Pages/settings/terms%20and%20conditions/terms_and_conditions.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/no_internet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,26 +28,36 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       body: Column(
         children: [
-          Container(
-            width: double.maxFinite,
-            margin: EdgeInsets.only(
-              left: Dimensions.height20,
-              right: Dimensions.height20,
-              top: Dimensions.height20,
-            ),
-            padding: EdgeInsets.symmetric(vertical: Dimensions.height10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius15),
-              border: Border.all(
-                width: 1,
-                color: AppColors.mainColor,
+          GestureDetector(
+            onTap: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => EditProfile(),
+              //   ),
+              // );
+            },
+            child: Container(
+              width: double.maxFinite,
+              margin: EdgeInsets.only(
+                left: Dimensions.height20,
+                right: Dimensions.height20,
+                top: Dimensions.height20,
               ),
-            ),
-            child: Center(
-              child: BigText(
-                text: 'Edit profile',
-                size: 18,
-                color: const Color.fromARGB(255, 59, 105, 102),
+              padding: EdgeInsets.symmetric(vertical: Dimensions.height10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius15),
+                border: Border.all(
+                  width: 1,
+                  color: AppColors.mainColor,
+                ),
+              ),
+              child: Center(
+                child: BigText(
+                  text: 'Edit profile',
+                  size: 18,
+                  color: const Color.fromARGB(255, 59, 105, 102),
+                ),
               ),
             ),
           ),

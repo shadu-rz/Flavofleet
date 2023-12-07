@@ -20,6 +20,7 @@ dependencies:
   get: ^4.6.5
   google_sign_in: ^6.1.5
   http: null
+  image_picker: ^1.0.4
   intl: ^0.18.1
   path_provider: ^2.1.1
   persistent_bottom_nav_bar: ^5.0.2

@@ -1,5 +1,5 @@
 
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {

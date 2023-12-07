@@ -1,9 +1,9 @@
 import 'package:flavofleet_main/Pages/Home/home_page.dart';
 import 'package:flavofleet_main/Pages/auth/auth_page.dart';
 import 'package:flavofleet_main/Pages/auth/sign_up_page.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
-import 'package:flavofleet_main/Widgets/Utils/app_text_field.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/app_text_field.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/no_internet.dart';
 import 'package:flavofleet_main/firebase/auth/sign_in_with_email_and_pass.dart';
 import 'package:flavofleet_main/firebase/auth/sign_in_with_google.dart';
@@ -42,30 +42,35 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(width: 10),
                       Text(
-                        'Welcome \nBack',
+                        'Welcome',
                         style: TextStyle(
-                            fontSize: Dimensions.font20 * 2.4,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87),
+                          fontSize: Dimensions.font20 * 2.5,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      Text(
+                        'Back',
+                        style: TextStyle(
+                          fontSize: Dimensions.font20 * 2.2,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(width: 10),
-                      Text(
-                        'Sign into your account',
-                        style: TextStyle(
-                            fontSize: Dimensions.font15 + 2,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[500]),
-                      ),
-                    ],
+                  const SizedBox(width: 10),
+                  Text(
+                    'Sign into your account',
+                    style: TextStyle(
+                        fontSize: Dimensions.font15 + 2,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[500]),
                   ),
                   SizedBox(
                     height: Dimensions.screenHeight * 0.03,
@@ -174,14 +179,17 @@ class _SignInPageState extends State<SignInPage> {
             RichText(
               text: TextSpan(
                 recognizer: TapGestureRecognizer()
-                  ..onTap = () => navigator!.pushReplacement(MaterialPageRoute(
-                        builder: (context) => const SignUpPage(),
-                      )),
+                  ..onTap = () => navigator!.pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
+                      ),
                 text: "Don't Have an account CREATE",
                 style: const TextStyle(
-                    color: Color.fromARGB(255, 0, 48, 87),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500),
+                  color: Color.fromARGB(255, 0, 48, 87),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(height: Dimensions.screenWidth * 0.05),

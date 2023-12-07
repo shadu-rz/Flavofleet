@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavofleet_main/Pages/settings/settings_page.dart';
-import 'package:flavofleet_main/Widgets/Utils/colors.dart';
-import 'package:flavofleet_main/Widgets/Utils/diamensions.dart';
+import 'package:flavofleet_main/Utils/colors.dart';
+import 'package:flavofleet_main/Utils/diamensions.dart';
 import 'package:flavofleet_main/Widgets/account%20page%20widgets/account_widget.dart';
 import 'package:flavofleet_main/Widgets/app_icon.dart';
-import 'package:flavofleet_main/Widgets/Utils/big_text.dart';
+import 'package:flavofleet_main/Utils/big_text.dart';
 import 'package:flavofleet_main/Widgets/is_guest_mode.dart';
 import 'package:flavofleet_main/Widgets/small_text.dart';
 import 'package:flavofleet_main/firebase/auth/usercontroller.dart';
@@ -135,7 +135,7 @@ class _AccountPageState extends State<AccountPage> {
                                 radius: Dimensions.height45 * 1.6,
                                 backgroundColor: Colors.white60,
                                 child: CircleAvatar(
-                                  backgroundColor: Colors.blueGrey[400],
+                                  backgroundColor: Colors.grey[350],
                                   backgroundImage: NetworkImage(snapshot
                                           .data!['image'].isEmpty
                                       ? 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659651_960_720.png'
